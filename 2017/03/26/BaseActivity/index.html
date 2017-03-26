@@ -1,0 +1,739 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android,框架,手把手," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="博客出自：http://blog.csdn.net/u012534831">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你如何搭建一个自己的安卓快速开发框架之BaseActivity(一)">
+<meta property="og:url" content="http://yoursite.com/2017/03/26/BaseActivity/index.html">
+<meta property="og:site_name" content="祁宏涛的Hexo">
+<meta property="og:description" content="博客出自：http://blog.csdn.net/u012534831">
+<meta property="og:updated_time" content="2017-03-26T14:20:05.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手把手教你如何搭建一个自己的安卓快速开发框架之BaseActivity(一)">
+<meta name="twitter:description" content="博客出自：http://blog.csdn.net/u012534831">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/26/BaseActivity/"/>
+
+
+
+
+
+  <title> 手把手教你如何搭建一个自己的安卓快速开发框架之BaseActivity(一) | 祁宏涛的Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">祁宏涛的Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/26/BaseActivity/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QHT">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="祁宏涛的Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                手把手教你如何搭建一个自己的安卓快速开发框架之BaseActivity(一)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-26T22:00:16+08:00">
+                2017-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  博客出自：http://blog.csdn.net/u012534831
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>   继上一篇博客已经好几个月没发布新博客了，中间因为教研室项目原因转手C#几个月，然后又加上各种事情(再加上懒 - -！)就落下了，<strong>并且有好多小伙伴给我留言上一篇播客的问题我都没能解答，在此给各位小伙伴说声抱歉了</strong>。 今天，又重拾安卓，准备慢慢构建一个自己的安卓快速开发框架，算是经验的总结和积累。网上这种东西很多，但是对于很多初学者而言需要的是动手实践，与此同时，不免就有自己 的感想，因此呢，我也动手并分享出来和大家一起学习。</p>
+<hr>
+<p>为什么我们要构建一个BaseActivity呢，无非因为以下两点：</p>
+<ul>
+<li>1、避免重复代码</li>
+<li>2、统一管理</li>
+</ul>
+<p>那么OK，我们构建一个自己的BaseActivity首先有什么需求呢？</p>
+<ul>
+<li>1、透明状态栏</li>
+<li>2、生命周期监控     </li>
+<li><p>3、顶部统一的ToolBar</p>
+<a id="more"></a>
+</li>
+</ul>
+<p>这是一个简单的Base，方便我们其他的Activity直接继承使用。</p>
+<p>从上面可以看出，我们有3个需求，那么我们都放到一个BaseActivity就OK了，在这一个Activity写状态栏、toolbar、日志。但是，这样的话我们如果某个Activity不需要toorbar或者状态栏了怎么办呢？是不是又不能继承了。所以，我们可以将这两个功能拆开，写两个Activity，如果不需要其中一个功能，继承另一个就OK了。</p>
+<p>经上面分析，我们此刻需要3个Activity，一个SuperActivity，一个StatusActivity,一个ToolBarActivity就OK了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div></pre></td><td class="code"><pre><div class="line">package com.android.qht.BaseActivity;</div><div class="line"></div><div class="line">import android.os.Bundle;</div><div class="line">import android.support.v7.app.AppCompatActivity;</div><div class="line">import com.android.qht.Util.LogUtil;</div><div class="line"></div><div class="line">public abstract class superActivity extends AppCompatActivity &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(getContentViewId());</div><div class="line">        LogUtil.e(&quot;---&gt;onCreate&quot;);</div><div class="line">    &#125;</div><div class="line">    public abstract int getContentViewId();</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onStart() &#123;</div><div class="line">        super.onStart();</div><div class="line">        LogUtil.e(&quot;---&gt;onStart&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onStop() &#123;</div><div class="line">        super.onStop();</div><div class="line">        LogUtil.e(&quot;---&gt;onStop&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onRestart() &#123;</div><div class="line">        super.onRestart();</div><div class="line">        LogUtil.e(&quot;---&gt;onRestart&quot;);</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    protected void onPause()&#123;</div><div class="line">        super.onPause();</div><div class="line">        LogUtil.e(&quot;---&gt;onpause&quot;);</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    protected void onResume() &#123;</div><div class="line">        super.onResume();</div><div class="line">        LogUtil.e(&quot;---&gt;onResume&quot;);</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    protected void onDestroy() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">        LogUtil.e(&quot;---&gt;onDestroy&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">这儿我用了一个日志工具类，先不管。</div><div class="line"></div><div class="line">先看下我们的superActivity</div><div class="line"></div><div class="line">1、重写了所有的生命周期，加上了日志监控</div><div class="line"></div><div class="line">      保证我们实时监控Activity的生命周期，这很必要，并且我们还可以在生命周期中加入butterKnife等的绑定和解绑等操作。</div><div class="line"></div><div class="line">2、重写setContentView()方法，并加入了getContentViewId()抽象方法</div><div class="line"></div><div class="line">	重写这个方法保证每次初始化布局时传入我们子Activity的布局ID，然后这个抽象方法强制子类重写，传入布局ID，SonActivity-&gt;ToolBarActivity-&gt;SuperActivity，这样就保证了我们的每个界面只听从一个布局，而不是掺杂了父类Activity的布局。</div><div class="line">	</div><div class="line">OK，下来再看下我们的statusActivity：</div><div class="line"></div><div class="line">package com.android.qht.BaseActivity;</div><div class="line">import android.app.Activity;</div><div class="line">import android.os.Build;</div><div class="line">import android.os.Bundle;</div><div class="line">import android.view.View;</div><div class="line">import android.view.ViewGroup;</div><div class="line">import android.view.WindowManager;</div><div class="line">import android.widget.LinearLayout;</div><div class="line">import com.android.qht.myandroid.R;</div><div class="line"></div><div class="line">public abstract class statusActivity extends superActivity &#123;</div><div class="line"></div><div class="line"></div><div class="line">    private View statusView;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setstatusColor(this, getResources().getColor(R.color.colorPrimary));//和toolbar一个颜色</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 设置状态栏颜色</div><div class="line">     *</div><div class="line">     * @param activity 需要设置的activity</div><div class="line">     * @param color    状态栏颜色值</div><div class="line">     */</div><div class="line">    public void setstatusColor(Activity activity, int color) &#123;</div><div class="line">        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) &#123;</div><div class="line">            // 设置状态栏透明</div><div class="line">            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);</div><div class="line">            // 生成一个状态栏大小的矩形</div><div class="line"></div><div class="line">            // 添加 statusView 到布局中</div><div class="line">            ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();</div><div class="line"></div><div class="line">            if (statusView != null) &#123;</div><div class="line">                decorView.removeView(statusView);</div><div class="line">            &#125;</div><div class="line">            statusView = createStatusView(activity, color);</div><div class="line">            decorView.addView(statusView);</div><div class="line">            // 设置根布局的参数</div><div class="line">            ViewGroup rootView = (ViewGroup) ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);</div><div class="line">            rootView.setFitsSystemWindows(true);</div><div class="line">            rootView.setClipToPadding(true);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 生成一个和状态栏大小相同的矩形条</div><div class="line">     *</div><div class="line">     * @param activity 需要设置的activity</div><div class="line">     * @param color    状态栏颜色值</div><div class="line">     * @return 状态栏矩形条</div><div class="line">     */</div><div class="line">    private View createStatusView(Activity activity, int color) &#123;</div><div class="line">        // 获得状态栏高度</div><div class="line">        int resourceId = activity.getResources().getIdentifier(&quot;status_bar_height&quot;, &quot;dimen&quot;, &quot;android&quot;);</div><div class="line">        int statusBarHeight = activity.getResources().getDimensionPixelSize(resourceId);</div><div class="line"></div><div class="line">        // 绘制一个和状态栏一样高的矩形</div><div class="line">        View statusView = new View(activity);</div><div class="line">        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,</div><div class="line">                statusBarHeight);</div><div class="line">        statusView.setLayoutParams(params);</div><div class="line">        statusView.setBackgroundColor(color);</div><div class="line">        return statusView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * 提供remove方法，在不需要状态栏时可以移除</div><div class="line">     */</div><div class="line">    public void removeView(Activity activity) &#123;</div><div class="line">        ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();</div><div class="line">        if (statusView != null) &#123;</div><div class="line">            decorView.removeView(statusView);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>在这个Activity中，我们在子类传递的布局上面添加了一个头部状态栏，颜色和ToolBar一样。先别着急，再看一下我们的ToolBarActivity：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div></pre></td><td class="code"><pre><div class="line">package com.android.qht.BaseActivity;</div><div class="line">import android.os.Bundle;</div><div class="line">import android.support.v7.widget.Toolbar;</div><div class="line">import android.view.Menu;</div><div class="line">import android.view.MenuItem;</div><div class="line">import android.view.View;</div><div class="line">import android.widget.TextView;</div><div class="line">import com.android.qht.Util.ToastUtil;</div><div class="line">import com.android.qht.myandroid.R;</div><div class="line"></div><div class="line">/**</div><div class="line"> * ToolBar Activity.</div><div class="line"> */</div><div class="line">public abstract class ToolBarActivity extends statusActivity &#123;</div><div class="line">    private TextView mToolbarTitle;</div><div class="line">    private TextView mToolbarSubTitle;</div><div class="line">    private Toolbar mToolbar;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        mToolbar = (Toolbar) findViewById(R.id.toolbar);</div><div class="line">         /*</div><div class="line">          toolbar.setLogo(R.mipmap.ic_launcher);</div><div class="line">          toolbar.setTitle(&quot;Title&quot;);</div><div class="line">          toolbar.setSubtitle(&quot;Sub Title&quot;);</div><div class="line">          */</div><div class="line">        mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);</div><div class="line">        mToolbarSubTitle = (TextView) findViewById(R.id.toolbar_subtitle);</div><div class="line">        if (mToolbar != null) &#123;</div><div class="line">            //将Toolbar显示到界面</div><div class="line">            setSupportActionBar(mToolbar);</div><div class="line">        &#125;</div><div class="line">        if (mToolbarTitle != null) &#123;</div><div class="line">            //getTitle()的值是activity的android:lable属性值</div><div class="line">            mToolbarTitle.setText(getTitle());</div><div class="line">            //设置默认的标题不显示</div><div class="line">            getSupportActionBar().setDisplayShowTitleEnabled(false);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public boolean onCreateOptionsMenu(Menu menu) &#123;</div><div class="line">        // Inflate the menu; this adds items to the action bar if it is present.</div><div class="line">        getMenuInflater().inflate(R.menu.activity_tool_bar, menu);</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public boolean onOptionsItemSelected(MenuItem item) &#123;</div><div class="line">        // TODO Auto-generated method stub</div><div class="line">        switch (item.getItemId()) &#123;</div><div class="line">            case R.id.action_item1:</div><div class="line">                ToastUtil.showToastShort(&quot;回到首页&quot;);</div><div class="line">                break;</div><div class="line">            case R.id.action_item2:</div><div class="line">                ToastUtil.showToastShort(&quot;分享&quot;);</div><div class="line">                break;</div><div class="line">            case R.id.action_item3:</div><div class="line">                ToastUtil.showToastShort(&quot;扫一扫&quot;);</div><div class="line">                break;</div><div class="line">            default:</div><div class="line">                break;</div><div class="line">        &#125;</div><div class="line">        return super.onOptionsItemSelected(item);</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    protected void onStart() &#123;</div><div class="line">        super.onStart();</div><div class="line">        /**</div><div class="line">         * 判断是否有Toolbar,并默认显示返回按钮</div><div class="line">         */</div><div class="line">        if(null != getToolbar() &amp;&amp; isShowBacking())&#123;</div><div class="line">            showBack();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 获取头部标题的TextView</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public TextView getToolbarTitle()&#123;</div><div class="line">        return mToolbarTitle;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 获取头部副标题的TextView</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public TextView getSubTitle()&#123;</div><div class="line">        return mToolbarSubTitle;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 设置头部标题</div><div class="line">     * @param title</div><div class="line">     */</div><div class="line">    public void setToolBarTitle(CharSequence title) &#123;</div><div class="line">        if(mToolbarTitle != null)&#123;</div><div class="line">            mToolbarTitle.setText(title);</div><div class="line">        &#125;else&#123;</div><div class="line">            getToolbar().setTitle(title);</div><div class="line">            setSupportActionBar(getToolbar());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * this Activity of tool bar.</div><div class="line">     * 获取头部.</div><div class="line">     * @return support.v7.widget.Toolbar.</div><div class="line">     */</div><div class="line">    public Toolbar getToolbar() &#123;</div><div class="line">        return (Toolbar) findViewById(R.id.toolbar);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 版本号小于21的后退按钮图片</div><div class="line">     */</div><div class="line">    private void showBack()&#123;</div><div class="line">        //setNavigationIcon必须在setSupportActionBar(toolbar);方法后面加入</div><div class="line">        getToolbar().setNavigationIcon(R.mipmap.back);</div><div class="line">        getToolbar().setNavigationOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                onBackPressed();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 是否显示后退按钮,默认显示,可在子类重写该方法.</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    protected boolean isShowBacking()&#123;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们在ToorBarActivity中写了ToorBar的实现，因为我们的ToolBar是include方式加入到子Activity中的，所以我们是按照正常的方式初始化ToolBar并写了它的一些方法。</p>
+<p>最终我们的加载顺序是这样的：</p>
+<p>1、先加载子Activity的Layout(包括ToolBar)<br>2、再加载顶部状态栏<br>3、再初始化ToolBar(findviewbyid)<br>4、再初始化其他控件(findviewbyid)</p>
+<p>总体的过程就是这样，我这个BaseActivity比较简单，只是帮助入门者建立一个这样的构建思想，建立自己的框架概念和体系。</p>
+<p>下一篇我会带大家一起封装一些常用的工具类+ButterKnife+retrofit+RXJava，敬请期待。</p>
+<p>csdn地址：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a><br>github地址：<a href="https://github.com/qht1003077897" target="_blank" rel="external">https://github.com/qht1003077897</a><br>个人博客地址：<a href="https://qht1003077897.github.io/" target="_blank" rel="external">https://qht1003077897.github.io/</a><br>QQ：1003077897</p>
+<p>欢迎交流。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/框架/" rel="tag"># 框架</a>
+          
+            <a href="/tags/手把手/" rel="tag"># 手把手</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/27/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="QHT" />
+          <p class="site-author-name" itemprop="name">QHT</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QHT</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2128785"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
