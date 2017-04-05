@@ -1,0 +1,924 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android,框架,手把手," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="博客出自：http://blog.csdn.net/u012534831">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)">
+<meta property="og:url" content="http://yoursite.com/2017/04/05/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)/index.html">
+<meta property="og:site_name" content="祁宏涛">
+<meta property="og:description" content="博客出自：http://blog.csdn.net/u012534831">
+<meta property="og:image" content="http://img.blog.csdn.net/20170331140915773?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170405214250887?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-04-05T14:21:47.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)">
+<meta name="twitter:description" content="博客出自：http://blog.csdn.net/u012534831">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170331140915773?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/05/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)/"/>
+
+
+
+
+
+  <title> 手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二) | 祁宏涛 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">祁宏涛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/05/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QHT">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="祁宏涛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-05T22:10:16+08:00">
+                2017-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/04/05/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)/" class="leancloud_visitors" data-flag-title="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  博客出自：http://blog.csdn.net/u012534831
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>####<a href="https://qht1003077897.github.io/2017/03/26/BaseActivity/" target="_blank" rel="external">点击查看上一篇文章：手把手教你如何搭建一个自己的安卓快速开发框架之BaseActivity(一)</a></p>
+<p>继上一篇我实现了基本的BaseActivity，包含</p>
+<blockquote>
+<ul>
+<li>ToolBar </li>
+<li>透明状态栏</li>
+<li>生命周期监控</li>
+</ul>
+</blockquote>
+<p>那么，这一篇，我准备引入：</p>
+<blockquote>
+<ul>
+<li>OkHttp 3.3.1(引用鸿洋的一个OkhttpUtil)</li>
+<li>EventBus 3.0</li>
+<li>Json解析 </li>
+<li>ButterKnife8.5.1 </li>
+</ul>
+</blockquote>
+<p> 来完善我们的快速开发框架。</p>
+<p>   上次本来说这篇引入RXJava+retrofit，然后再引入MVP，但是突然发现过渡是不是有点太突然。<br>   因此我准备循序渐进，慢慢深入，所以这次我们先用OKhttp+EventBus，去实现一次网络请求并完成界面异步更新。</p>
+<p><img src="http://img.blog.csdn.net/20170331140915773?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>####<strong>1、首先第一：明确我们服务返回的JSON数据格式：</strong><br>   我们暂且称为<strong>BaseData</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">      &#123;</div><div class="line">    &quot;message&quot;: &quot;ok&quot;,</div><div class="line">    &quot;nu&quot;: &quot;7700008953907&quot;,</div><div class="line">    &quot;ischeck&quot;: &quot;1&quot;,</div><div class="line">    &quot;condition&quot;: &quot;F00&quot;,</div><div class="line">    &quot;com&quot;: &quot;yunda&quot;,</div><div class="line">    &quot;status&quot;: &quot;200&quot;,</div><div class="line">    &quot;state&quot;: &quot;3&quot;,</div><div class="line">    &quot;data&quot;: [</div><div class="line">        &#123;</div><div class="line">            &quot;time&quot;: &quot;2017-02-14 19:14:27&quot;,</div><div class="line">            &quot;ftime&quot;: &quot;2017-02-14 19:14:27&quot;,</div><div class="line">            &quot;context&quot;: &quot;[陕西西安东郊区兴庆公园公司理工大分部]快件已被 已签收 签收&quot;,</div><div class="line">            &quot;location&quot;: &quot;陕西西安东郊区兴庆公园公司理工大分部&quot;</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;time&quot;: &quot;2017-02-12 23:26:15&quot;,</div><div class="line">            &quot;ftime&quot;: &quot;2017-02-12 23:26:15&quot;,</div><div class="line">            &quot;context&quot;: &quot;[上海分拨中心]进行装车扫描，即将发往：陕西西安分拨中心&quot;,</div><div class="line">            &quot;location&quot;: &quot;上海分拨中心&quot;</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;time&quot;: &quot;2017-02-12 23:21:52&quot;,</div><div class="line">            &quot;ftime&quot;: &quot;2017-02-12 23:21:52&quot;,</div><div class="line">            &quot;context&quot;: &quot;[上海分拨中心]在分拨中心进行称重扫描&quot;,</div><div class="line">            &quot;location&quot;: &quot;上海分拨中心&quot;</div><div class="line">        &#125;,</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>####<strong>2、第二：我们有一个get请求的URL:</strong><br>  <a href="http://www.kuaidi100.com/query" target="_blank" rel="external">http://www.kuaidi100.com/query</a></p>
+<p> 有2个参数 type=yunda&amp;postid=7700008953907。</p>
+<p>####<strong>3、第三：</strong><br>明确我们希望看到的请求方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Ok_Request.getAsyncData(this, map, UrlUtil.GetKuaiDi, new MyStringCallBack() &#123;</div><div class="line">      </div><div class="line">          @Override</div><div class="line">         public void onResponse(BaseData response, int id) &#123;</div><div class="line">              List&lt;dataModel&gt; resultlist= null;</div><div class="line">              if (response != null) &#123;</div><div class="line">                  resultlist=response.getData();</div><div class="line">                &#125;</div><div class="line">                //EventBus.getDefault().post(resultlist);</div><div class="line">          &#125;</div></pre></td></tr></table></figure>
+<p>  发送一次get请求，Map里面是我们需要提交的参数。 最后在onResponse方法中得到我们想要的返回结果response，它是通过BaseData做了一层封装的。</p>
+<p>####<strong>4、第四：</strong><br>请求结束，通过 EventBus.getDefault().post(resultlist);发送接收到的Json数据以供处理。并且通过dataEvent方法接收数据。ThreadMode.MAIN指定在主线程处理数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Subscribe(threadMode = ThreadMode.MAIN)</div><div class="line">   public void dataEvent(List&lt;dataModel&gt; resultlist) &#123;</div><div class="line">       tv.setText(resultlist.toString());</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>一次流程就这么走完了，但是从哪儿能看出我们这是一个框架呢？</p>
+<p> <strong>1. BaseData</strong></p>
+<p> 我们明确服务端的数据格式务必统一为BaseData，方便安卓端封装解析方法，直接返回需要的data字段。</p>
+<p> <strong>2. getAsyncData</strong></p>
+<p> 精简的请求方式，传入参数，URL，CallBack，在onresponse中处理结果即可。</p>
+<p> <strong>3. BindView</strong></p>
+<p>所有界面省略繁琐的findviewById方法，采用ButterKnife注解生成，包括点击事件。</p>
+<hr>
+<p>这里，第一和第三比较简单，第一点很必要，因为这直接决定了APP端的封装完整度和简洁度。第三点会用就行。所以，我们下来重点阐述第二点：</p>
+<p>本来，OkhttpUtil的用法是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">OkHttpUtils</div><div class="line">.get()</div><div class="line">.params(map)</div><div class="line">.tag(mContext)</div><div class="line">.url(url)</div><div class="line">.build()</div><div class="line">.execute(new StringCallback() &#123;</div><div class="line">    @Override</div><div class="line">    public void onError(Call call, Exception e, int id) &#123;</div><div class="line">            </div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onResponse(String response, int id) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>直接放到Activity中有以下几个缺点：</p>
+<ul>
+<li>每个页面都得写这样一段。</li>
+<li>如果一个页面3个请求就得写三个这样的代码段。</li>
+<li>突然OKhttpUtil出Bug了需要修改为Volley，难道每个页面都要改吗？！</li>
+</ul>
+<p>因此，我们需要做个封装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Created by QHT on 2017-04-05.</div><div class="line"> *</div><div class="line"> * GET,PUT等网络操作类</div><div class="line"> */</div><div class="line">public class Ok_Request &#123;</div><div class="line"></div><div class="line">    public static MediaType JSON = MediaType.parse(&quot;application/json;charset=utf-8&quot;);</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * GET方式</div><div class="line">     * 异步get请求</div><div class="line">     * @param url</div><div class="line">     */</div><div class="line"></div><div class="line">    public static void getAsyncData(Context mContext, HashMap&lt;String,String&gt; map,final String url, Callback callback) &#123;</div><div class="line">        OkHttpUtils</div><div class="line">                .get()</div><div class="line">                .params(map)</div><div class="line">                .tag(mContext)</div><div class="line">                .url(url)</div><div class="line">                .build()</div><div class="line">                .execute(callback);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在Activity中调用Ok_Request.getAsyncData方法传入一个匿名CallBack即可。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"> private static int Ok_count=2;</div><div class="line"></div><div class="line"></div><div class="line"> HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();</div><div class="line">       /**</div><div class="line">       * 参数</div><div class="line">       */</div><div class="line">        map.put(&quot;type&quot;, &quot;yunda&quot;);</div><div class="line">        map.put(&quot;postid&quot;, &quot;7700008953907&quot;);</div><div class="line">Ok_Request.getAsyncData(this, map, UrlUtil.GetKuaiDi, new MyStringCallBack() &#123;</div><div class="line">            /**</div><div class="line">             * UI Thread</div><div class="line">             */</div><div class="line">            @Override</div><div class="line">            public void onBefore(Request request, int id) &#123;</div><div class="line">                DialogUtil.showProgressDialog(MainActivity.this, true);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onAfter(int id) &#123;</div><div class="line">               --Ok_count;</div><div class="line">                if(Ok_count==0)&#123;</div><div class="line">                    DialogUtil.hideProgressDialog();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onError(Call call, Exception e, int id) &#123;</div><div class="line">                ToastUtil.showToastLong(e.getMessage());</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onResponse(BaseData response, int id) &#123;</div><div class="line">                List&lt;dataModel&gt; resultlist= null;</div><div class="line">                if (response != null) &#123;</div><div class="line">                    resultlist=response.getData();</div><div class="line">                &#125;</div><div class="line">                EventBus.getDefault().post(resultlist);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<p>共四个回调方法onBefore，onAfter，onResponse，onError。</p>
+<ul>
+<li>onBefore方法中我们显示一个dialog“加载中…”</li>
+<li>onAfter方法中我们dismiss这个dialog</li>
+<li>onResponse方法中处理服务端返回的数据 </li>
+<li>onError方法中进行异常处理</li>
+</ul>
+<p>如上，我们已经完成了我们的网络请求。但是，如果我们一个页面不止一次请求呢，有两次呢？我们怎么控制dialog何时隐藏？</p>
+<p>这个时候，我们就需要一个计数器Ok_count，在onAfter方法中执行Ok_count减一，并且判断Ok_count是否为0，若为0才允许隐藏dialog。(类似于同步计数器CountDownLatch类)</p>
+<hr>
+<p>####<strong>说完了请求，下来我们来说说Json</strong></p>
+<p>默认情况下，Okhttp返回的数据为Response，那么我们就来一步一步写自己的解析方式：</p>
+<p><img src="http://img.blog.csdn.net/20170405214250887?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>请求结束之后，数据层首先执行parseNetworkResponse方法(此方法运行在子线程)，返回一个Response，在这里，我们对需要的数据进行处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Created by QHT on 2017-04-05.</div><div class="line"> */</div><div class="line">public abstract  class MyStringCallBack  extends Callback&lt;BaseData&gt;&#123;</div><div class="line">    /**</div><div class="line">     * Thread Pool Thread</div><div class="line">     * @param response</div><div class="line">     * @param id</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public BaseData parseNetworkResponse(Response response, int id) throws Exception &#123;</div><div class="line">        String temp=response.body().string();</div><div class="line">        BaseData baseData = GsonUtils.jsonToModel(temp, BaseData.class);</div><div class="line">        return baseData;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 解析的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static  &lt;T&gt; T jsonToModel(String json,Class&lt;T&gt; clazz) &#123;</div><div class="line">        if (TextUtils.isEmpty(json) || null == clazz) &#123;</div><div class="line">            return null;</div><div class="line">        &#125;</div><div class="line">        try &#123;</div><div class="line">            return gson.fromJson(json, clazz);</div><div class="line">        &#125;catch (Exception e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            LogUtil.e(&quot;服务端接口json数据格式异常:&quot;+e.getMessage());</div><div class="line">            return null;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>通过response.body().string()可以拿到返回的String。   </li>
+<li>通过我们写好的Json解析类可以将String解析为我们最外层的BaseData。</li>
+<li>固定服务端返回数据格式的重要作用就在这儿(统一处理)</li>
+</ul>
+<p>接下来，回调onResponse方法，参数为我们上面返回的BaseData，onResponse方法最后就变成了这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">    @Override</div><div class="line">public void onResponse(BaseData response, int id) &#123;</div><div class="line">    List&lt;dataModel&gt; resultlist= null;</div><div class="line">    if (response != null) &#123;</div><div class="line">        resultlist=response.getData();</div><div class="line">    &#125;</div><div class="line">    EventBus.getDefault().post(resultlist);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>要什么，在BaseData 中取什么就行。</p>
+<p>下一篇，我准备开始完善功能了，加入：</p>
+<ol>
+<li>BaseFrament </li>
+<li>微信底部4按钮切换 </li>
+<li>登录功能 </li>
+<li>快递追踪功能</li>
+</ol>
+<p>最后，我将代码上传到github上，持续更新，逐渐完善这个简易框架。</p>
+<p>我的QQ: <a href="">1003077897</a><br>我的csdn：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a><br>我的github：<a href="https://github.com/qht1003077897" target="_blank" rel="external">https://github.com/qht1003077897</a><br>我的个人博客：<a href="https://qht1003077897.github.io" target="_blank" rel="external">https://qht1003077897.github.io</a></p>
+<p>欢迎交流。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/框架/" rel="tag"># 框架</a>
+          
+            <a href="/tags/手把手/" rel="tag"># 手把手</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/26/BaseActivity/" rel="next" title="手把手教你如何搭建一个自己的安卓快速开发框架之BaseActivity(一)">
+                <i class="fa fa-chevron-left"></i> 手把手教你如何搭建一个自己的安卓快速开发框架之BaseActivity(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460"
+               alt="QHT" />
+          <p class="site-author-name" itemprop="name">QHT</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QHT</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2128785"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("iHroEhpKFMjKWPBLi56akdfi-gzGzoHsz", "SKwAep4PKplglnYzay5F4dFm");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
