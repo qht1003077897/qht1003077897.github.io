@@ -1,0 +1,887 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android,框架,手把手," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="博客出自：http://blog.csdn.net/u012534831">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)">
+<meta property="og:url" content="http://yoursite.com/2017/04/11/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)/index.html">
+<meta property="og:site_name" content="祁宏涛">
+<meta property="og:description" content="博客出自：http://blog.csdn.net/u012534831">
+<meta property="og:image" content="http://img.blog.csdn.net/20170410224639063?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170410233043172?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-04-11T01:08:53.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)">
+<meta name="twitter:description" content="博客出自：http://blog.csdn.net/u012534831">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170410224639063?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/11/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)/"/>
+
+
+
+
+
+  <title> 手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三) | 祁宏涛 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">祁宏涛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/11/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QHT">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="祁宏涛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-11T09:10:16+08:00">
+                2017-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/04/11/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)/" class="leancloud_visitors" data-flag-title="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  博客出自：http://blog.csdn.net/u012534831
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>点击查看上一篇文章：<a href="http://blog.csdn.net/u012534831/article/details/69363039" target="_blank" rel="external">手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)</a></p>
+<p>继上一篇我们的进一步封装，包含</p>
+<ul>
+<li>OkhttpRequest </li>
+<li>EventBus  </li>
+<li>Json解析，基类数据封装 </li>
+<li>ButterKnife</li>
+</ul>
+<p>那么，这一篇，我准备加入：</p>
+<ul>
+<li>BaseFragment  </li>
+<li>精美的仿微信底部菜单栏  </li>
+<li>网络请求失败时如何显示空View</li>
+</ul>
+<p>继续来完善我们的快速开发框架。</p>
+<p><strong>1、开门见山，看下BaseFragment都做了些什么？</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Created by QHT on 2017-04-08.</div><div class="line"> */</div><div class="line">public abstract class BaseFragment extends Fragment</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * 依附的activity</div><div class="line">     */</div><div class="line">    protected FragmentActivity mActivity;</div><div class="line">    /**</div><div class="line">     * 根view</div><div class="line">     */</div><div class="line">    protected View mRootView;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    @Nullable</div><div class="line">    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,</div><div class="line">                             @Nullable Bundle savedInstanceState)</div><div class="line">    &#123;</div><div class="line">        if (getContentViewId() != 0) &#123;</div><div class="line">            mRootView= inflater.inflate(getContentViewId(), null);</div><div class="line">        &#125; else &#123;</div><div class="line">            mRootView= super.onCreateView(inflater, container, savedInstanceState);</div><div class="line">        &#125;</div><div class="line">        ButterKnife.bind(this, mRootView);</div><div class="line">        LogUtil.e(this.getClass().getName()+&quot;---&gt;onCreateView&quot;);</div><div class="line">        initData(getArguments());</div><div class="line">        return mRootView;</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public void onAttach(Context context)</div><div class="line">    &#123;</div><div class="line">        super.onAttach(context);</div><div class="line">        mActivity = getActivity();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 设置根布局资源id</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public abstract int getContentViewId();</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 初始化数据</div><div class="line">     * @param arguments 接收到的从其他地方传递过来的参数</div><div class="line">     */</div><div class="line">    protected void initData(Bundle arguments)</div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onResume() &#123;</div><div class="line">        super.onResume();</div><div class="line">        LogUtil.e(this.getClass().getName()+&quot;---&gt;onResume&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onStop() &#123;</div><div class="line">        super.onStop();</div><div class="line">        LogUtil.e(this.getClass().getName()+&quot;---&gt;onStop&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onDestroy() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">        LogUtil.e(this.getClass().getName()+&quot;---&gt;onDestroy&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>很简单，做了一些初始化操作。我们的子Fragment只需要继承并重写2个方法即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class FragmentSecond extends BaseFragment &#123;</div><div class="line"></div><div class="line">  @Override</div><div class="line">    public int getContentViewId() &#123;</div><div class="line">        return R.layout.fragment_second;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void initData(Bundle arguments) &#123;</div><div class="line">        super.initData(arguments);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  因为暂时我们没有用到viewpage，所以不需要懒加载，等下面用到了的时候再加进去。</p>
+<p> <strong>2、接下来看看我们的仿微信底部菜单栏是怎么做的？</strong><br>MainActivity的布局呢，就是上面一个toolbar，中间一个Linearlayout用来显示Fragment，下面一个Ralativelayout容纳4个按钮</p>
+<p>首先，初始化我们的Fragment状态，第一个fragment为默认加载的Fragment</p>
+<p><img src="http://img.blog.csdn.net/20170410224639063?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">    /**</div><div class="line">     * 初始化底部标签</div><div class="line">     */</div><div class="line">    private void initTab() &#123;</div><div class="line">        if (oneFragment == null) &#123;</div><div class="line">        </div><div class="line">        /** 默认加载第一个Fragment*/</div><div class="line">            oneFragment = new FragmentFrist();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if (!oneFragment.isAdded()) &#123;</div><div class="line">        </div><div class="line">       /** 如果第一个未被添加，则添加到管理器中*/</div><div class="line">            getSupportFragmentManager().beginTransaction()</div><div class="line">                    .add(R.id.content_layout, oneFragment).commit();</div><div class="line"></div><div class="line">       /** 记录当前Fragment*/</div><div class="line">            currentFragment = oneFragment;</div><div class="line">            </div><div class="line">       /** 设置图片文本的变化*/  </div><div class="line">llBottomIvOne.setImageResource(R.mipmap.bottom_home_click);</div><div class="line">llBottomTvOne.setTextColor(getResources()</div><div class="line">                    .getColor(R.color.bottom_click));</div><div class="line">            llBottomIvTwo.setImageResource(R.mipmap.bottom_notice_normal);</div><div class="line">llbottomTvTwo.setTextColor(getResources().getColor(</div><div class="line">                    R.color.bottom_normal));</div><div class="line">           llBottomIvThree.setImageResource(R.mipmap.bottom_bill_normal);</div><div class="line">llBottomTvThree.setTextColor(getResources().getColor(</div><div class="line">                    R.color.bottom_normal));          </div><div class="line">            llBottomIvFour.setImageResource(R.mipmap.bottom_me_normal);</div><div class="line">llBottomTvFour.setTextColor(getResources().getColor(</div><div class="line">                    R.color.bottom_normal));</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>接下来，当我们点击底部每个按钮时：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">    /**</div><div class="line">     * 点击第一个tab</div><div class="line">     */</div><div class="line">    private void clickTab1Layout() &#123;</div><div class="line">        if (oneFragment == null) &#123;</div><div class="line">            oneFragment = new FragmentFrist();</div><div class="line">        &#125;</div><div class="line">        addOrShowFragment(getSupportFragmentManager().beginTransaction(), oneFragment);</div><div class="line"></div><div class="line">llBottomIvOne.setImageResource(R.mipmap.bottom_home_click);</div><div class="line">llBottomTvOne.setTextColor(getResources()</div><div class="line">                .getColor(R.color.bottom_click));</div><div class="line">        llBottomIvTwo.setImageResource(R.mipmap.bottom_notice_normal);</div><div class="line">llbottomTvTwo.setTextColor(getResources().getColor(</div><div class="line">                R.color.bottom_normal));</div><div class="line"></div><div class="line">        llBottomIvThree.setImageResource(R.mipmap.bottom_bill_normal);</div><div class="line">llBottomTvThree.setTextColor(getResources().getColor(</div><div class="line">                R.color.bottom_normal));</div><div class="line"></div><div class="line">        llBottomIvFour.setImageResource(R.mipmap.bottom_me_normal);</div><div class="line">llBottomTvFour.setTextColor(getResources().getColor(</div><div class="line">                R.color.bottom_normal));</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>这个方法用来判断到底是add还是show/hide 我们的Fragment<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">     * 添加或者显示碎片</div><div class="line">     *</div><div class="line">     * @param transaction</div><div class="line">     * @param fragment</div><div class="line">     */</div><div class="line">    private void addOrShowFragment(FragmentTransaction transaction,</div><div class="line">                                   Fragment fragment) &#123;</div><div class="line">        if (currentFragment == fragment)</div><div class="line">            return;</div><div class="line">        if (!fragment.isAdded()) &#123; </div><div class="line">        </div><div class="line">        // 如果当前fragment未被添加，则添加到Fragment管理器中</div><div class="line">            transaction.hide(currentFragment)</div><div class="line">                    .add(R.id.content_layout,        </div><div class="line">                    fragment).commit();</div><div class="line">           &#125; else &#123;</div><div class="line">           </div><div class="line">        // 如果当前fragment已被添加，则显示即可</div><div class="line">transaction.hide(currentFragment).show(fragment).commit();</div><div class="line">        &#125;</div><div class="line">        currentFragment = fragment;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p> <strong>3、再来看看我们的空View是怎么实现的呢？</strong></p>
+<p>在使用listview时我们见过 setEmptyView() 方法(内部实现原理也是通过 Visible 去控制显示的)，但是其他的 view 却没有吧，因此我们实现一个自己的空 View，在什么时候都可以使用。<br><img src="http://img.blog.csdn.net/20170410233043172?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line">public class EmptyViewLayout extends RelativeLayout &#123;</div><div class="line">    private ImageView failure;//加载失败的图片</div><div class="line">    private View bindView;// 绑定的View，即要显示的View</div><div class="line">    private Button loading_btn;//重试按钮</div><div class="line">    public EmptyViewLayout(Context context) &#123;</div><div class="line">        super(context);</div><div class="line">        initView(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public EmptyViewLayout(Context context, AttributeSet attrs) &#123;</div><div class="line">        super(context, attrs);</div><div class="line">        initView(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void initView(Context context) &#123;</div><div class="line">       </div><div class="line">        View view =              LayoutInflater.from(context).inflate(R.layout.empty_view,null);</div><div class="line">        failure = (ImageView)view.findViewById(R.id.loading_failure);</div><div class="line">        loading_btn= (Button) view.findViewById(R.id.loading_btn);</div><div class="line">        </div><div class="line">        //设置View参数</div><div class="line">        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,</div><div class="line">       </div><div class="line">        //最后添加进ViewGroup</div><div class="line">        addView(view, param);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     *正在加载中</div><div class="line">     */</div><div class="line">    public void Loading() &#123;</div><div class="line">        setVisibility(View.VISIBLE);</div><div class="line">        if (bindView != null) &#123;</div><div class="line">            failure.setVisibility(View.GONE);</div><div class="line">            loading_btn.setVisibility(View.GONE);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     *加载成功</div><div class="line">     */</div><div class="line">    public void succees() &#123;</div><div class="line">        setVisibility(View.GONE);</div><div class="line">        if (bindView != null) &#123;</div><div class="line">            bindView.setVisibility(View.VISIBLE);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     *加载失败</div><div class="line">     */</div><div class="line">    public void failure() &#123;</div><div class="line">        setVisibility(View.VISIBLE);</div><div class="line">        if (bindView != null) &#123;</div><div class="line">            failure.setVisibility(View.VISIBLE);</div><div class="line">            bindView.setVisibility(View.GONE);</div><div class="line">            loading_btn.setVisibility(View.VISIBLE);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 绑定加载 的view</div><div class="line">    public void bindView(View view) &#123;</div><div class="line">        this.bindView = view;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     * 利用反射机制，响应对方需要响应的方法</div><div class="line">     */</div><div class="line">    public void buttonClick(final Object base, final String method) &#123;</div><div class="line">        loading_btn.setOnClickListener(new OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                try &#123;</div><div class="line">                  Method m=base.getClass().getDeclaredMethod(method);</div><div class="line">                         m.setAccessible(true);</div><div class="line">                         m.invoke(base, null);</div><div class="line">                &#125; catch (Exception e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在布局和Activity中我们这样使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">  /**</div><div class="line">   *布局中</div><div class="line">   */</div><div class="line">&lt;com.qht.blog2.View.EmptyViewLayout</div><div class="line">       android:id=&quot;@+id/emptyView&quot;</div><div class="line">       android:layout_width=&quot;match_parent&quot;</div><div class="line">       android:layout_height=&quot;match_parent&quot;</div><div class="line">       android:layout_below=&quot;@+id/toolbar&quot;/&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> *Activity中</div><div class="line"> */</div><div class="line"> </div><div class="line"> // 绑定要显示的View</div><div class="line"> emptyView.bindView(content);</div><div class="line"> </div><div class="line"> // 注册点击事件，加载失败后点击重试执行onload方法</div><div class="line"> emptyView.buttonClick(this, &quot;onClick&quot;);</div><div class="line"> </div><div class="line"> 在我们的onResponse中执行 emptyView.succees();方法</div><div class="line"> 在我们的onError中执行 emptyView.succees();方法</div><div class="line"> 在我们的onBefore中执行 emptyView.Loading();方法</div></pre></td></tr></table></figure>
+<p>原理就是利用View的Visible和Gone去控制显示哪个View。</p>
+<hr>
+<p>下一篇，我准备开始实现功能了：<br>(因为我们刚开始选用的接口为快递100的，所以功能上考虑为一款快递查询APP)</p>
+<ul>
+<li>Fragment 和 ViewPage 结合实现顶部标签切换  </li>
+<li>RecycleView 实现精美的订单追踪页面</li>
+</ul>
+<p>我的QQ: 1003077897<br>我的csdn：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a><br>我的github：<a href="https://github.com/qht1003077897/AppFrame" target="_blank" rel="external">https://github.com/qht1003077897/AppFrame</a><br>我的个人博客：<a href="https://qht1003077897.github.io" target="_blank" rel="external">https://qht1003077897.github.io</a></p>
+<p>欢迎交流。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/框架/" rel="tag"># 框架</a>
+          
+            <a href="/tags/手把手/" rel="tag"># 手把手</a>
+          
+        </div>
+      
+
+      
+        
+      
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/05/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)/" rel="next" title="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)">
+                <i class="fa fa-chevron-left"></i> 手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODA2Ni80NjQw"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460"
+               alt="QHT" />
+          <p class="site-author-name" itemprop="name">QHT</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QHT</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+&nbsp; | &nbsp;
+<span id="busuanzi_container_site_pv">
+   本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("iHroEhpKFMjKWPBLi56akdfi-gzGzoHsz", "SKwAep4PKplglnYzay5F4dFm");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
