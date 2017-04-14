@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20170413174340323?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170413173702598?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170413174603076?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-04-14T06:31:34.604Z">
+<meta property="og:updated_time" content="2017-04-14T06:39:22.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APP构建之路踩坑记录">
 <meta name="twitter:description" content="对于踩过的坑记录下来，实时更新">
@@ -385,19 +385,19 @@
       
         <hr>
 <p>-</p>
-<h2 id="2017-04-14"><a href="#2017-04-14" class="headerlink" title="2017-04-14"></a>2017-04-14</h2><h2 id="Gson-解析时使用泛型报错-LinkedTreeMap-相关"><a href="#Gson-解析时使用泛型报错-LinkedTreeMap-相关" class="headerlink" title="Gson 解析时使用泛型报错 LinkedTreeMap 相关"></a>Gson 解析时使用泛型报错 LinkedTreeMap 相关</h2><p> <strong>- 相关代码：</strong></p>
+<h2 id="2017-04-14"><a href="#2017-04-14" class="headerlink" title="2017-04-14"></a>2017-04-14</h2><h2 id="Gson-解析时使用泛型报错-LinkedTreeMap-相关"><a href="#Gson-解析时使用泛型报错-LinkedTreeMap-相关" class="headerlink" title="Gson 解析时使用泛型报错 LinkedTreeMap 相关"></a>Gson 解析时使用泛型报错 LinkedTreeMap 相关</h2><p> <strong>相关代码：</strong></p>
 <p>gson.fromJson(json, clazz)</p>
-<p> <strong>- 错误日志：</strong></p>
+<p> <strong>错误日志：</strong></p>
 <p>java.lang.ClassCastException: com.google.gson.internal.LinkedTreeMap cannot be cast to com.qht.blog2.OtherActivity.orderdetail.data.OrderInfoDetailBean</p>
-<p> <strong>- 现场还原：</strong></p>
+<p> <strong>现场还原：</strong></p>
 <p>在使用 Gson 解析时，我们使用了封装的 JavaBean ，意味着要使用泛型。在解析的时候正常，解析为 LinkedTreeMap 类型，但是在使用 get 方法取值的时候报错 LinkedTreeMap 不能转化为<br> JavaBean。</p>
-<p> <strong>- 问题解决：</strong></p>
+<p> <strong>问题解决：</strong></p>
 <ul>
 <li><p>情况1：</p>
 <p>若返回类型为 List<t> 类型，我们采用这种方式解析：</t></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * 将返回的 List 类型的 Json 字符串解析为 List</div><div class="line"> * @param &lt;T&gt;</div><div class="line"> * @param json</div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public static  &lt;T&gt; List&lt;T&gt; jsonToList(String json,Class&lt;T&gt; clazz) &#123;</div><div class="line">    if (TextUtils.isEmpty(json) || null == clazz) &#123;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line">    List&lt;T&gt; list = new ArrayList&lt;T&gt;();</div><div class="line">    JsonArray array = new JsonParser().parse(json).getAsJsonArray();</div><div class="line">    for(final JsonElement elem : array)&#123;</div><div class="line">        list.add(gson.fromJson(elem, clazz));</div><div class="line">    &#125;</div><div class="line">    return list;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">    * 将返回的 List 类型的 Json 字符串解析为 List</div><div class="line">    * @param &lt;T&gt;</div><div class="line">    * @param json</div><div class="line">    * @return</div><div class="line">    */</div><div class="line">   public static  &lt;T&gt; List&lt;T&gt; jsonToList(String json,Class&lt;T&gt; clazz) &#123;</div><div class="line">       if (TextUtils.isEmpty(json) || null == clazz) &#123;</div><div class="line">           return null;</div><div class="line">       &#125;</div><div class="line">       List&lt;T&gt; list = new ArrayList&lt;T&gt;();</div><div class="line">       JsonArray array = new JsonParser().parse(json).getAsJsonArray();</div><div class="line">       for(final JsonElement elem : array)&#123;</div><div class="line">           list.add(gson.fromJson(elem, clazz));</div><div class="line">       &#125;</div><div class="line">       return list;</div><div class="line"></div><div class="line">   &#125;</div></pre></td></tr></table></figure>
 <ul>
 <li><p>情况2：(我采用的方法二，很明显是很笨的方法，所有希望能找个更好的方法。)</p>
 <p>若返回类型为 Model 类型，并且里面包含 list，例如：</p>
@@ -454,11 +454,7 @@
 </li>
 </ul>
 <pre><code>所以注册时参数为当前类，或者直接填写 this，不论任何类，首先保证在本类生效。
-</code></pre><hr>
-<p>-</p>
-<p>我的QQ: <a href="">1003077897</a><br>我的csdn：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a><br>我的github：<a href="https://github.com/qht1003077897" target="_blank" rel="external">https://github.com/qht1003077897</a><br>我的个人博客：<a href="https://qht1003077897.github.io" target="_blank" rel="external">https://qht1003077897.github.io</a></p>
-<p>欢迎交流。</p>
-
+</code></pre>
       
     </div>
 
