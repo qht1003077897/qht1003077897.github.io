@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20170413174340323?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170413173702598?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170413174603076?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-04-14T06:39:22.450Z">
+<meta property="og:updated_time" content="2017-04-22T02:02:22.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APP构建之路踩坑记录">
 <meta name="twitter:description" content="对于踩过的坑记录下来，实时更新">
@@ -385,6 +385,16 @@
       
         <hr>
 <p>-</p>
+<h2 id="2017-04-22"><a href="#2017-04-22" class="headerlink" title="2017-04-22"></a>2017-04-22</h2><h2 id="Litepal-删除数据不成功"><a href="#Litepal-删除数据不成功" class="headerlink" title="Litepal 删除数据不成功"></a>Litepal 删除数据不成功</h2><p> <strong>- 相关代码：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@OnClick(R.id.btn_orderall_delete)</div><div class="line">public void onClick() &#123;</div><div class="line">for(int i=0;i&lt;list.size();i++)&#123;</div><div class="line">if(list.get(i).isselect())&#123;</div><div class="line">list.remove(i);</div><div class="line">DataSupport.delete(OrderInfoLitePal.class,i+1);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">LogUtil.e(&quot;&quot;+DataSupport.count(OrderInfoLitePal.class));</div><div class="line">madapter.notifyDataSetChanged();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>本来 list 的大小是3，执行 delete 后大小还是3</p>
+<p> <strong>- 错误原因：</strong></p>
+<p>使用 litepal 删除数据时不能根据 list 的 position 作为 delete 的参数 id 进行删除，因为在数据库中我们知道如果使用自增id的话，删除一条数据，它的id是不会变的。比如1、2、3、4、5个自增id，删除id为3的数据，那么现在表大小为4，id分别为1、2、4、5，可见会跳过3。</p>
+<p> <strong>- 问题解决：</strong>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@OnClick(R.id.btn_orderall_delete)</div><div class="line">    public void onClick() &#123;</div><div class="line">        for(int i=0;i&lt;list.size();i++)&#123;</div><div class="line">            if(list.get(i).isselect())&#123;</div><div class="line">                int id=list.get(i).getId();</div><div class="line">                list.remove(i);</div><div class="line">                DataSupport.delete(OrderInfoLitePal.class,id);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        LogUtil.e(&quot;&quot;+DataSupport.count(OrderInfoLitePal.class));</div><div class="line">        madapter.notifyDataSetChanged();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>我们在定义javabean的时候需要自己定义一个 ID 字段，不用设置值，在执行插入操作时litepal会自动为我们的数据插入 ID，然后在删除时使用这个 ID 作为 delete 方法的参数进行删除，成功。</p>
+<hr>
+<p>-</p>
 <h2 id="2017-04-14"><a href="#2017-04-14" class="headerlink" title="2017-04-14"></a>2017-04-14</h2><h2 id="Gson-解析时使用泛型报错-LinkedTreeMap-相关"><a href="#Gson-解析时使用泛型报错-LinkedTreeMap-相关" class="headerlink" title="Gson 解析时使用泛型报错 LinkedTreeMap 相关"></a>Gson 解析时使用泛型报错 LinkedTreeMap 相关</h2><p> <strong>相关代码：</strong></p>
 <p>gson.fromJson(json, clazz)</p>
 <p> <strong>错误日志：</strong></p>
@@ -636,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-14"><span class="nav-number">1.</span> <span class="nav-text">2017-04-14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gson-解析时使用泛型报错-LinkedTreeMap-相关"><span class="nav-number">2.</span> <span class="nav-text">Gson 解析时使用泛型报错 LinkedTreeMap 相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-13"><span class="nav-number">3.</span> <span class="nav-text">2017-04-13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Studio-compile时导致重复包"><span class="nav-number">4.</span> <span class="nav-text">Android Studio compile时导致重复包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-09"><span class="nav-number">5.</span> <span class="nav-text">2017-04-09</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EventBus"><span class="nav-number">6.</span> <span class="nav-text">EventBus</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-22"><span class="nav-number">1.</span> <span class="nav-text">2017-04-22</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Litepal-删除数据不成功"><span class="nav-number">2.</span> <span class="nav-text">Litepal 删除数据不成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-14"><span class="nav-number">3.</span> <span class="nav-text">2017-04-14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gson-解析时使用泛型报错-LinkedTreeMap-相关"><span class="nav-number">4.</span> <span class="nav-text">Gson 解析时使用泛型报错 LinkedTreeMap 相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-13"><span class="nav-number">5.</span> <span class="nav-text">2017-04-13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Studio-compile时导致重复包"><span class="nav-number">6.</span> <span class="nav-text">Android Studio compile时导致重复包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-09"><span class="nav-number">7.</span> <span class="nav-text">2017-04-09</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EventBus"><span class="nav-number">8.</span> <span class="nav-text">EventBus</span></a></li></ol></div>
             
 
           </div>
