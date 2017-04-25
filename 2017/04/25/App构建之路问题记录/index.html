@@ -90,14 +90,14 @@
 <meta name="description" content="对于踩过的坑记录下来，实时更新">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APP构建之路问题记录">
-<meta property="og:url" content="http://yoursite.com/2017/04/24/App构建之路问题记录/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/04/25/App构建之路问题记录/index.html">
 <meta property="og:site_name" content="祁宏涛">
 <meta property="og:description" content="对于踩过的坑记录下来，实时更新">
 <meta property="og:image" content="http://img.blog.csdn.net/20170413173559251?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170413174340323?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170413173702598?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170413174603076?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-04-24T07:58:43.290Z">
+<meta property="og:updated_time" content="2017-04-25T01:53:16.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="APP构建之路问题记录">
 <meta name="twitter:description" content="对于踩过的坑记录下来，实时更新">
@@ -129,7 +129,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/24/App构建之路问题记录/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/25/App构建之路问题记录/"/>
 
 
 
@@ -274,7 +274,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/24/App构建之路问题记录/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/25/App构建之路问题记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QHT">
@@ -310,8 +310,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-24T15:31:16+08:00">
-                2017-04-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T10:31:16+08:00">
+                2017-04-25
               </time>
             
 
@@ -350,7 +350,7 @@
 
           
           
-             <span id="/2017/04/24/App构建之路问题记录/" class="leancloud_visitors" data-flag-title="APP构建之路问题记录">
+             <span id="/2017/04/25/App构建之路问题记录/" class="leancloud_visitors" data-flag-title="APP构建之路问题记录">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -400,7 +400,12 @@ android:focusableInTouchMode=&quot;false&quot;
 <p> <strong>- 问题解决：</strong>  </p>
 <p><strong>暂未解决。</strong><br>-</p>
 <p> <strong>- 应急方案：</strong>   </p>
-<p>使用 addOnItemTouchListener 实现 item 的点击事件。<br>并且在 checkbox 被选择时使用布尔值 check=true； 标志当前点击是 checkbox 发出的。如果是 checkbox 发出的则 置 check=false； 且在 onItemClick 方法里面不对此次事件做出任何响应。</p>
+<ol>
+<li><p>使用 addOnItemTouchListener 实现 item 的点击事件。 并且在 checkbox 被选择时使用布尔值<br>check=true； 标志当前点击是 checkbox 发出的。如果是 checkbox 发出的则 置 check=false； 且在<br>onItemClick 方法里面不对此次事件做出任何响应。</p>
+</li>
+<li><p>不使用 recycleview 的 item 点击事件，而是在 item 上面添加一个小箭头，点击小箭头即为点击 item，这样<br>checkbox 的点击事件和小箭头的点击事件则是独立的。</p>
+</li>
+</ol>
 <hr>
 <p>-</p>
 <h2 id="2017-04-22-━-Litepal-删除数据不成功"><a href="#2017-04-22-━-Litepal-删除数据不成功" class="headerlink" title="2017-04-22 ━ Litepal 删除数据不成功"></a>2017-04-22 ━ Litepal 删除数据不成功</h2><hr>
@@ -523,8 +528,8 @@ android:focusableInTouchMode=&quot;false&quot;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/11/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)/" rel="next" title="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)">
-                <i class="fa fa-chevron-left"></i> 手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)
+              <a href="/2017/04/25/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)/" rel="next" title="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)">
+                <i class="fa fa-chevron-left"></i> 手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)
               </a>
             
           </div>
@@ -532,10 +537,6 @@ android:focusableInTouchMode=&quot;false&quot;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/25/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)/" rel="prev" title="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)">
-                手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
