@@ -1,0 +1,980 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android,框架,手把手," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="博客出自：http://blog.csdn.net/u012534831">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)">
+<meta property="og:url" content="http://yoursite.com/2017/04/25/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)/index.html">
+<meta property="og:site_name" content="祁宏涛">
+<meta property="og:description" content="博客出自：http://blog.csdn.net/u012534831">
+<meta property="og:image" content="http://img.blog.csdn.net/20170425094428881?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170424211159691?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170425094449350?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170424220605933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170424220903155?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170424224416891?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170424230351342?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-04-25T01:43:48.153Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)">
+<meta name="twitter:description" content="博客出自：http://blog.csdn.net/u012534831">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170425094428881?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/25/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)/"/>
+
+
+
+
+
+  <title> 手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四) | 祁宏涛 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">祁宏涛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/25/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QHT">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="祁宏涛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T09:10:16+08:00">
+                2017-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/04/25/手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)/" class="leancloud_visitors" data-flag-title="手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(四)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  博客出自：http://blog.csdn.net/u012534831
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>点击查看上一篇文章：<a href="http://blog.csdn.net/u012534831/article/details/70040106" target="_blank" rel="external">手把手教你如何搭建一个自己的安卓快速开发框架之带你做自己的APP(三)</a></p>
+<p>继上一篇我们的开发，包含</p>
+<ul>
+<li>BaseFragment  </li>
+<li>精美的仿微信底部菜单栏  </li>
+<li>网络请求失败时如何显示空View</li>
+</ul>
+<p>那么，这一篇，我准备完成：</p>
+<ul>
+<li>精美的订单追踪页面  </li>
+<li>fragment+viewpage实现完整订单查看模块</li>
+<li>baseAdapter+下拉刷新</li>
+<li>litepal数据库操作</li>
+</ul>
+<p>其实到上一篇为止，我们的快速开发框架已经基本完成了。所以呢，接下来我准备在此基础上开发我们的一款APP—–<strong>玩快递</strong></p>
+<p>上面所说的准备完成的4部分其实我已经做完了，代码在git上，所以这儿我只是带大家看一下，就不细说。</p>
+<p><strong>1、开门见山，看下什么是精美的订单追踪页面？</strong></p>
+<p><img src="http://img.blog.csdn.net/20170425094428881?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>如上：我们使用 <strong>recycleview</strong> 来实现。</p>
+<p>首先是一个自定义View，这个自定义 View 包含三部分，</p>
+<ul>
+<li>beginline</li>
+<li>mark</li>
+<li>endline</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20170424211159691?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>代码在这里：<br><a href="https://github.com/qht1003077897/AppFrame/blob/master/app/src/main/java/com/qht/blog2/View/TimeLineMarkerView.java" target="_blank" rel="external">https://github.com/qht1003077897/AppFrame/blob/master/app/src/main/java/com/qht/blog2/View/TimeLineMarkerView.java</a></p>
+<p>使用了自定义属性，以便在 adapter 中设置这三个位置的 drawable，比如图中的红点</p>
+<ul>
+<li>如果已经签收，setbeginline(null); setmark(color.red);</li>
+<li>如果在途中，则不用设置，使用 xml 中定义的即可。</li>
+<li>如果是第一条信息，即为开始派件，则 setendline(null);</li>
+</ul>
+<p>然后 View 的左边是订单时间，右边是具体信息，下面加了一条 height=1px的 view 作为分割线，并且设置 recycleview 的分割线为 null。</p>
+<p>接下来看下我们 recycleview 所使用的 Adapter，考虑到 recycleview 的通用性，以及我们的订单页面使用的也是 recycleview，所以我们需要一个 BaseAdapter。</p>
+<p>在 github上找了一个，算是比较强大的，并且作者一直在维护：<a href="https://github.com/CymChad/BaseRecyclerViewAdapterHelper" target="_blank" rel="external">RecycleViewBaseAdapter</a></p>
+<p>看下我们是怎么用的，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Created by QHT on 2017-04-12.</div><div class="line"> * 订单详情页面</div><div class="line"> */</div><div class="line">public class OrderDetail_RV_Adapter extends BaseQuickAdapter&lt;OrderInfoDetailBean,BaseViewHolder&gt; &#123;</div><div class="line"></div><div class="line">    private Context context;</div><div class="line">    private TimeLineMarkerView timelineView;</div><div class="line">    private String state;</div><div class="line"></div><div class="line"></div><div class="line">    public OrderDetail_RV_Adapter(List&lt;OrderInfoDetailBean&gt; list,String state,Context context) &#123;</div><div class="line">        super(R.layout.activity_orderdetail_rv_item, list);</div><div class="line">        this.context=context;</div><div class="line">        this.state=state;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void convert(BaseViewHolder helper, OrderInfoDetailBean item) &#123;</div><div class="line">        if(timelineView==null ) &#123;</div><div class="line">            timelineView = (TimeLineMarkerView) (helper.getView(R.id.tv_rv_activity_orderdetail_timelineview));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if(helper.getItemViewType()==OrderSite.BEGIN)&#123;</div><div class="line">            timelineView.setBeginLine(null);</div><div class="line">            helper.setTextColor(R.id.tv_rv_activity_orderdetail_time,context.getResources().getColor(R.color.red));</div><div class="line">            helper.setTextColor(R.id.tv_rv_activity_orderdetail_content,context.getResources().getColor(R.color.red));</div><div class="line">            timelineView.setMarkerDrawable(context.getResources().getDrawable(R.drawable.timeline_bg_red));</div><div class="line">        &#125; else if(helper.getItemViewType()==OrderSite.END)&#123;</div><div class="line">            timelineView.setEndLine(null);</div><div class="line">        &#125;</div><div class="line">            helper.setText(R.id.tv_rv_activity_orderdetail_content, item.getContext());</div><div class="line">            //分两行显示</div><div class="line">            helper.setText(R.id.tv_rv_activity_orderdetail_time,</div><div class="line">                item.getTime().toString().substring(0,10)+&quot;\n&quot;+</div><div class="line">                item.getTime().toString().substring(10));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public int getItemViewType(int position) &#123;</div><div class="line">                if(position==0 &amp;&amp; state.equals(&quot;3&quot;))&#123;</div><div class="line">                    return OrderSite.BEGIN;</div><div class="line">                &#125;else if(position==getItemCount()-1)&#123;</div><div class="line">                    return OrderSite.END;</div><div class="line">                &#125;</div><div class="line">                return  super.getItemViewType(position);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们在 getItemViewType 类里面判断 item 的类型，返回不同的 int 值：</p>
+<ul>
+<li>OrderSite.BEGIN  代表订单已经签收。</li>
+<li>OrderSite.END     代表订单开始派发。</li>
+</ul>
+<p>然后在convert 方法中对 viewtype 进行判断，若为签收状态，则不显示 beginline，且 mark 为红色标示；若为派单状态，则 endline 不显示。</p>
+<hr>
+<p> <strong>2、接下来我们需要花很多时间看这个地方–订单列表  ↓ </strong>   </p>
+<p><img src="http://img.blog.csdn.net/20170425094449350?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>看图，在这个页面中，包含了以下几个要点：</p>
+<ul>
+<li>recycleview 的下拉刷新  </li>
+<li>recycleview 的右移动画  </li>
+<li>Activity 和 Fragment 积极通信</li>
+<li>单选、多选、全选删除动作</li>
+<li>litepal 增删改查</li>
+</ul>
+<p>你有没有注意到，在上个页面，我们的右下角有个浮动按钮，点击是这样的效果：</p>
+<p><img src="http://img.blog.csdn.net/20170424220605933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>噢，是将这个订单标记为已签收或者未签收状态，所以，我们还用到了数据库。</p>
+<p><img src="http://img.blog.csdn.net/20170424220903155?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>头大，但是也得看下去！</p>
+<p>首先，我们有这样一个model：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class OrderInfoLitePal extends DataSupport &#123;</div><div class="line"></div><div class="line"></div><div class="line">    int     id;</div><div class="line">    String  nu;</div><div class="line">    String  com;</div><div class="line">    String  state;</div><div class="line">    String  time;</div><div class="line">    boolean isselect;</div><div class="line"></div><div class="line">    public int getId() &#123;</div><div class="line">        return id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setId(int id) &#123;</div><div class="line">        this.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ............................</div></pre></td></tr></table></figure>
+<p>isselect 字段的目的是为了解决 checkbox 状态错乱的问题。</p>
+<p>extends DataSupport 是 litepal 所需，id 是每条数据的 Id,后面会方便删除。</p>
+<p> <strong>1. 先来看下拉刷新：</strong></p>
+<p>下拉刷新我们用到了这个库 <a href="https://github.com/baoyongzhang/android-PullRefreshLayout" target="_blank" rel="external">pullrefreshlayout</a></p>
+<p>用法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">swipeRefreshLayoutOrderall.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onRefresh() &#123;</div><div class="line">                swipeRefreshLayoutOrderall.post(new Runnable() &#123;</div><div class="line">                    @Override</div><div class="line">                    public void run() &#123;</div><div class="line">                        QueryData();</div><div class="line">                        notifydata();</div><div class="line">                        swipeRefreshLayoutOrderall.setRefreshing(false);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<p> <strong>2. 衔接上，下面是数据库查询操作 ：</strong></p>
+<p>使用 findAll 方法查一遍数据库，更新 list，再刷新视图即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">     * 避免调用notify失败</div><div class="line">     */</div><div class="line">    public void QueryData() &#123;</div><div class="line">      list.clear();</div><div class="line">      List&lt;OrderInfoLitePal&gt; lists=new ArrayList&lt;OrderInfoLitePal&gt;();</div><div class="line">      lists= DataSupport.findAll(OrderInfoLitePal.class);</div><div class="line">      list.addAll(lists);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>为了避免调用 notifyDataSetChanged 失败，采用上面的办法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lists= DataSupport.findAll(OrderInfoLitePal.class);</div></pre></td></tr></table></figure>
+<p>这句代码即为查询数据库中 表名为 <strong>OrderInfoLitePal</strong> 的所有数据。</p>
+<p>因为是全部订单，所以使用 findAll 。<br>如果是已签收订单（state为3代表已签收，其余状态各有意思）： 则为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lists=DataSupport.where(&quot;state=?&quot;,&quot;3&quot;).find(OrderInfoLitePal.class);</div></pre></td></tr></table></figure>
+<p>如果是未签收（state不等于3则为未签收），则为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lists=DataSupport.where(&quot;state!=?&quot;,&quot;3&quot;).find(OrderInfoLitePal.class);</div></pre></td></tr></table></figure>
+<p>3个页面非业务功能一致，所有这儿只说所有订单页面。</p>
+<p> <strong>3. 使用 EventBus 进行通信：</strong></p>
+<p>因为我们的结构是下面这样的：</p>
+<p><img src="http://img.blog.csdn.net/20170424224416891?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>toolbar 位于 MainActivity 上，如果点击 toolbar ，需要 AllOrderFragment做出动作，很明显我们需要使用 EventBus，并且还需要定制我们的 Event。</p>
+<p>如果在上图中加上 EventBus ，则变成这样：</p>
+<p><img src="http://img.blog.csdn.net/20170424230351342?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>在 AllOrder 中我们接受一个 OrderEvent,如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public class OrderEvent extends Event &#123;</div><div class="line">    public int position;</div><div class="line">    public String from;</div><div class="line">    public  boolean needclose;</div><div class="line">    public  boolean needselect;</div><div class="line"></div><div class="line">    public OrderEvent(boolean needclose,boolean needselect, String from, int position, Object source) &#123;</div><div class="line">        super(source);</div><div class="line">        this.needclose=needclose;</div><div class="line">        this.needselect=needselect;</div><div class="line">        this.from=from;</div><div class="line">        this.position=position;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>position 表示是哪个 fragment 。<br>from 代表这条消息来自哪儿。<br>needclose 代表 Recycleview 的 Item 右移动画是否需要关闭。<br>needselet  代表 checkbox 是否需要被选择。</p>
+<p>在 OnEvent 方法中 总共接受4种类型的消息</p>
+<ul>
+<li><p>第一种消息来自 MainActivity，代表点击了 toolbar 上面的 编辑/取消 按钮。</p>
+</li>
+<li><p>第二种消息来自 FragmentSecond，表示当切换 fragment 时，关闭上个 fragment 的右移动画 ，并且置select 字段 false。</p>
+</li>
+<li><p>第三种消息来自 MainActivity，表示点击了 全选/取消全选 按钮，并且置 select 字段 true/false。</p>
+</li>
+<li><p>第四种消息来自 MainActivity，表示因为底部 fragment 切换需要关闭 item 的右移动画，并且置 select 字段false；</p>
+</li>
+</ul>
+<p>比如说，我们点击了全选按钮：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">case R.id.toolbar_sub2title:</div><div class="line">         if (&quot;全选&quot;.equals(getSub2Title().getText().toString())) &#123;</div><div class="line">                getSub2Title().setText(&quot;取消全选&quot;);</div><div class="line">               // To:FragmentOrder_***.onEvent()</div><div class="line">               // false:不需要关闭动画</div><div class="line">               // true: 需要选择</div><div class="line">               // MainActivity_Allselect: 发送自 MainActivity</div><div class="line">               // 参数-1无意义</div><div class="line">               EventBusUtil.postSync(new       OrderEvent(false,true,&quot;MainActivity_Allselect&quot;, -1, this));</div><div class="line">      &#125; </div><div class="line">    else if (&quot;取消全选&quot;.equals(getSub2Title().getText().toString())) &#123;</div><div class="line">               getSub2Title().setText(&quot;全选&quot;);</div><div class="line">               // To:FragmentOrder_Signed.onEvent()</div><div class="line">               EventBusUtil.postSync(new OrderEvent(false,false, &quot;MainActivity_Allselect&quot;, -1, this));</div><div class="line">                &#125;</div><div class="line">                break;</div></pre></td></tr></table></figure>
+<p>当然，我们在 viewpage 切换的时候需要关闭上个 fragment 的右移动画和checkbox 的被选效果，则这样就可以：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">      public void onPageSelected(int position) &#123;</div><div class="line">      </div><div class="line">          lastViewPageIndex=viewPagePosition;</div><div class="line">          viewPagePosition=position;</div><div class="line">          // To:FragmentOrder_Signed.onEvent()  切换，则恢复动画</div><div class="line">          EventBusUtil.postSync(new OrderEvent(true,false,&quot;FragmentSecond&quot;,lastViewPageIndex,this));</div><div class="line">          // To:MainActivity.onEvent() 切换，则还原编辑字样</div><div class="line">          EventBusUtil.postSync(new OrderEvent(true,false,&quot;FragmentSecond&quot;,-1,this));</div><div class="line">          &#125;</div></pre></td></tr></table></figure>
+<p>position 发挥作用，表示上个 fragment 的位置，以明确到底是哪个 fragment接收。</p>
+<p> <strong>4. 最后看一下单选、多选、全选，以及删除是怎么做的：</strong></p>
+<ul>
+<li>单选</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.get(response.position).setIsselect(response.checked);</div></pre></td></tr></table></figure>
+<p>   设置 isselect 字段为 true 即可；</p>
+<ul>
+<li><p>多选、全选同理。</p>
+</li>
+<li><p>删除</p>
+</li>
+</ul>
+<p>最后删除的时候，我们需要遍历 list，找到 isselect字段为 true 的数据，从list 中移除，且调用 notifyItemRemoved 方法更新列表视图，最后从数据库中根据我们 model 中的 id 字段删除这条数据即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@OnClick(R.id.btn_orderall_delete)</div><div class="line">    public void onClick() &#123;</div><div class="line">        for (int i = 0; i &lt; list.size(); i++) &#123;</div><div class="line">            if (list.get(i).isselect()) &#123;</div><div class="line">                int id = list.get(i).getId();</div><div class="line">                list.remove(i);</div><div class="line">                madapter.notifyItemRemoved(i);</div><div class="line">                DataSupport.delete(OrderInfoLitePal.class, id);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>这篇就到这儿了，代码在 github 上。</p>
+<hr>
+<p>下一篇，我们来完成个人中心模块，也许包括：</p>
+<ul>
+<li>侧滑抽屉布局</li>
+<li>第三方登录</li>
+<li>第三方分享</li>
+</ul>
+<p>我的QQ: 1003077897<br>我的csdn：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a><br>我的github：<a href="https://github.com/qht1003077897/AppFrame" target="_blank" rel="external">https://github.com/qht1003077897/AppFrame</a><br>我的个人博客：<a href="https://qht1003077897.github.io" target="_blank" rel="external">https://qht1003077897.github.io</a></p>
+<p>欢迎交流。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/框架/" rel="tag"># 框架</a>
+          
+            <a href="/tags/手把手/" rel="tag"># 手把手</a>
+          
+        </div>
+      
+
+      
+        
+      
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/24/App构建之路问题记录/" rel="next" title="APP构建之路问题记录">
+                <i class="fa fa-chevron-left"></i> APP构建之路问题记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODA2Ni80NjQw"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460"
+               alt="QHT" />
+          <p class="site-author-name" itemprop="name">QHT</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QHT</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+&nbsp; | &nbsp;
+<span id="busuanzi_container_site_pv">
+   本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("iHroEhpKFMjKWPBLi56akdfi-gzGzoHsz", "SKwAep4PKplglnYzay5F4dFm");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
