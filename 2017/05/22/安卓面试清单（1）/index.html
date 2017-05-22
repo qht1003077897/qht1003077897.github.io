@@ -1,0 +1,990 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,面试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="面试记录本，博客出自：http://blog.csdn.net/u012534831">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓面试清单">
+<meta property="og:url" content="http://yoursite.com/2017/05/22/安卓面试清单（1）/index.html">
+<meta property="og:site_name" content="祁宏涛">
+<meta property="og:description" content="面试记录本，博客出自：http://blog.csdn.net/u012534831">
+<meta property="og:image" content="http://img.blog.csdn.net/20170522162734499?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170522162446466?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170522162759281?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-05-22T11:39:45.618Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓面试清单">
+<meta name="twitter:description" content="面试记录本，博客出自：http://blog.csdn.net/u012534831">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170522162734499?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/22/安卓面试清单（1）/"/>
+
+
+
+
+
+  <title> 安卓面试清单 | 祁宏涛 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">祁宏涛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/22/安卓面试清单（1）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QHT">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="祁宏涛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                安卓面试清单
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T08:54:16+08:00">
+                2017-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android，面试/" itemprop="url" rel="index">
+                    <span itemprop="name">Android，面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/05/22/安卓面试清单（1）/" class="leancloud_visitors" data-flag-title="安卓面试清单">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  面试记录本，博客出自：http://blog.csdn.net/u012534831
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Activity相关"><a href="#Activity相关" class="headerlink" title="Activity相关:"></a><strong>Activity相关:</strong></h1><h2 id="1-Activity的加载模式。"><a href="#1-Activity的加载模式。" class="headerlink" title="1. Activity的加载模式。"></a>1. Activity的加载模式。</h2><p><a href="http://blog.csdn.net/mynameishuangshuai/article/details/51491074" target="_blank" rel="external">http://blog.csdn.net/mynameishuangshuai/article/details/51491074</a></p>
+<p>任务是指在执行特定作业时与用户交互的一系列 Activity。 这些 Activity 按照各自的打开顺序排列在堆栈（即返回栈）中。</p>
+<p>注：某些适用于清单文件的启动模式不可用作 Intent 标志，同样，某些可用作 Intent 标志的启动模式无法在清单文件中定义。</p>
+<p><strong>standard-默认模式</strong></p>
+<p>  这个模式是默认的启动模式，即标准模式，在不指定启动模式的前提下，系统默认使用该模式启动Activity，每次启动一个Activity都会重写创建一个新的实例，不管这个实例存不存在，这种模式下，谁启动了该模式的Activity，该Activity就属于启动它的Activity的任务栈中。这个Activity它的onCreate()，onStart()，onResume()方法都会被调用。</p>
+<p><strong>singleTop模式分3种情况</strong></p>
+<ul>
+<li>当前栈中已有该Activity的实例并且该实例位于栈顶时，不会新建实例，而是复用栈顶的实例，并且会将Intent对象传入，回调onNewIntent方法</li>
+<li>当前栈中已有该Activity的实例但是该实例不在栈顶时，其行为和standard启动模式一样，依然会创建一个新的实例</li>
+<li>当前栈中不存在该Activity的实例时，其行为同standard启动模式</li>
+</ul>
+<p>standard和singleTop启动模式都是在原任务栈中新建Activity实例，不会启动新的Task，即使你指定了taskAffinity属性。</p>
+<p>那么什么是taskAffinity属性呢，可以简单的理解为任务相关性。</p>
+<ul>
+<li><p>这个参数标识了一个Activity所需任务栈的名字，默认情况下，所有Activity所需的任务栈的名字为应用的包名。</p>
+</li>
+<li><p>我们可以单独指定每一个Activity的taskAffinity属性覆盖默认值。</p>
+</li>
+<li><p>一个任务的affinity决定于这个任务的根activity（root activity）的taskAffinity。</p>
+</li>
+<li><p>在概念上，具有相同的affinity的activity（即设置了相同taskAffinity属性的activity）属于同一个任务。</p>
+</li>
+</ul>
+<ul>
+<li><p>为一个activity的taskAffinity设置一个空字符串，表明这个activity不属于任何task。</p>
+</li>
+<li><p>很重要的一点taskAffinity属性不对standard和singleTop模式有任何影响，即时你指定了该属性为其他不同的值，这两种启动模式下不会创建新的task（如果不指定即默认值，即包名）</p>
+</li>
+</ul>
+<p><strong>singleTask-栈内复用模式</strong> <strong>（MainActivity时会用到）</strong></p>
+<p>这个模式十分复杂，有各式各样的组合。在这个模式下，如果栈中存在这个Activity的实例就会复用这个Activity，不管它是否位于栈顶，复用时，会将它上面的Activity全部出栈，并且会回调该实例的onNewIntent方法。其实这个过程还存在一个任务栈的匹配，因为这个模式启动时，会在自己需要的任务栈中寻找实例，这个任务栈就是通过taskAffinity属性指定。如果这个任务栈不存在，则会创建这个任务栈。 </p>
+<ul>
+<li><p>singleTask启动模式启动Activity时，首先会根据taskAffinity去寻找当前是否存在一个对应名字的任务栈。</p>
+</li>
+<li><p>如果不存在，则会创建一个新的Task，并创建新的Activity实例入栈到新创建的Task中去。</p>
+</li>
+<li><p>如果存在，则得到该任务栈，查找该任务栈中是否存在该Activity实例。</p>
+<ul>
+<li><p>如果存在实例，则将它上面的Activity实例都出栈，然后回调启动的Activity实例的onNewIntent方法。</p>
+</li>
+<li><p>如果不存在该实例，则新建Activity，并入栈。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>此外，我们可以将两个不同App中的Activity设置为相同的taskAffinity，这样虽然在不同的应用中，但是Activity会被分配到同一个Task中去。</p>
+<p><strong>singleInstance-全局唯一模式</strong></p>
+<p>该模式具备singleTask模式的所有特性外，与它的区别就是，这种模式下的Activity会单独占用一个Task栈，具有全局唯一性，即<strong>整个系统</strong>中就这么一个实例，由于栈内复用的特性，后续的请求均不会创建新的Activity实例，除非这个特殊的任务栈被销毁了。以singleInstance模式启动的Activity在整个系统中是单例的，如果在启动这样的Activiyt时，已经存在了一个实例，那么会把它所在的任务调度到前台，重用这个实例。 </p>
+<p>整个系统即为Android系统，允许不同的APP应用同用一个任务栈。</p>
+<hr>
+<h2 id="2-Application、Activity、Fragment、broadcastReceiver、service生命周期，横竖屏切换时候Activity的生命周期"><a href="#2-Application、Activity、Fragment、broadcastReceiver、service生命周期，横竖屏切换时候Activity的生命周期" class="headerlink" title=" 2. Application、Activity、Fragment、broadcastReceiver、service生命周期，横竖屏切换时候Activity的生命周期 "></a> 2. Application、Activity、Fragment、broadcastReceiver、service生命周期，横竖屏切换时候Activity的生命周期 </h2><p>###Application:</p>
+<p>Application和Activity,Service一样,是android框架的一个系统组件，当android程序启动时系统会创建一个application对象，用来存储系统的一些信息。application对象的生命周期是整个程序中最长的，它的生命周期就等于这个程序的生命周期。因为它是全局的单例的，所以在不同的Activity,Service中获得的对象都是同一个对象。所以通过Application来进行一些，数据传递，数据共享 等,数据缓存等操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">public class BaseApplication extends Application &#123;  </div><div class="line">      </div><div class="line">        @Override  </div><div class="line">        public void onCreate() &#123;  </div><div class="line">            // 程序创建的时候执行  </div><div class="line">            super.onCreate();  </div><div class="line">        &#125;  </div><div class="line">      </div><div class="line">        @Override  </div><div class="line">        public void onTerminate() &#123;  </div><div class="line">           /**</div><div class="line">	       * onTerminate()会在app关闭的时候调用,但是就像onDestroy()一样，</div><div class="line">	       * 不能保证一定会被调用。</div><div class="line">	       * 系统内存不足可能强制杀掉你的进程，这时候onterminate就不调了。</div><div class="line">	       * 所以最好不要依赖这个方法做重要的处理，</div><div class="line">	       * 这个方法最多可以用来销毁一写对象，清除一下缓存，</div><div class="line">	       * 但是也并不能保证一定会清除掉，其他操作，例如想在程序结束保存               </div><div class="line">	       * 数据，用这个方法明显是错误的。</div><div class="line">	       */</div><div class="line">            super.onTerminate();  </div><div class="line">        &#125;  </div><div class="line">      </div><div class="line">        @Override  </div><div class="line">        public void onLowMemory() &#123;  </div><div class="line">            /**onLowMemory()在内存比较紧张时,根据优先级把后台程序杀死  </div><div class="line">            时,系统回调他,它用在14之前,14之后就出现了onTrimMemory()  </div><div class="line">            */</div><div class="line">            super.onLowMemory();  </div><div class="line">        &#125;  </div><div class="line">      </div><div class="line">        @Override  </div><div class="line">        public void onTrimMemory(int level) &#123;  </div><div class="line">          /**</div><div class="line">	       * 程序在内存清理的时候执行（回收内存）  </div><div class="line">	       * HOME键退出应用程序、长按MENU键，打开Recent TASK都会执行。</div><div class="line">	       */</div><div class="line">            super.onTrimMemory(level);  </div><div class="line">        &#125;  </div><div class="line">      </div><div class="line">        @Override  </div><div class="line">        public void onConfigurationChanged(Configuration newConfig) &#123;  </div><div class="line">            super.onConfigurationChanged(newConfig);  </div><div class="line">        &#125;  </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>###Activity:</p>
+<p><img src="http://img.blog.csdn.net/20170522162734499?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170522162446466?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170522162759281?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>程序启动运行并结束上述生命周期的方法执行顺序是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">onCreate –&gt; onContentChanged –&gt; onStart –&gt; onPostCreate –&gt; onResume –&gt; onPostResume –&gt; onPause –&gt; onStop –&gt; onDestroy</div></pre></td></tr></table></figure>
+<p> <strong>- onContentChanged</strong></p>
+<p>onContentChanged()是Activity中的一个回调方法 当Activity的布局改动时，即setContentView()或者addContentView()方法执行完毕时就会调用该方法， 例如，Activity中各种View的findViewById()方法都可以放到该方法中。</p>
+<p> <strong>- onPostCreate、onPostResume</strong></p>
+<p>onPostCreate方法是指onCreate方法彻底执行完毕的回调，onPostResume类似，这两个方法官方说法是一般不会重写，现在知道的做法也就只有在使用ActionBarDrawerToggle的使用在onPostCreate需要在屏幕旋转时候等同步下状态，Google官方提供的一些实例就是如下做法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onPostCreate(Bundle savedInstanceState) &#123;</div><div class="line">    super.onPostCreate(savedInstanceState);</div><div class="line"></div><div class="line">    // Sync the toggle state after onRestoreInstanceState has occurred.</div><div class="line">    mDrawerToggle.syncState();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> <strong>- onPause、 onStop</strong></p>
+<p>这里顺便再提一下onPause、 onStop的区别， onPause是在整个窗口被半遮盖或者半透明的时候会执行，而onStop则是在整个窗口被完全遮盖才会触发， 触发onStop的方法之前必定会触发onPause方法。</p>
+<p> <strong>- onCreate、 onStart</strong></p>
+<p>onCreate方法会在第一次创建的时候执行，紧接着便会执行onStart方法，之后页面被完全遮挡会执行onStop方法，再返回的时候一般便会执行onRestart –&gt; onStart方法， 但是如果如果这时候App内存不够需要更多的内存的时候，App便会杀死该进程，结束掉该Activity，所以这时候再返回的时候便会重新执行onCreate –&gt; onStart –&gt; onResume方法。</p>
+<p> <strong>- onSaveInstanceState、 onRestoreInstanceState</strong></p>
+<ul>
+<li>onSaveInstanceState</li>
+</ul>
+<p>onSaveInstanceState字面理解就是保存实例的状态，当某个activity变得“容易”被系统销毁时，该activity的onSaveInstanceState就会被执行，除非该activity是被用户主动销毁的，例如当用户按BACK键的时候。</p>
+<p>注意上面的双引号，何为“容易”？言下之意就是该activity还没有被销毁，而仅仅是一种可能性。这种可能性有这么几种情况：</p>
+<ol>
+<li>当用户按下HOME键时</li>
+</ol>
+<p>这是显而易见的，系统不知道你按下HOME后要运行多少其他的程序，自然也不知道activity A是否会被销毁，故系统会调用onSaveInstanceState，让用户有机会保存某些非永久性的数据。以下几种情况的分析都遵循该原则</p>
+<ol>
+<li>长按HOME键，选择运行其他的程序时。</li>
+<li>按下电源按键（关闭屏幕显示）时。 </li>
+<li>从activity A中启动一个新的activity时。</li>
+<li>屏幕方向切换时，例如从竖屏切换到横屏时。</li>
+</ol>
+<p>在屏幕切换之前，系统会销毁activity A，在屏幕切换之后系统又会自动地创建activity A，所以onSaveInstanceState一定会被执行</p>
+<p>总而言之，onSaveInstanceState的调用遵循一个重要原则，即当系统“未经你许可”时销毁了你的activity，则onSaveInstanceState会被系统调用，这是系统的责任，因为它必须要提供一个机会让你保存你的数据（当然你不保存那就随便你了）。</p>
+<ul>
+<li>onRestoreInstanceState</li>
+</ul>
+<p>onSaveInstanceState字面理解就是恢复实例的状态, 需要注意的是，onSaveInstanceState方法和onRestoreInstanceState方法“不一定”是成对的被调用的，onRestoreInstanceState被调用的前提是，activity A“确实”被系统销毁了，而如果仅仅是停留在有这种可能性的情况下，则该方法不会被调用，例如，当正在显示activity A的时候，用户按下HOME键回到主界面，然后用户紧接着又返回到activity A，这种情况下activity A一般不会因为内存的原因被系统销毁，故activity A的onRestoreInstanceState方法不会被执行。</p>
+<p>不过大多数情况下也是很少使用onRestoreInstanceState方法的，经常我们还是在onCreate方法里直接恢复状态的，onCreate方法里本身会有一个Bundle参数的，很多时候我们是这样使用的。（onCreate在onStart之前调用，而onRestoreInstanceState是在onStart之后调用）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">protected void onSaveInstanceState(Bundle savedInstanceState) &#123;</div><div class="line">    super.onSaveInstanceState(icicle);</div><div class="line">    savedInstanceState.putLong(&quot;param&quot;, value);</div><div class="line">&#125;</div><div class="line">public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">    if (savedInstanceState != null)&#123;</div><div class="line">        value = savedInstanceState.getLong(&quot;param&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>来结合一些特定的使用场景来分析下Activity的生命周期。</strong></p>
+<p>首次启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">onCreate –&gt; onStart –&gt; onResume</div></pre></td></tr></table></figure>
+<p>按下返回按键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">onPause –&gt; onStop –&gt; onDestroy</div></pre></td></tr></table></figure>
+<p>按Home键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">onPause –&gt; onSaveInstanceState –&gt; onStop</div></pre></td></tr></table></figure>
+<p>再次打开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">onRestart –&gt; onStart –&gt; onResume</div></pre></td></tr></table></figure>
+<p>屏幕旋转</p>
+<p>如果你不做任何配置，启动Activity会执行如下方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">onCreate –&gt; onStart –&gt; onResume</div></pre></td></tr></table></figure>
+<p>之后旋转屏幕，则Activity会被销毁并重新创建，之后便会执行如下方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">onPause –&gt; onSaveInstanceState –&gt; onStop –&gt; onDestroy –&gt; onCreate –&gt; onStart –&gt; onRestoreInstanceState –&gt; onResume</div></pre></td></tr></table></figure>
+<p>在AndroidManifest配置文件里声明android:configChanges属性<br>默认屏幕旋转会重新创建，当然可以通过在配置文件里加上如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:configChanges=&quot;keyboardHidden|orientation|screenSize&quot;（sdk&gt;13时需加上screenSize）</div></pre></td></tr></table></figure>
+<p>这个时候再旋转屏幕便不会销毁Activity，这时候再旋转屏幕可以看到只会执行onConfigurationChanged方法，有什么在屏幕旋转的逻辑可以重写这个方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public void onConfigurationChanged(Configuration newConfig) &#123;</div><div class="line">    if (newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) &#123;</div><div class="line">        // TODO:</div><div class="line">    &#125;</div><div class="line">    super.onConfigurationChanged(newConfig);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>FirstActivity打开SecondActivity</p>
+<p>FirstActivity打开SecondActivity，这时候FirstActivity生命周期的方法是这样的： onPause –&gt; onSaveInstanceState –&gt; onStop, 这个时候在SecondActivity按返回键，FirstActivity会有以下集中情况：</p>
+<p>正常情况下会执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">onRestart -&gt; onStart -&gt; onResume</div></pre></td></tr></table></figure>
+<p>当系统由于要回收内存而把 activity 销毁时，</p>
+<p>Activity在onPause或者onStop状态下都有可能遇到由于突发事件系统需要回收内存，之后的onDestroy方法便不会再执行，这时候会执行： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">onCreate –&gt; onStart –&gt; onRestoreInstanceState –&gt; onResume</div></pre></td></tr></table></figure>
+<hr>
+<hr>
+<p>csdn地址：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a><br>github地址：<a href="https://github.com/qht1003077897" target="_blank" rel="external">https://github.com/qht1003077897</a><br>个人博客地址：<a href="https://qht1003077897.github.io" target="_blank" rel="external">https://qht1003077897.github.io</a><br>QQ：1003077897</p>
+<p>欢迎交流。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+        
+      
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/05/一款仿快递100的快递类APP之H-Express/" rel="next" title="一款仿快递100的快递类APP  H-Express">
+                <i class="fa fa-chevron-left"></i> 一款仿快递100的快递类APP  H-Express
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODA2Ni80NjQw"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460"
+               alt="QHT" />
+          <p class="site-author-name" itemprop="name">QHT</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Activity相关"><span class="nav-number">1.</span> <span class="nav-text">Activity相关:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Activity的加载模式。"><span class="nav-number">1.1.</span> <span class="nav-text">1. Activity的加载模式。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Application、Activity、Fragment、broadcastReceiver、service生命周期，横竖屏切换时候Activity的生命周期"><span class="nav-number">1.2.</span> <span class="nav-text"> 2. Application、Activity、Fragment、broadcastReceiver、service生命周期，横竖屏切换时候Activity的生命周期 </span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QHT</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+&nbsp; | &nbsp;
+<span id="busuanzi_container_site_pv">
+   本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("iHroEhpKFMjKWPBLi56akdfi-gzGzoHsz", "SKwAep4PKplglnYzay5F4dFm");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
