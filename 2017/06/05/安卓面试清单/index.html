@@ -90,13 +90,13 @@
 <meta name="description" content="面试记录本">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安卓面试清单">
-<meta property="og:url" content="http://yoursite.com/2017/05/22/安卓面试清单/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/06/05/安卓面试清单/index.html">
 <meta property="og:site_name" content="祁宏涛">
 <meta property="og:description" content="面试记录本">
 <meta property="og:image" content="http://img.blog.csdn.net/20170522194639623?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170522162446466?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170522162759281?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-05-22T11:54:03.854Z">
+<meta property="og:updated_time" content="2017-06-05T13:43:47.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓面试清单">
 <meta name="twitter:description" content="面试记录本">
@@ -128,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/22/安卓面试清单/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/05/安卓面试清单/"/>
 
 
 
@@ -273,7 +273,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/22/安卓面试清单/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/05/安卓面试清单/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QHT">
@@ -309,8 +309,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T08:54:16+08:00">
-                2017-05-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-05T08:54:16+08:00">
+                2017-06-05
               </time>
             
 
@@ -349,7 +349,7 @@
 
           
           
-             <span id="/2017/05/22/安卓面试清单/" class="leancloud_visitors" data-flag-title="安卓面试清单">
+             <span id="/2017/06/05/安卓面试清单/" class="leancloud_visitors" data-flag-title="安卓面试清单">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -498,9 +498,99 @@
 <p>Activity在onPause或者onStop状态下都有可能遇到由于突发事件系统需要回收内存，之后的onDestroy方法便不会再执行，这时候会执行： </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">onCreate –&gt; onStart –&gt; onRestoreInstanceState –&gt; onResume</div></pre></td></tr></table></figure>
 <hr>
+<h1 id="二、Handler相关"><a href="#二、Handler相关" class="headerlink" title="二、Handler相关:"></a><strong>二、Handler相关:</strong></h1><h2 id="1-Handler机制。"><a href="#1-Handler机制。" class="headerlink" title=" 1. Handler机制。"></a> 1. Handler机制。</h2><p>1、 <a href="http://blog.csdn.net/lmj623565791/article/details/38377229/" target="_blank" rel="external">（鸿洋Android 异步消息处理机制 让你深入理解Looper、Handler、Message三者关系）</a></p>
+<p>2、子线程更新UI问题？(不严谨）：</p>
+<ul>
+<li><p>情况1：若在子线程(需要标记)创建ViewRoot对象，调用windowmanager的addview()方法，添加对应的视图，则可以更新UI，参考：<strong>忘记地址了</strong>……</p>
+</li>
+<li><p>情况2：在onresume()之前，比如oncreate()，开启子线程并且更新UI，不会报错，因为此时还没有执行requestlayout(),也未执行checkthread()方法。参考自己的博客（<a href="http://blog.csdn.net/u012534831/article/details/52056072" target="_blank" rel="external">子线程真的不能更新UI吗？</a>）</p>
+</li>
+</ul>
+<p>UI控件是线程不安全的。若在子线程中更新UI，会产生竞争、死锁等问题，多个子线程更新UI会使UI控件混乱，且不可控制。</p>
+<h2 id="2-Looper。"><a href="#2-Looper。" class="headerlink" title=" 2. Looper。"></a> 2. Looper。</h2><p>1、   如何保证一个线程只有一个Looper？</p>
+<p> Looper.prepare()方法已经保证了一个线程只能拥有一个Looper实例。但是其中是使用ThreadLocal进行保存这个looper对象的。那么ThreadLocal怎么保证这个looper唯一呢，而不是作为一个同步共享变量呢？</p>
+<p><a href="http://www.cnblogs.com/dolphin0520/p/3920407.html" target="_blank" rel="external">Java并发编程：深入剖析ThreadLocal</a></p>
+<p>  阅读上文（注意阅读评论，作者原文内容部分有歧义）我们可以知道：</p>
+<p>一个线程内部可以创建多个ThreadLocal，每个ThreadLocal维护一个ThreadLocalMap，每个ThreadLocalMap的key（键）为ThreadLocal对象，我们需要保存的任何对象作为value（值）；</p>
+<p>在looper.prepare()方法里面只创建了一个sThreadLocal对象，通过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sThreadLocal.set(new Looper(true));</div></pre></td></tr></table></figure>
+<p> 方法可以保存此looper的引用（某些地方称为副本，并不准确），可见此looper 在每个线程中是唯一的，因为：</p>
+<ol>
+<li>每个sThreadLocal只能存放一个键值对。</li>
+<li>下面这段代码保证了looper不能被new两次。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (sThreadLocal.get() != null) &#123;  </div><div class="line">            throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);  </div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="三、多线程"><a href="#三、多线程" class="headerlink" title="三、多线程:"></a><strong>三、多线程:</strong></h1><h2 id="1-安卓多线程的方式有哪些。"><a href="#1-安卓多线程的方式有哪些。" class="headerlink" title=" 1. 安卓多线程的方式有哪些。"></a> 1. 安卓多线程的方式有哪些。</h2><p>###安卓多线程方式：</p>
+<p> Handler+Thread（sendmessage() 和 handler.post()）</p>
+<p>AsynTask</p>
+<p>ThreadPoolExecutor</p>
+<p>IntentService</p>
+<p>###安卓异步更新UI方式：</p>
+<p>sendmessage() 和 handler.post()</p>
+<p>AsynTask</p>
+<p>RunOnUiThread</p>
+<p>view.post()（需要确保View已经attach到window）详见<a href="http://blog.csdn.net/a740169405/article/details/69668957" target="_blank" rel="external">View#post与Handler#post的区别，以及导致的内存泄漏分析</a></p>
+<p>###详解几种线程池：</p>
+<p><a href="http://blog.csdn.net/u012702547/article/details/52259529" target="_blank" rel="external">Android开发之线程池使用总结</a></p>
+<p>###多线程面试基础知识点-java教程：</p>
+<ol>
+<li>什么是进程？什么是线程？进程与线程的关系是怎样的？<br>【答】进程：进程是一个可并发的具有独立功能的程序关于某个数据集合的一次执行过程，也是操作系统进行资源分配和保护的基本单位。<br>线程：线程是操作系统进程中能够独立执行的实体，是处理器调度和分派的基本单位。<br>线程是进程的组成部分，每个进程内允许包含多个并发执行的线程。</li>
+</ol>
+<ol>
+<li>操作系统为什么要支持多线程技术？<br>【答】操作系统采用进程机制能够减少程序并发时所付出的时空开销，使得并发粒度更细，并发性更好，提高了资源使用率和系统效率。<ol>
+<li>Java为什么要支持线程？什么场合需要使用多线程程序设计？<br>【答】支持多线程能充分发挥硬件的并发性，消除处理器和I/O设备的互等现象，提高系统效率。 一般一下场合需要使用多线程：1、程序包好复杂的计算任务时，主要是利用多线程获取更所得CPU时间。2、处理速度较慢的外围设备。3、程序设计自身的需要。</li>
+<li>Java提供了哪些接口和类实现多线程机制？<br>【答】Java主要提供了java.lang.Runnable接口和Thread线程类来实现多线程机制。</li>
+<li>一个线程对象的生命周期有哪几种状态构成？各状态之间是如何变化的？<br>【答】<br>线程对象的生命周期主要包括：新建态、就绪态和运行态、阻塞态和等待态、终止态。新建态通过start()方法是线程成为运行态，当运行态遇到sleep()或wait()方法时就进入等待态，而当sleep()时间到或通过notify()方法线程就又进入了运行态;当运行态遇到synchronized()方法时就进入阻塞态,当线程获得互斥锁使用权时就又到了运行态；当线程的run()方法结束时整个线程就进入了终止态，整个线程结束。</li>
+<li>Java提供了哪些方法能够改变线程状态？程序中能够调度线程立即执行吗？<br>【答】Java中提供了start()方法来启动已创建的线程对象；sleep()方法使当前线程睡眠若干毫秒，线程有运行态进入等待态，但是不交出临界区的锁；yield() 方法暂停当前线程的执行，允许其他线程竞争CPU；stop()方法来结束一个线程；wait()方法将本线程设为等待态；notify() 方法来唤醒当前处于等待态的线程；interrupt()方法改变当前线程的中断状态，但是当前线程还可以继续执行。</li>
+<li>什么是线程的优先级？设置线程优先级有什么作用？<br>【答】每个线程被执行的优先顺序即为线程的优先级，默认优先级为5。当创建了多个线程并要执行这些线程时，操作系统不知到底该执行哪个线程，当设置好优先级后，程序首先会执行优先级最高的线程，然后依次执行下去。这样处理器将会合理而且充实的额被利用，不会造成资源的浪费或者运行的混乱。</li>
+<li>线程按什么规则排队等待？<br>【答】线程按优先级排队，线程调度语句优先级基础上的“先到先服务”原则</li>
+<li>多线程间共享数据时会发生怎样的并发执行错误？<br>【答】当几个线程共享数据时，一个线程的执行可能影响其他线程的执行结果，并导致错误的程序运行结果。</li>
+<li>在什么情况下需要采用线程同步机制？<br>【答】当并发执行的多个线程间需要共享资源或交换数据时，各个线程执行时相互之间会干扰或影响其他线程的执行结果，这时就需要采用线程同步机制。</li>
+<li>关键字synchronized是什么含义？为什么wait()和notify()方法要与synchronized同时使用？<br>【答】synchronized用于声明一段程序为临界区，使线程对临界资源采用互斥使用方式。<br>wait()和notify()不是属于线程类，而是每一个对象都具有的方法，而且这两个方法都和对象锁有关，有锁的地方必有synchronized()方法，故wait()和notify()方法要与synchronized同时使用。</li>
+<li>明sleep()和wait()方法的异同。<br>【答】wait是Object类的方法，sleep与yield都是Thread类的方法。wait调用的时候需要注意的是该方法是释放锁标志的，而sleep在调用的时候是紧紧抱着锁标志的，也就是等他完全执行完成了才可以让其他线程来访问的<br>sleep 方法使当前运行中的线程睡眼一段时间，进入不可运行状态，这段时间的长短是由程序设定的，yield 方法使当前线程让出 CPU 占有权，但让出的时间是不可设定的。</li>
+<li>一个对象为什么需要调用wait()方法使当前线程等待？<br>【答】wait()使当前线程进入停滞状态时，还会释放当前线程所占有的“锁标志”， 从而使线程所在对象中的其它synchronized数据可被别的线程使用。当调用sleep()方法时，该线程不会释放当前线程所占有的“锁标志”。</li>
+<li>什么是死锁？什么情况下会死锁？<br>【答】由于资源占用是互斥的，当某个进程提出申请资源后，使得有关进程在无外力协助下，永远分配不到必需的资源而无法继续运行，这就产生了一种特殊现象死锁。<br>当多个线程同时被阻塞，他们中的一个或者全部都在等待某个资源被释放，由于线程被无限期地阻塞，因此程序处于非正常终止，才会产生死锁。</li>
+</ol>
+</li>
+</ol>
+<h1 id="四、ANR异常发生条件"><a href="#四、ANR异常发生条件" class="headerlink" title="四、ANR异常发生条件:"></a><strong>四、ANR异常发生条件:</strong></h1><p>###发生条件：</p>
+<p>ANR 一般有三种类型：</p>
+<ul>
+<li><p>KeyDispatchTimeout(5 seconds) –主要类型</p>
+<p> 按键或触摸事件在特定时间内无响应</p>
+</li>
+<li><p>BroadcastTimeout(10 seconds)</p>
+<p>BroadcastReceiver在特定时间内无法处理完成</p>
+</li>
+<li><p>ServiceTimeout(20 seconds) –小概率类型</p>
+</li>
+</ul>
+<p>超时的原因一般有两种：</p>
+<ol>
+<li>当前的事件没有机会得到处理（UI线程正在处理前一个事件没有及时完成或者looper被某种原因阻塞住）。</li>
+<li>当前的事件正在处理，但没有及时完成。<br>UI线程尽量只做跟UI相关的工作，耗时的工作（数据库操作，I/O，连接网络或者其他可能阻碍 UI线程的操作）放入单独的线程处理，尽量用Handler来处理 UI thread 和 thread 之间的交互。<br>UI线程主要包括如下：<br>Activity:onCreate(), onResume(), onDestroy(), onKeyDown(), onClick()<br>AsyncTask: onPreExecute(), onProgressUpdate(), onPostExecute(), onCancel()<br>Mainthread handler: handleMessage(), post(runnable r)</li>
+</ol>
+<p>###如何分析ANR:</p>
+<p>查找 ANR 的方式：</p>
+<ul>
+<li>导出/data/data/anr/traces.txt，找出函数和调用过程，分析代码 </li>
+<li>通过 LOG 查找</li>
+</ul>
+<h1 id="五、自定义View和ViewGroup"><a href="#五、自定义View和ViewGroup" class="headerlink" title="五、自定义View和ViewGroup:"></a><strong>五、自定义View和ViewGroup:</strong></h1><p>###自定义View：</p>
+<p>1、<a href="http://www.jianshu.com/p/d507e3514b65#" target="_blank" rel="external">教你步步为营掌握自定义View(修改原文中广播为 Timer更好)</a><br>2、个人项目 H-Express 自定义时间轴(待完善)</p>
+<p>###自定义ViewGroup：</p>
+<p><a href="http://www.jianshu.com/p/5e61b6af4e4c" target="_blank" rel="external">教你步步为营掌握自定义ViewGroup</a></p>
+<h1 id="六、安卓事件分发处理"><a href="#六、安卓事件分发处理" class="headerlink" title="六、安卓事件分发处理:"></a><strong>六、安卓事件分发处理:</strong></h1><p><a href="http://www.jianshu.com/p/e99b5e8bd67b" target="_blank" rel="external">图解 Android 事件分发机制</a></p>
+<p><a href="http://www.jianshu.com/p/2be492c1df96" target="_blank" rel="external">可能是讲解Android事件分发最好的文章</a></p>
+<h1 id="七、GC算法"><a href="#七、GC算法" class="headerlink" title="七、GC算法:"></a><strong>七、GC算法:</strong></h1><p><a href="http://www.cnblogs.com/sunfie/p/5125283.html" target="_blank" rel="external">JVM学习之GC常用算法</a></p>
+<p><a href="http://www.jianshu.com/p/24c074138efa" target="_blank" rel="external">你不得不了解的JVM（一、二）</a></p>
+<h1 id="八、四大引用"><a href="#八、四大引用" class="headerlink" title="八、四大引用:"></a><strong>八、四大引用:</strong></h1><p><a href="http://blog.csdn.net/hejjunlin/article/details/52637333" target="_blank" rel="external"> Android性能提升之强引用、软引用、弱引用、虚引用使用</a></p>
+<h1 id="九、安卓动画"><a href="#九、安卓动画" class="headerlink" title="九、安卓动画:"></a><strong>九、安卓动画:</strong></h1><p><a href="http://www.cnblogs.com/angeldevil/archive/2011/12/02/2271096.html" target="_blank" rel="external">Android动画学习笔记-Android Animation</a></p>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/38067475" target="_blank" rel="external">Android 属性动画（Property Animation） 完全解析 （上）</a></p>
+<h1 id="十、Dalvik和Art区别？"><a href="#十、Dalvik和Art区别？" class="headerlink" title="十、Dalvik和Art区别？:"></a><strong>十、Dalvik和Art区别？:</strong></h1><p><a href="http://blog.csdn.net/watermusicyes/article/details/50526814" target="_blank" rel="external"> Dalvik和ART运行时环境的区别</a></p>
 <hr>
 <p>csdn地址：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a><br>github地址：<a href="https://github.com/qht1003077897" target="_blank" rel="external">https://github.com/qht1003077897</a><br>个人博客地址：<a href="https://qht1003077897.github.io" target="_blank" rel="external">https://qht1003077897.github.io</a><br>QQ：1003077897</p>
-<p>欢迎交流。</p>
+<p>安卓面试清单</p>
 
       
     </div>
@@ -683,7 +773,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Activity相关"><span class="nav-number">1.</span> <span class="nav-text">Activity相关:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Activity的加载模式。"><span class="nav-number">1.1.</span> <span class="nav-text">1. Activity的加载模式。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Application、Activity、Fragment、broadcastReceiver、service生命周期，横竖屏切换时候Activity的生命周期"><span class="nav-number">1.2.</span> <span class="nav-text"> 2. Application、Activity、Fragment、broadcastReceiver、service生命周期，横竖屏切换时候Activity的生命周期 </span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Activity相关"><span class="nav-number">1.</span> <span class="nav-text">Activity相关:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Activity的加载模式。"><span class="nav-number">1.1.</span> <span class="nav-text">1. Activity的加载模式。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Application、Activity、Fragment、broadcastReceiver、service生命周期，横竖屏切换时候Activity的生命周期"><span class="nav-number">1.2.</span> <span class="nav-text"> 2. Application、Activity、Fragment、broadcastReceiver、service生命周期，横竖屏切换时候Activity的生命周期 </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Handler相关"><span class="nav-number">2.</span> <span class="nav-text">二、Handler相关:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Handler机制。"><span class="nav-number">2.1.</span> <span class="nav-text"> 1. Handler机制。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Looper。"><span class="nav-number">2.2.</span> <span class="nav-text"> 2. Looper。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、多线程"><span class="nav-number">3.</span> <span class="nav-text">三、多线程:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安卓多线程的方式有哪些。"><span class="nav-number">3.1.</span> <span class="nav-text"> 1. 安卓多线程的方式有哪些。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、ANR异常发生条件"><span class="nav-number">4.</span> <span class="nav-text">四、ANR异常发生条件:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、自定义View和ViewGroup"><span class="nav-number">5.</span> <span class="nav-text">五、自定义View和ViewGroup:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、安卓事件分发处理"><span class="nav-number">6.</span> <span class="nav-text">六、安卓事件分发处理:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七、GC算法"><span class="nav-number">7.</span> <span class="nav-text">七、GC算法:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八、四大引用"><span class="nav-number">8.</span> <span class="nav-text">八、四大引用:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#九、安卓动画"><span class="nav-number">9.</span> <span class="nav-text">九、安卓动画:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十、Dalvik和Art区别？"><span class="nav-number">10.</span> <span class="nav-text">十、Dalvik和Art区别？:</span></a></li></ol></div>
             
 
           </div>
