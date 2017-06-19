@@ -1,0 +1,954 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,面试,OKHttp," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="OKHttp源码从头解析，面试杀手锏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓面试清单----OKHttp源码解析（二）">
+<meta property="og:url" content="http://yoursite.com/2017/06/16/OkHttp源码分析（二）/index.html">
+<meta property="og:site_name" content="祁宏涛">
+<meta property="og:description" content="OKHttp源码从头解析，面试杀手锏">
+<meta property="og:image" content="http://img.blog.csdn.net/20170616165105874?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-06-19T08:15:04.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓面试清单----OKHttp源码解析（二）">
+<meta name="twitter:description" content="OKHttp源码从头解析，面试杀手锏">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170616165105874?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/16/OkHttp源码分析（二）/"/>
+
+
+
+
+
+  <title> 安卓面试清单----OKHttp源码解析（二） | 祁宏涛 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">祁宏涛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/16/OkHttp源码分析（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QHT">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="祁宏涛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                安卓面试清单----OKHttp源码解析（二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-16T08:54:16+08:00">
+                2017-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/06/16/OkHttp源码分析（二）/" class="leancloud_visitors" data-flag-title="安卓面试清单----OKHttp源码解析（二）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  OKHttp源码从头解析，面试杀手锏
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上篇文章我们讲到了getResponse()方法，这节接着来看：</p>
+<p>getResponse()方法中最重要的有两个方法，sendRequest() 和 readResponse()；</p>
+<p>先来看 sendRequest() ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**来自 HttpEngine 类*/</div><div class="line"></div><div class="line">public void sendRequest() throws RequestException, RouteException, IOException &#123;</div><div class="line">      if(this.cacheStrategy == null) &#123;</div><div class="line">         if(this.httpStream != null) &#123;</div><div class="line">            throw new IllegalStateException();</div><div class="line">         &#125; else &#123;</div><div class="line">            Request request = this.networkRequest(this.userRequest);</div><div class="line">            InternalCache responseCache = Internal.instance.internalCache(this.client);</div><div class="line">            Response cacheCandidate = responseCache != null?responseCache.get(request):null;</div><div class="line">            long now = System.currentTimeMillis();</div><div class="line">            this.cacheStrategy = (new Factory(now, request, cacheCandidate)).get();</div><div class="line">            this.networkRequest = this.cacheStrategy.networkRequest;</div><div class="line">            this.cacheResponse = this.cacheStrategy.cacheResponse;</div><div class="line">            if(responseCache != null) &#123;</div><div class="line">               responseCache.trackResponse(this.cacheStrategy);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            if(cacheCandidate != null &amp;&amp; this.cacheResponse == null) &#123;</div><div class="line">               Util.closeQuietly(cacheCandidate.body());</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            if(this.networkRequest == null &amp;&amp; this.cacheResponse == null) &#123;</div><div class="line">               this.userResponse = (new Builder()).request(this.userRequest).priorResponse(stripBody(this.priorResponse)).protocol(Protocol.HTTP_1_1).code(504).message(&quot;Unsatisfiable Request (only-if-cached)&quot;).body(EMPTY_BODY).build();</div><div class="line">            &#125; else if(this.networkRequest == null) &#123;</div><div class="line">               this.userResponse = this.cacheResponse.newBuilder().request(this.userRequest).priorResponse(stripBody(this.priorResponse)).cacheResponse(stripBody(this.cacheResponse)).build();</div><div class="line">               this.userResponse = this.unzip(this.userResponse);</div><div class="line">            &#125; else &#123;</div><div class="line">               boolean success = false;</div><div class="line"></div><div class="line">               try &#123;</div><div class="line">                  this.httpStream = this.connect();</div><div class="line">                  this.httpStream.setHttpEngine(this);</div><div class="line">                  if(this.writeRequestHeadersEagerly()) &#123;</div><div class="line">                     long contentLength = OkHeaders.contentLength(request);</div><div class="line">                     if(this.bufferRequestBody) &#123;</div><div class="line">                        if(contentLength &gt; 2147483647L) &#123;</div><div class="line">                           throw new IllegalStateException(&quot;Use setFixedLengthStreamingMode() or setChunkedStreamingMode() for requests larger than 2 GiB.&quot;);</div><div class="line">                        &#125;</div><div class="line"></div><div class="line">                        if(contentLength != -1L) &#123;</div><div class="line">                           this.httpStream.writeRequestHeaders(this.networkRequest);</div><div class="line">                           this.requestBodyOut = new RetryableSink((int)contentLength);</div><div class="line">                        &#125; else &#123;</div><div class="line">                           this.requestBodyOut = new RetryableSink();</div><div class="line">                        &#125;</div><div class="line">                     &#125; else &#123;</div><div class="line">                        this.httpStream.writeRequestHeaders(this.networkRequest);</div><div class="line">                        this.requestBodyOut = this.httpStream.createRequestBody(this.networkRequest, contentLength);</div><div class="line">                     &#125;</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  success = true;</div><div class="line">               &#125; finally &#123;</div><div class="line">                  if(!success &amp;&amp; cacheCandidate != null) &#123;</div><div class="line">                     Util.closeQuietly(cacheCandidate.body());</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">               &#125;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">         &#125;</div><div class="line">      &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>第10句：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">InternalCache responseCache = Internal.instance.internalCache(this.client);</div></pre></td></tr></table></figure>
+<p>Internal 是个抽象类， Internal.instance 对象最终在 OKhttpClient 的static 代码块中构造，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**来自 OKhttpClient 类*/</div><div class="line"></div><div class="line">     Internal.instance = new Internal() &#123;</div><div class="line">        ......</div><div class="line">         public InternalCache internalCache(OkHttpClient client) &#123;</div><div class="line">            return client.internalCache();</div><div class="line">         &#125;</div><div class="line">		......</div><div class="line">      &#125;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/**来自 OKhttpClient 类*/</div><div class="line"></div><div class="line">InternalCache internalCache() &#123;</div><div class="line">      return this.cache != null?this.cache.internalCache:this.internalCache;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>我们这里需要看下cache.internalCache的实现，这个位于Cache.Java里面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">/**来自 Cache 类*/</div><div class="line"></div><div class="line"> this.internalCache = new InternalCache() &#123;</div><div class="line">		  //根据请求得到响应</div><div class="line">         public Response get(Request request) throws IOException &#123;</div><div class="line">            return Cache.this.get(request);</div><div class="line">         &#125;</div><div class="line">		  //缓存响应</div><div class="line">         public CacheRequest put(Response response) throws IOException &#123;</div><div class="line">            return Cache.this.put(response);</div><div class="line">         &#125;</div><div class="line"></div><div class="line">         public void remove(Request request) throws IOException &#123;</div><div class="line">            Cache.this.remove(request);</div><div class="line">         &#125;</div><div class="line"></div><div class="line">         public void update(Response cached, Response network) throws IOException &#123;</div><div class="line">            Cache.this.update(cached, network);</div><div class="line">         &#125;</div><div class="line"></div><div class="line">         public void trackConditionalCacheHit() &#123;</div><div class="line">            Cache.this.trackConditionalCacheHit();</div><div class="line">         &#125;</div><div class="line"></div><div class="line">         public void trackResponse(CacheStrategy cacheStrategy) &#123;</div><div class="line">            Cache.this.trackResponse(cacheStrategy);</div><div class="line">         &#125;</div><div class="line">      &#125;;</div></pre></td></tr></table></figure>
+<p>就是一些对cache的控制，sendRequest方法中的responseCache就是Cache中的InternalCache，因此我们继续看下面的代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/** getResponse 方法*/</div><div class="line"></div><div class="line"> Response cacheCandidate = responseCache != null</div><div class="line">        ? responseCache.get(request)</div><div class="line">        : null;</div></pre></td></tr></table></figure>
+<p>在看get方法之前我们有必要看一下缓存响应的put方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">/**来自 Cache 类*/</div><div class="line"></div><div class="line"></div><div class="line">private CacheRequest put(Response response) &#123;</div><div class="line">    //得到请求的方法</div><div class="line">    String requestMethod = response.request().method();</div><div class="line"></div><div class="line">    if (HttpMethod.invalidatesCache(response.request().method())) &#123;</div><div class="line">      try &#123;</div><div class="line">        remove(response.request());</div><div class="line">      &#125; catch (IOException ignored) &#123;</div><div class="line">        // The cache cannot be written.</div><div class="line">      &#125;</div><div class="line">      return null;</div><div class="line">    &#125;</div><div class="line">    //不缓存非GET方法的响应</div><div class="line">    if (!requestMethod.equals(&quot;GET&quot;)) &#123;</div><div class="line">      // Don&apos;t cache non-GET responses. We&apos;re technically allowed to cache</div><div class="line">      // HEAD requests and some POST requests, but the complexity of doing</div><div class="line">      // so is high and the benefit is low.</div><div class="line">      return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (HttpHeaders.hasVaryAll(response)) &#123;</div><div class="line">      return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //使用JakeWharton大神的DiskLruCache进行缓存  采用LUR算法</div><div class="line">    Entry entry = new Entry(response);</div><div class="line">    DiskLruCache.Editor editor = null;</div><div class="line">    try &#123;</div><div class="line">      editor = cache.edit(urlToKey(response.request()));</div><div class="line">      if (editor == null) &#123;</div><div class="line">        return null;</div><div class="line">      &#125;</div><div class="line">      entry.writeTo(editor);</div><div class="line">      return new CacheRequestImpl(editor);</div><div class="line">    &#125; catch (IOException e) &#123;</div><div class="line">      abortQuietly(editor);</div><div class="line">      return null;</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>从上面代码可以看到，首先是对请求的方法进行判断，概括起来就是一句话：只缓存请求方法为GET的响应。然后符合缓存的条件后，使用响应创建一个Entry对象，然后使用DiskLruCache写入缓存，最终返回一个CacheRequestImpl对象。cache是DiskLruCache的实例，调用edit方法传入响应的key值，而key值就是对请求调用urlToKey方法。下面是urlToKey的实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**来自 Cache 类*/</div><div class="line"></div><div class="line">private static String urlToKey(Request request) &#123;</div><div class="line">    //MD5</div><div class="line">    return Util.md5Hex(request.url().toString());</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>从代码就可以看出是对请求的URL做MD5然后再得到MD5值的十六进制表示形式，这儿就不继续看了。<br>Entry实例就是要写入的缓存部分，主要看一下它的writeTo()方法，该方法执行具体的写入磁盘操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">/**来自 Cache 的static内部类 Entry*/</div><div class="line"></div><div class="line">public void writeTo(Editor editor) throws IOException &#123;</div><div class="line">         BufferedSink sink = Okio.buffer(editor.newSink(0));</div><div class="line">         sink.writeUtf8(this.url);</div><div class="line">         sink.writeByte(10);</div><div class="line">         sink.writeUtf8(this.requestMethod);</div><div class="line">         sink.writeByte(10);</div><div class="line">         sink.writeDecimalLong((long)this.varyHeaders.size());</div><div class="line">         sink.writeByte(10);</div><div class="line">         int i = 0;</div><div class="line"></div><div class="line">         int size;</div><div class="line">         for(size = this.varyHeaders.size(); i &lt; size; ++i) &#123;</div><div class="line">            sink.writeUtf8(this.varyHeaders.name(i));</div><div class="line">            sink.writeUtf8(&quot;: &quot;);</div><div class="line">            sink.writeUtf8(this.varyHeaders.value(i));</div><div class="line">            sink.writeByte(10);</div><div class="line">         &#125;</div><div class="line"></div><div class="line">         sink.writeUtf8((new StatusLine(this.protocol, this.code, this.message)).toString());</div><div class="line">         sink.writeByte(10);</div><div class="line">         sink.writeDecimalLong((long)this.responseHeaders.size());</div><div class="line">         sink.writeByte(10);</div><div class="line">         i = 0;</div><div class="line"></div><div class="line">         for(size = this.responseHeaders.size(); i &lt; size; ++i) &#123;</div><div class="line">            sink.writeUtf8(this.responseHeaders.name(i));</div><div class="line">            sink.writeUtf8(&quot;: &quot;);</div><div class="line">            sink.writeUtf8(this.responseHeaders.value(i));</div><div class="line">            sink.writeByte(10);</div><div class="line">         &#125;</div><div class="line"></div><div class="line">         if(this.isHttps()) &#123;</div><div class="line">            sink.writeByte(10);</div><div class="line">            sink.writeUtf8(this.handshake.cipherSuite().javaName());</div><div class="line">            sink.writeByte(10);</div><div class="line">            this.writeCertList(sink, this.handshake.peerCertificates());</div><div class="line">            this.writeCertList(sink, this.handshake.localCertificates());</div><div class="line">            if(this.handshake.tlsVersion() != null) &#123;</div><div class="line">               sink.writeUtf8(this.handshake.tlsVersion().javaName());</div><div class="line">               sink.writeByte(10);</div><div class="line">            &#125;</div><div class="line">         &#125;</div><div class="line"></div><div class="line">         sink.close();</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p>从上面的代码可以看到，写入缓存的不仅仅只是响应的头部信息，还包括请求的部分信息：URL、请求方法、请求头部。至此，我们看到对于一个请求和响应，缓存中的key值是请求的URL的MD5值，而value包括请求和响应部分。Entry的writeTo()方法只把请求的头部和响应的头部保存了，最关键的响应主体部分在哪里保存呢？答案在put方法的返回体CacheRequestImpl，下面是这个类的实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">/**来自 Cache 的内部类 CacheRequestImpl，实现了CacheRequest接口*/</div><div class="line"></div><div class="line">    public CacheRequestImpl(final Editor editor) throws IOException &#123;</div><div class="line">         this.editor = editor;</div><div class="line">         this.cacheOut = editor.newSink(1);</div><div class="line">         this.body = new ForwardingSink(this.cacheOut) &#123;</div><div class="line">            public void close() throws IOException &#123;</div><div class="line">               Cache arg0 = Cache.this;</div><div class="line">               synchronized(Cache.this) &#123;</div><div class="line">                  if(CacheRequestImpl.this.done) &#123;</div><div class="line">                     return;</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  CacheRequestImpl.this.done = true;</div><div class="line">                  Cache.this.writeSuccessCount++;</div><div class="line">               &#125;</div><div class="line"></div><div class="line">               super.close();</div><div class="line">               editor.commit();</div><div class="line">            &#125;</div><div class="line">         &#125;;</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p>最终，通过 editor.commit();进行缓存写入。看完了put方法再来看get方法就能好理解点了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">/**来自 Cache 类*/</div><div class="line"></div><div class="line">  Response get(Request request) &#123;</div><div class="line">	</div><div class="line">      String key = urlToKey(request);</div><div class="line">      Snapshot snapshot;</div><div class="line">      try &#123;</div><div class="line">         snapshot = this.cache.get(key);</div><div class="line">         if(snapshot == null) &#123;</div><div class="line">            return null;</div><div class="line">         &#125;</div><div class="line">      &#125; catch (IOException arg6) &#123;</div><div class="line">         return null;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      Cache.Entry entry;</div><div class="line">      try &#123;</div><div class="line">         entry = new Cache.Entry(snapshot.getSource(0));</div><div class="line">      &#125; catch (IOException arg5) &#123;</div><div class="line">         Util.closeQuietly(snapshot);</div><div class="line">         return null;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      Response response = entry.response(snapshot);</div><div class="line">      if(!entry.matches(request, response)) &#123;</div><div class="line">         Util.closeQuietly(response.body());</div><div class="line">         return null;</div><div class="line">      &#125; else &#123;</div><div class="line">         return response;</div><div class="line">      &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>从代码中可以看到，首先是对请求的URL进行MD5计算得到key值，然后尝试根据key值从缓存中得到值，如果没有该值，说明缓存中没有该值，那么直接返回null，否则创建Entry对象，然后再从Entry中得到响应对象，如果请求和响应不匹配(地址，请求方式、请求头) ，那么也返回null，否则就返回响应对象。<br>下面是Entry的构造方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">/**来自 Cache 类（Entry的构造方法）*/</div><div class="line"></div><div class="line">  public Entry(Source in) throws IOException &#123;</div><div class="line">         try &#123;</div><div class="line">            BufferedSource source = Okio.buffer(in);</div><div class="line">             //读请求相关信息</div><div class="line">            this.url = source.readUtf8LineStrict();</div><div class="line">            this.requestMethod = source.readUtf8LineStrict();</div><div class="line">            Builder varyHeadersBuilder = new Builder();</div><div class="line">            int varyRequestHeaderLineCount = Cache.readInt(source);</div><div class="line"></div><div class="line">            for(int statusLine = 0; statusLine &lt; varyRequestHeaderLineCount; ++statusLine) &#123;</div><div class="line">               varyHeadersBuilder.addLenient(source.readUtf8LineStrict());</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            this.varyHeaders = varyHeadersBuilder.build();</div><div class="line">             //读响应状态行</div><div class="line">            StatusLine arg16 = StatusLine.parse(source.readUtf8LineStrict());</div><div class="line">            this.protocol = arg16.protocol;</div><div class="line">            this.code = arg16.code;</div><div class="line">            this.message = arg16.message;</div><div class="line">            //读响应首部</div><div class="line">            Builder responseHeadersBuilder = new Builder();</div><div class="line">            int responseHeaderLineCount = Cache.readInt(source);</div><div class="line"></div><div class="line">            for(int blank = 0; blank &lt; responseHeaderLineCount; ++blank) &#123;</div><div class="line">               responseHeadersBuilder.addLenient(source.readUtf8LineStrict());</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            this.responseHeaders = responseHeadersBuilder.build();</div><div class="line">             //是HTTPS协议，读握手、证书信息</div><div class="line">            if(this.isHttps()) &#123;</div><div class="line">               String arg17 = source.readUtf8LineStrict();</div><div class="line">               if(arg17.length() &gt; 0) &#123;</div><div class="line">                  throw new IOException(&quot;expected \&quot;\&quot; but was \&quot;&quot; + arg17 + &quot;\&quot;&quot;);</div><div class="line">               &#125;</div><div class="line"></div><div class="line">               String cipherSuiteString = source.readUtf8LineStrict();</div><div class="line">               CipherSuite cipherSuite = CipherSuite.forJavaName(cipherSuiteString);</div><div class="line">               List peerCertificates = this.readCertificateList(source);</div><div class="line">               List localCertificates = this.readCertificateList(source);</div><div class="line">               TlsVersion tlsVersion = !source.exhausted()?TlsVersion.forJavaName(source.readUtf8LineStrict()):null;</div><div class="line">               this.handshake = Handshake.get(tlsVersion, cipherSuite, peerCertificates, localCertificates);</div><div class="line">            &#125; else &#123;</div><div class="line">               this.handshake = null;</div><div class="line">            &#125;</div><div class="line">         &#125; finally &#123;</div><div class="line">            in.close();</div><div class="line">         &#125;</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p>在put方法中我们知道了缓存中保存了请求的信息和响应的信息。 获得了包含首部信息的Entry之后，再调用response方法得到正在的响应，下面是response()方法的实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">/**来自 Cache 内部类 Entry*/</div><div class="line"></div><div class="line">  public Response response(Snapshot snapshot) &#123;</div><div class="line">         String contentType = this.responseHeaders.get(&quot;Content-Type&quot;);</div><div class="line">         String contentLength = this.responseHeaders.get(&quot;Content-Length&quot;);</div><div class="line">         Request cacheRequest = (new okhttp3.Request.Builder()).</div><div class="line">         url(this.url).</div><div class="line">         method(this.requestMethod, (RequestBody)null).</div><div class="line">         headers(this.varyHeaders).build();</div><div class="line">         </div><div class="line">         return (new okhttp3.Response.Builder()). request(cacheRequest).</div><div class="line">         protocol(this.protocol).</div><div class="line">         code(this.code).</div><div class="line">         message(this.message).</div><div class="line">         headers(this.responseHeaders).</div><div class="line">         body(new Cache.CacheResponseBody(snapshot, contentType, contentLength)).</div><div class="line">         handshake(this.handshake).build();</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p>再看下match方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/**来自 Cache 内部类 Entry*/</div><div class="line"></div><div class="line"> public boolean matches(Request request, Response response) &#123;</div><div class="line">         return this.url.equals(request.url().toString()) &amp;&amp; this.requestMethod.equals(request.method()) &amp;&amp; OkHeaders.varyMatches(response, this.varyHeaders, request);</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p>可以看到，响应的首部信息保存在Entry中，而主体部分是在传入的Snapshot中，主体是创建了一个CacheResponseBody对象。CacheResponseBody继承自ResponseBody类并且使用传入的Snapshot获得put中保存的响应主体部分。 </p>
+<p>最终通过比较发起请求的url，方法，head等信息和缓存中的进行比较，决定是否返回response。</p>
+<hr>
+<p>OK，再回到 HttpEngine 类，上面分析完了10,11行，我们再来接着看13行，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">this.cacheStrategy = (new Factory(now, request, cacheCandidate)).get();</div></pre></td></tr></table></figure>
+<p>可以看到根据当前时间、构建的Request请求体、和得到的缓存响应 创建一个工厂，然后再得到一个CacheStrategy。首先看该工厂的构造方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">/**来自 Cache 的内部static工厂类 Factory*/</div><div class="line"></div><div class="line">public Factory(long nowMillis, Request request, Response cacheResponse) &#123;</div><div class="line">			this.nowMillis = nowMillis;</div><div class="line">			this.request = request;</div><div class="line">			this.cacheResponse = cacheResponse;</div><div class="line">			if (cacheResponse != null) &#123;</div><div class="line">				Headers headers = cacheResponse.headers();</div><div class="line">				int i = 0;</div><div class="line"></div><div class="line">				for (int size = headers.size(); i &lt; size; ++i) &#123;</div><div class="line">					String fieldName = headers.name(i);</div><div class="line">					String value = headers.value(i);</div><div class="line">					if (&quot;Date&quot;.equalsIgnoreCase(fieldName)) &#123;</div><div class="line">						this.servedDate = HttpDate.parse(value);</div><div class="line">						this.servedDateString = value;</div><div class="line">					&#125; else if (&quot;Expires&quot;.equalsIgnoreCase(fieldName)) &#123;</div><div class="line">						this.expires = HttpDate.parse(value);</div><div class="line">					&#125; else if (&quot;Last-Modified&quot;.equalsIgnoreCase(fieldName)) &#123;</div><div class="line">						this.lastModified = HttpDate.parse(value);</div><div class="line">						this.lastModifiedString = value;</div><div class="line">					&#125; else if (&quot;ETag&quot;.equalsIgnoreCase(fieldName)) &#123;</div><div class="line">						this.etag = value;</div><div class="line">					&#125; else if (&quot;Age&quot;.equalsIgnoreCase(fieldName)) &#123;</div><div class="line">						this.ageSeconds = HeaderParser.parseSeconds(value, -1);</div><div class="line">					&#125; else if (OkHeaders.SENT_MILLIS</div><div class="line">							.equalsIgnoreCase(fieldName)) &#123;</div><div class="line">						this.sentRequestMillis = Long.parseLong(value);</div><div class="line">					&#125; else if (OkHeaders.RECEIVED_MILLIS</div><div class="line">							.equalsIgnoreCase(fieldName)) &#123;</div><div class="line">						this.receivedResponseMillis = Long.parseLong(value);</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
+<p>从代码中可以看出，如果候选的缓存响应不为null，那么将响应首部中有关缓存的首部的值得到，主要有Date、Expires、Last-Modified、ETag和Age首部。 </p>
+<p>其中Date表明响应报文是何时创建的，Expires表示该响应的绝对过期时间，Last-Modified表示最近一次修改的时间。 </p>
+<p>再看Factory的get方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> /**</div><div class="line">	 *来自 Cache 的内部static工厂类 Factory</div><div class="line">     * Returns a strategy to satisfy &#123;@code request&#125; </div><div class="line">     * using the a cached response &#123;@code response&#125;.</div><div class="line">     */</div><div class="line">    public CacheStrategy get() &#123;</div><div class="line">      CacheStrategy candidate = getCandidate();</div><div class="line"></div><div class="line">return candidate.networkRequest != null</div><div class="line">						&amp;&amp; this.request.cacheControl().onlyIfCached() ?</div><div class="line">					 new CacheStrategy((Request) null, (Response) null) : candidate;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>从代码中可以看出首先调用getCandidate()得到候选的CacheStrategy对象，然后如果得到的缓存策略表明需要使用网络，但是请求中指定响应只能从缓存中得到，那么返回一个networkRequest和cacheResonse均为null的CacheStrategy。</p>
+<p>OkHttp中使用了CacheStrategy，它根据之前的缓存结果与当前将要发送Request的header进行策略分析，并得出是否进行请求的结论。</p>
+<p>CacheStrategy类似一个mapping操作，将两个值输入，再将两个值输出。</p>
+<hr>
+<pre><code>&gt; Input                request, cacheCandidate 
+    ↓                        ↓
+&gt; CacheStrategy     处理，判断Header信息
+    ↓                         ↓  
+&gt; Output        networkRequest, cacheResponse
+</code></pre><hr>
+<p>Request:<br>开发者手动编写并在Interceptor中递归加工而成的对象，我们只需要知道了目前传入的Request中并没有任何关于缓存的Header。</p>
+<p>cacheCandidate:<br>也就是上次与服务器交互缓存的Response，可能为null。我们现在知道它是一个可以读取缓存Header的Response。</p>
+<p>当被CacheStrategy加工输出后，输出networkRequest与cacheResponse，根据是否为空执行不同的请求。</p>
+<p><img src="http://img.blog.csdn.net/20170616165105874?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图 1 几种情况下的请求策略"></p>
+<p>下面主要看一下getCandidate方法，该方法返回的策略是基于请求可以使用网络的假设之上的，所以这也就解释了get()方法中为什么要对使用网络但是请求却指定缓存响应的情况做区分。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div></pre></td><td class="code"><pre><div class="line">/**来自 Cache 的内部static工厂类 Factory*/</div><div class="line"></div><div class="line">private CacheStrategy getCandidate() &#123;</div><div class="line">			 //如果缓存没有命中(即null),网络请求也不需要加缓存Header了</div><div class="line">			if (this.cacheResponse == null) &#123;</div><div class="line">			 //`没有缓存的网络请求,查上文的表可知是直接访问</div><div class="line">				return new CacheStrategy(this.request, (Response) null);</div><div class="line">			&#125; </div><div class="line">			 // 如果缓存的TLS握手信息丢失,返回进行直接连接</div><div class="line">				else if (this.request.isHttps()</div><div class="line">					&amp;&amp; this.cacheResponse.handshake() == null) &#123;</div><div class="line">				return new CacheStrategy(this.request, (Response) null);</div><div class="line">			&#125; </div><div class="line">			 //检测response的状态码,Expired时间,是否有no-cache标签</div><div class="line">				else if (!CacheStrategy.isCacheable(this.cacheResponse,</div><div class="line">					this.request)) &#123;</div><div class="line">				return new CacheStrategy(this.request, (Response) null);</div><div class="line">			&#125; else &#123;</div><div class="line">				CacheControl requestCaching = this.request.cacheControl();</div><div class="line">				</div><div class="line">				if (!requestCaching.noCache() &amp;&amp; !hasConditions(this.request)) &#123;</div><div class="line">				    //根据RFC协议计算</div><div class="line">			        //计算当前age的时间戳</div><div class="line">			        //now - sent + age (s)</div><div class="line">					long ageMillis = this.cacheResponseAge();</div><div class="line">					//大部分情况服务器设置为max-age</div><div class="line">					long freshMillis = this.computeFreshnessLifetime();</div><div class="line">					if (requestCaching.maxAgeSeconds() != -1) &#123;</div><div class="line">					//大部分情况下是取max-age</div><div class="line">						freshMillis = Math.min(freshMillis,</div><div class="line">								TimeUnit.SECONDS.toMillis((long) requestCaching</div><div class="line">										.maxAgeSeconds()));</div><div class="line">					&#125;</div><div class="line">					long minFreshMillis = 0L;</div><div class="line">					if (requestCaching.minFreshSeconds() != -1) &#123;</div><div class="line">					//大部分情况下设置是0</div><div class="line">						minFreshMillis = TimeUnit.SECONDS</div><div class="line">								.toMillis((long) requestCaching</div><div class="line">										.minFreshSeconds());</div><div class="line">					&#125;</div><div class="line"></div><div class="line">					long maxStaleMillis = 0L;</div><div class="line">					//ParseHeader中的缓存控制信息</div><div class="line">					CacheControl responseCaching = this.cacheResponse</div><div class="line">							.cacheControl();</div><div class="line">					if (!responseCaching.mustRevalidate()</div><div class="line">							&amp;&amp; requestCaching.maxStaleSeconds() != -1) &#123;</div><div class="line">					//设置最大过期时间,一般设置为0</div><div class="line">						maxStaleMillis = TimeUnit.SECONDS</div><div class="line">								.toMillis((long) requestCaching</div><div class="line">										.maxStaleSeconds());</div><div class="line">					&#125;</div><div class="line">					//缓存在过期时间内,可以使用</div><div class="line">				    //大部分情况下是进行如下判断</div><div class="line">				    //now - sent + age + 0 &lt; max-age + 0</div><div class="line">					if (!responseCaching.noCache()</div><div class="line">							&amp;&amp; ageMillis + minFreshMillis &lt; freshMillis</div><div class="line">									+ maxStaleMillis) &#123;</div><div class="line">						Builder conditionalRequestBuilder1 = this.cacheResponse</div><div class="line">								.newBuilder();</div><div class="line">						if (ageMillis + minFreshMillis &gt;= freshMillis) &#123;</div><div class="line">							conditionalRequestBuilder1</div><div class="line">									.addHeader(&quot;Warning&quot;,</div><div class="line">											&quot;110 HttpURLConnection \&quot;Response is stale\&quot;&quot;);</div><div class="line">						&#125;</div><div class="line"></div><div class="line">						long conditionalRequest1 = 86400000L;</div><div class="line">						if (ageMillis &gt; conditionalRequest1</div><div class="line">								&amp;&amp; this.isFreshnessLifetimeHeuristic()) &#123;</div><div class="line">							conditionalRequestBuilder1</div><div class="line">									.addHeader(&quot;Warning&quot;,</div><div class="line">											&quot;113 HttpURLConnection \&quot;Heuristic expiration\&quot;&quot;);</div><div class="line">						&#125;</div><div class="line"></div><div class="line">						return new CacheStrategy((Request) null,</div><div class="line">								conditionalRequestBuilder1.build());</div><div class="line">					&#125; else &#123;</div><div class="line">						okhttp3.Request.Builder conditionalRequestBuilder = this.request</div><div class="line">								.newBuilder();</div><div class="line">						if (this.etag != null) &#123;</div><div class="line">							conditionalRequestBuilder.header(&quot;If-None-Match&quot;,</div><div class="line">									this.etag);</div><div class="line">						&#125; else if (this.lastModified != null) &#123;</div><div class="line">							conditionalRequestBuilder.header(</div><div class="line">									&quot;If-Modified-Since&quot;,</div><div class="line">									this.lastModifiedString);</div><div class="line">						&#125; else if (this.servedDate != null) &#123;</div><div class="line">							conditionalRequestBuilder.header(</div><div class="line">									&quot;If-Modified-Since&quot;, this.servedDateString);</div><div class="line">						&#125;</div><div class="line"></div><div class="line">						Request conditionalRequest = conditionalRequestBuilder</div><div class="line">								.build();</div><div class="line">						return hasConditions(conditionalRequest) ? new CacheStrategy(</div><div class="line">								conditionalRequest, this.cacheResponse)</div><div class="line">								: new CacheStrategy(conditionalRequest,</div><div class="line">										(Response) null);</div><div class="line">					&#125;</div><div class="line">				&#125; else &#123;</div><div class="line">				 //对应相应的iF请求</div><div class="line">				 //如果请求报文使用了`no-cache`标签(这个只可能是开发者故意添加的)</div><div class="line">			     //或者有ETag/Since标签(也就是条件GET请求)</div><div class="line">					return new CacheStrategy(this.request, (Response) null);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>上面的主要内容是缓存，okhttp实现的缓存策略实质上就是大量的if判断集合，这些是根据RFC标准文档写死的。</li>
+<li></li>
+<li>Okhttp的缓存是自动完成的，完全由服务器Header决定的，自己没有必要进行控制。网上热传的文章在Interceptor中手工添加缓存代码控制，它固然有用，但是属于Hack式的利用，违反了RFC文档标准，不建议使用，OkHttp的官方缓存控制在注释中。如果读者的需求是对象持久化，建议用文件储存或者数据库即可（比如realm、litepal）。</li>
+<li></li>
+<li>服务器的配置非常重要，如果你需要减小请求次数，建议直接找对接人员对max-age等头文件进行优化；服务器的时钟需要严格NTP同步。</li>
+</ul>
+<p>总结上面的方法：</p>
+<ol>
+<li><p>如果缓存没有命中，即cacheResponse==null，那么直接进行网络请求 </p>
+</li>
+<li><p>如果请求是HTTPS并且缓存响应中没有握手或者握手信息丢失，那么需要重新进行网络请求</p>
+</li>
+<li><p>如果响应不应该被存储，那么需要重新进行网络请求 （比如header中指定no-store）</p>
+</li>
+<li><p>如果请求中指定不使用缓存响应，那么需要进行网络请求 （比如header中指定no-cache）</p>
+</li>
+<li><p>接下来比较缓存响应检查是否有条件请求的首部，如果有，就进行额外的请求（ request.header(“If-Modified-Since”) != null || request.header(“If-None-Match”) != null）</p>
+</li>
+</ol>
+<p>上面得到 CacheStrategy 后，我们下来再回到HttpEngine 定位到 17行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if(responseCache != null) &#123;</div><div class="line">            responseCache.trackResponse(this.cacheStrategy);</div><div class="line">           &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/**来自Cache类*/</div><div class="line"></div><div class="line"> private synchronized void trackResponse(CacheStrategy cacheStrategy) &#123;</div><div class="line">    requestCount++;</div><div class="line"></div><div class="line">    if (cacheStrategy.networkRequest != null) &#123;</div><div class="line">     // If this is a conditional request, we&apos;ll increment hitCount if/when it hits.</div><div class="line">      networkCount++;</div><div class="line">    &#125; else if (cacheStrategy.cacheResponse != null) &#123;</div><div class="line">     // This response uses the cache and not the network. That&apos;s a cache hit.</div><div class="line">      hitCount++;</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>可以看到该方法主要就是对Cache中的三个记录进行赋值，从这儿我们可以得出结论requestCount&gt;=networkCount+hitCount。</p>
+<p>当networkRequest和cacheResponse均为null的时候，这个时候的响应既不是从网络得到也不是从缓存得到。 （查阅图1）</p>
+<p>cacheResponse表示从缓存上得到的响应。如果该响应没有使用缓存，那么将会为null。</p>
+<p>关于Response有一点需要铭记，该类的实例不是一成不变的，响应主体部分只能被消费一次然后关闭，其他参数是不变的。 </p>
+<p>那么为什么Response的主体部分只能被消费一次呢？ </p>
+<p>这是因为ResponseBody的底层是用Okio实现的，而Okio的Source只能被读取一次，因为读完之后，Buffer底层的Segment关于之前数据的信息（pos和limit）就丢失了，并且在读完一次之后就将Source关闭了，所以只能读一次。关于Okio的可以参考<a href="https://blog.piasy.com/2016/08/04/Understand-Okio/" target="_blank" rel="external">拆轮子系列：拆 Okio</a>。</p>
+<hr>
+<p>再用个分割线进行分割，上面的代码得到了缓存策略，即cacheStrategy，再次定位到HttpEngine 的第37行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">this.httpStream = this.connect();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**来自HttpEngine 类*/</div><div class="line"></div><div class="line">   private HttpStream connect() throws RouteException, RequestException, IOException &#123;</div><div class="line">      boolean doExtensiveHealthChecks = !this.networkRequest.method().equals(&quot;GET&quot;);</div><div class="line">      return this.streamAllocation.newStream(this.client.connectTimeoutMillis(), this.client.readTimeoutMillis(), this.client.writeTimeoutMillis(), this.client.retryOnConnectionFailure(), doExtensiveHealthChecks);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>跳转到 newStream 方法，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">/**来自StreamAllocation 类*/</div><div class="line"></div><div class="line">public HttpStream newStream(int connectTimeout, int readTimeout,</div><div class="line">			int writeTimeout, boolean connectionRetryEnabled,</div><div class="line">			boolean doExtensiveHealthChecks) throws RouteException, IOException &#123;</div><div class="line">		try &#123;</div><div class="line">			RealConnection e = this.findHealthyConnection(connectTimeout,</div><div class="line">					readTimeout, writeTimeout, connectionRetryEnabled,</div><div class="line">					doExtensiveHealthChecks);</div><div class="line">			Object resultStream;</div><div class="line">			if (e.framedConnection != null) &#123;</div><div class="line">				resultStream = new Http2xStream(this, e.framedConnection);</div><div class="line">			&#125; else &#123;</div><div class="line">				e.socket().setSoTimeout(readTimeout);</div><div class="line">				e.source.timeout().timeout((long) readTimeout,</div><div class="line">						TimeUnit.MILLISECONDS);</div><div class="line">				e.sink.timeout().timeout((long) writeTimeout,</div><div class="line">						TimeUnit.MILLISECONDS);</div><div class="line">				resultStream = new Http1xStream(this, e.source, e.sink);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			ConnectionPool arg7 = this.connectionPool;</div><div class="line">			synchronized (this.connectionPool) &#123;</div><div class="line">				this.stream = (HttpStream) resultStream;</div><div class="line">				return (HttpStream) resultStream;</div><div class="line">			&#125;</div><div class="line">		&#125; catch (IOException arg10) &#123;</div><div class="line">			throw new RouteException(arg10);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>在newStream 方法中，首先调用了 findHealthyConnection，得到RealConnection对象，再根据framedConnection 是否为空，确定采取的http协议：<br>Http2xStream 代表是https请求，采用 http2.0或者spdy 协议。</p>
+<p>Http1xStream 代表是http请求，采用 http1.0或者 http1.1 协议。</p>
+<p>newStream 方法中又调用了 findHealthyConnection ，<br>这个方法当中又调用了 findConnection 方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">/**来自StreamAllocation 类*/</div><div class="line"></div><div class="line">private RealConnection findHealthyConnection(int connectTimeout,</div><div class="line">int readTimeout, int writeTimeout, boolean connectionRetryEnabled,</div><div class="line">boolean doExtensiveHealthChecks) throws IOException, RouteException &#123;</div><div class="line">		while (true) &#123;</div><div class="line">			RealConnection candidate = this.findConnection(connectTimeout,</div><div class="line">					readTimeout, writeTimeout, connectionRetryEnabled);</div><div class="line">			......</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>我们再来看findConnection 方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">/**来自StreamAllocation 类*/</div><div class="line"></div><div class="line">private RealConnection findConnection(int connectTimeout, int readTimeout,</div><div class="line">			int writeTimeout, boolean connectionRetryEnabled)</div><div class="line">			throws IOException, RouteException &#123;</div><div class="line">			......</div><div class="line">RealConnection pooledConnection = Internal.instance.get(</div><div class="line">					this.connectionPool, this.address, this);</div><div class="line">			......</div><div class="line">		newConnection1.connect(connectTimeout, readTimeout, writeTimeout,</div><div class="line">			......</div><div class="line">Internal.instance.put(this.connectionPool, newConnection1);</div><div class="line">		return newConnection1;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>重要的看下这三个方法：</p>
+<p>前面我们已经说过了get是Internal的方法，是在OkhttpClient中的static代码块中实现的，这个get方法中最终调用了ConnectPool 的get方法，看名字我们就能猜到，这儿维护了一个连接池，这个东西：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private final Deque&lt;RealConnection&gt; connections;</div></pre></td></tr></table></figure>
+<p>get 和 put 都是对它的操作。</p>
+<p>OK，看下第二个方法，connect方法，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">/**来自 RealConnection 方法，实现了Connection接口*/</div><div class="line"></div><div class="line">public void connect(int connectTimeout, int readTimeout, int writeTimeout, List&lt;ConnectionSpec&gt; connectionSpecs, boolean connectionRetryEnabled) throws RouteException &#123;</div><div class="line">      if(this.protocol != null) &#123;</div><div class="line">         throw new IllegalStateException(&quot;already connected&quot;);</div><div class="line">      &#125; else &#123;</div><div class="line">         RouteException routeException = null;</div><div class="line">         ConnectionSpecSelector connectionSpecSelector = new ConnectionSpecSelector(connectionSpecs);</div><div class="line">         Proxy proxy = this.route.proxy();</div><div class="line">         Address address = this.route.address();</div><div class="line">         if(this.route.address().sslSocketFactory() == null &amp;&amp; !connectionSpecs.contains(ConnectionSpec.CLEARTEXT)) &#123;</div><div class="line">            throw new RouteException(new UnknownServiceException(&quot;CLEARTEXT communication not supported: &quot; + connectionSpecs));</div><div class="line">         &#125; else &#123;</div><div class="line">            while(this.protocol == null) &#123;</div><div class="line">               try &#123;</div><div class="line">                  this.rawSocket = proxy.type() != Type.DIRECT &amp;&amp; proxy.type() != Type.HTTP?new Socket(proxy):address.socketFactory().createSocket();</div><div class="line">                  this.connectSocket(connectTimeout, readTimeout, writeTimeout, connectionSpecSelector);</div><div class="line">               &#125; catch (IOException arg10) &#123;</div><div class="line">                  Util.closeQuietly(this.socket);</div><div class="line">                  Util.closeQuietly(this.rawSocket);</div><div class="line">                  this.socket = null;</div><div class="line">                  this.rawSocket = null;</div><div class="line">                  this.source = null;</div><div class="line">                  this.sink = null;</div><div class="line">                  this.handshake = null;</div><div class="line">                  this.protocol = null;</div><div class="line">                  if(routeException == null) &#123;</div><div class="line">                     routeException = new RouteException(arg10);</div><div class="line">                  &#125; else &#123;</div><div class="line">                     routeException.addConnectException(arg10);</div><div class="line">                  &#125;</div><div class="line"></div><div class="line">                  if(!connectionRetryEnabled || !connectionSpecSelector.connectionFailed(arg10)) &#123;</div><div class="line">                     throw routeException;</div><div class="line">                  &#125;</div><div class="line">               &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">         &#125;</div><div class="line">      &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>可以看到，典型的socket连接，最终使用Okio包进行socket连接。</p>
+<p>再底层先不看了，了解到主要流程就行。</p>
+<p>再次回到httpEngine方法的37行，我们知道connect方法最终得到一个httpstream对象（好像OKhttp2.x版本这个方法没返回值）。<br>到这儿，sendRequest 方法我们就分析完了。篇幅太长了，所以我们下篇继续来看 readResponse() 方法。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+            <a href="/tags/OKHttp/" rel="tag"># OKHttp</a>
+          
+        </div>
+      
+
+      
+        
+      
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/14/OkHttp源码分析（一）/" rel="next" title="安卓面试清单----OKHttp源码解析（一）">
+                <i class="fa fa-chevron-left"></i> 安卓面试清单----OKHttp源码解析（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/19/OkHttp源码解析（三）/" rel="prev" title="安卓面试清单----OKHttp源码解析（三）">
+                安卓面试清单----OKHttp源码解析（三） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODA2Ni80NjQw"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460"
+               alt="QHT" />
+          <p class="site-author-name" itemprop="name">QHT</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QHT</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+&nbsp; | &nbsp;
+<span id="busuanzi_container_site_pv">
+   本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("iHroEhpKFMjKWPBLi56akdfi-gzGzoHsz", "SKwAep4PKplglnYzay5F4dFm");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
