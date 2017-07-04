@@ -87,19 +87,24 @@
 
 
 
-<meta name="description" content="面试算法之----floyd判环算法（摘自数据结构与算法经典问题解析57页问题9）">
+<meta name="description" content="面试算法之----求直方图最大矩形（摘自数据结构与算法经典问题解析 95 页问题 24）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法-floyd判环(圈)算法">
-<meta property="og:url" content="http://yoursite.com/2017/07/03/算法-floyd判断链表是否有环/index.html">
+<meta property="og:title" content="算法-直方图中的最大矩形">
+<meta property="og:url" content="http://yoursite.com/2017/07/04/算法-直方图中的最大矩形/index.html">
 <meta property="og:site_name" content="祁宏涛">
-<meta property="og:description" content="面试算法之----floyd判环算法（摘自数据结构与算法经典问题解析57页问题9）">
-<meta property="og:image" content="http://img.blog.csdn.net/20170703170559457?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170703172340818?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-07-03T09:52:50.548Z">
+<meta property="og:description" content="面试算法之----求直方图最大矩形（摘自数据结构与算法经典问题解析 95 页问题 24）">
+<meta property="og:image" content="http://img.blog.csdn.net/20170704144023023?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170704154100788?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170704172139176?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170704155632934?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170704164034869?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170704171910717?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170704171925040?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-07-04T12:48:14.362Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法-floyd判环(圈)算法">
-<meta name="twitter:description" content="面试算法之----floyd判环算法（摘自数据结构与算法经典问题解析57页问题9）">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20170703170559457?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:title" content="算法-直方图中的最大矩形">
+<meta name="twitter:description" content="面试算法之----求直方图最大矩形（摘自数据结构与算法经典问题解析 95 页问题 24）">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170704144023023?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
 
@@ -127,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/03/算法-floyd判断链表是否有环/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/04/算法-直方图中的最大矩形/"/>
 
 
 
 
 
-  <title> 算法-floyd判环(圈)算法 | 祁宏涛 </title>
+  <title> 算法-直方图中的最大矩形 | 祁宏涛 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -272,7 +277,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/03/算法-floyd判断链表是否有环/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/04/算法-直方图中的最大矩形/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QHT">
@@ -293,7 +298,7 @@
             
             
               
-                算法-floyd判环(圈)算法
+                算法-直方图中的最大矩形
               
             
           </h1>
@@ -308,8 +313,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-03T22:00:16+08:00">
-                2017-07-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-04T22:00:16+08:00">
+                2017-07-04
               </time>
             
 
@@ -348,7 +353,7 @@
 
           
           
-             <span id="/2017/07/03/算法-floyd判断链表是否有环/" class="leancloud_visitors" data-flag-title="算法-floyd判环(圈)算法">
+             <span id="/2017/07/04/算法-直方图中的最大矩形/" class="leancloud_visitors" data-flag-title="算法-直方图中的最大矩形">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -366,7 +371,7 @@
 
           
               <div class="post-description">
-                  面试算法之----floyd判环算法（摘自数据结构与算法经典问题解析57页问题9）
+                  面试算法之----求直方图最大矩形（摘自数据结构与算法经典问题解析 95 页问题 24）
               </div>
           
 
@@ -381,31 +386,57 @@
       
 
       
-        <p>floyd（Floyd cycle detection）</p>
-<p>问题：如何检测一个链表是否有环，如果有，那么如何确定环的起点？如何确定环的长度？</p>
+        <p>直方图中最大矩形（(Largest Rectangle in Histogram)）</p>
+<p>问题：直方图是由排列在同一基线上的一系列矩形组成的多边形。为了简单起见，假设这些矩形的宽度相等但高度可能不同。例如，下图1给出了一个直方图，其中各个矩形的高度为3、2、5、6、1、4、4，宽度为标准1单位。当给定了一个保存所有矩形高度的数组时，如何找到其中最大的矩形。对于给定的例子，最大矩形如图2阴影部分所示：<br><img src="http://img.blog.csdn.net/20170704144023023?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <ul>
 <li>时间复杂度：O（n） （高效率）</li>
-<li>空间复杂度：O（1）</li>
+<li>空间复杂度：O（n） （栈开销）</li>
 </ul>
-<p>此算法又成为龟兔赛跑算法，基本思想是：</p>
-<p>好比两个人在赛跑，A的速度快，B的速度慢，经过一定时间后，A总是会和B相遇，且相遇时A跑过的总距离减去B跑过的总距离一定是圈长的n倍（初中数学题……）。</p>
-<p>弗洛伊德（Floyd ）使用了两个指针，一个慢指针（龟）每次前进一步，快指针（兔）指针每次前进两步（两步或多步效果是等价的，只要一个比另一个快就行。但是如果移动步数增加，算法的复杂度可能增加）。如果两者在链表头以外（不包含开始情况）的某一点相遇（即相等）了，那么说明链表有环，否则，如果（快指针）到达了链表的结尾（如果存在结尾，肯定无环），那么说明没环。</p>
-<p>环的检测从上面的解释理解起来应该没有问题。接下来我们来看一下如何确定环的起点，这也是Floyd解法的第二部分。方法是将慢指针（或快指针）移到链表起点，然后两者同时移动，每次移动一步，那么两者相遇的地方就是环的起点。</p>
-<p>下面给出论证过程：</p>
-<p>假设一个链表是下面这样的：</p>
-<p><img src="http://img.blog.csdn.net/20170703170559457?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>设环长为n，非环形部分长度为m，当第一次相遇时显然slow指针行走了 m+A<em>n+k（A表示slow行走了A圈。附：A</em>n 是因为如果环够大，则他们的相遇需要经过好几环才相遇）。fast行走了 m+B*n+k。</p>
-<p>上面我们说了slow每次行走一步，fast每次行走两步，则在同一时间，fast行走的路程是slow的两倍。假设slow行走的路程为S，则fast行走的路程为2S。</p>
-<p>用fast减去slow可得：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">S=（B-A）*n</div></pre></td></tr></table></figure></p>
-<p>很显然这意味着当slow和fast相遇时他们走过的路程都为圈长的倍数。</p>
-<p>接下来，将slow移动到起点位置，如下图：</p>
-<p><img src="http://img.blog.csdn.net/20170703172340818?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>然后每次两个指针都只移动一步，当slow移动了m，即到达了环的起点位置，此时fast总共移动了 2S+m。 考虑到S为环长的倍数，可以理解为：fast先从链表起点出发，经过了m到达环的起点，然后绕着环移动了几圈，最终又到达环的起点，值为2S+m。所以fast最终必定处在环的起点位置。即两者相遇点即为环的起点位置。</p>
+<p>这个问题有多种解法，包含枚举、动态规划、分治等等。<br>这儿我们采用一种巧妙的方法，使用堆栈，将复杂度降到最低。</p>
+<p>算法思想：</p>
+<p>1、新建一个空栈，将 A[1] 压入栈中，此时 A[1] 位于栈顶。</p>
+<p>2、A[i] 与栈顶元素比较。如果A[i] 大，那么将其入栈。如果两者相等，跳过，继续下一个元素。</p>
+<ul>
+<li>如果A[i]小于当前栈顶元素，说明已经找到第一个位于栈顶右边的比它小的值（此时这个较小的元素还未入栈），在它的左边（在栈内就是它脚下的元素）即为第一个左边比它小的值。此时需要这样做：</li>
+</ul>
+<pre><code>- 以栈顶元素为最小高度计算最大矩形面积，并更新现在的最大面积，宽度为左边界到右边界。
+
+- 弹出栈顶元素。
+
+- 重复第2步。
+</code></pre><p>3.扫描完后，一般情况下会剩下一个单调递增的堆栈，那么一个一个出栈计算面积就可以了。左边依旧还是栈顶下面那个值，右边这个时候就不存在了，最后一个栈状态的栈顶即为右边界。</p>
 <hr>
-<p>算法如下（Java）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public ListNode findBeginLoop(ListNode head)&#123;</div><div class="line"></div><div class="line">ListNode slowPtr=head;</div><div class="line">ListNode fastPtr=head;</div><div class="line">boolean loopExists=false;</div><div class="line"></div><div class="line">if(head=null)&#123;return 0;&#125;</div><div class="line"></div><div class="line">while(slowPtr.getNext()!=null &amp;&amp; fastPtr.getNext().getNext()!=nulll)&#123;</div><div class="line"> slowPtr=slowPtr.getNext();</div><div class="line"> fastPtr=fastPtr.getNext().getNext();</div><div class="line"> if(slowPtr==fastPtr)&#123;</div><div class="line">	loopExists=true;</div><div class="line">	break;</div><div class="line">	&#125;</div><div class="line">  &#125;</div><div class="line">  if(loopExists)&#123;  //环存在</div><div class="line">    slowPtr=head;</div><div class="line">	while(slowPtr!=fastPtr)&#123;</div><div class="line">		slowPtr=slowPtr.getNext();</div><div class="line">		fastPtr=fastPtr.getNext();</div><div class="line">	&#125;</div><div class="line">	return slowPtr;</div><div class="line">  &#125; </div><div class="line">  return null; //环不存在</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果要求环的长度，可以这样做：</p>
-<p>当两者相遇之后，固定一个指针，让另一个指针行走一圈，使用count计数，如果两个指针相等（即相遇），则count即为环的长度。</p>
+<p><strong>就拿上面的输入为例：[3、2、5、6、1、4、4]</strong></p>
+<p>首先：记左边界为字母L，右边界为字母R，图中红色框为最新最大面积。</p>
+<p><img src="http://img.blog.csdn.net/20170704154100788?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p> 1、  堆栈[ ]，开始扫描i从0到6；</p>
+<p> 2、  i=0，因为堆栈为空，把3入栈<strong>【此时堆栈为[0]】</strong></p>
+<p> 3、  i=1，因为a[i] =2 &lt; a[top] = a[0] =3，所以这个时候0出栈，并且计算a[0]作为矩形最小高度的面积，因为堆栈已空，所以左边界L就是0，右边界R就是i−1=0；所以最大面积就是a[0]×(R−L+1)=3;<strong>【此时堆栈为[ ]】</strong>然后再把i=1入栈。<strong>【此时堆栈[1]】</strong>，如上图。</p>
+<p><img src="http://img.blog.csdn.net/20170704172139176?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p> 4、  i=2，因为a[i] =5 &gt; a[top] = a[1] =2，所以i=2入栈。<strong>【此时堆栈[1,2]】</strong> </p>
+<p> 5、 i=3，因为a[i] =6 &gt; a[top] = a[2] =5，所以i=3入栈。<strong>【此时堆栈[1,2,3]】</strong></p>
+<p> 6、 i=4，因为a[i] =1 &lt; a[top] = a[3] =6，所以3要出栈，并且计算a[3]=6作为矩形最小高度的面积，左边就是栈顶下一个值加1，L=2+1=3，右边R=i−1=3，所以最大面积就是a[3]×(R−L+1)=6 ;<strong>【此时堆栈[1,2]】</strong>。如上图。</p>
+<p><img src="http://img.blog.csdn.net/20170704155632934?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>  此时a[i] =1 &lt;  a[top] = a[2] =5，所以2也要出栈，并且计算a[2]=5作为矩形最小高度的面积，左边就是栈顶下一个值加1，L=1+1=2，右边R=i−1=3，<strong>所以最大面积就是a[2]×(R−L+1)=10 ;【此时堆栈[1]】</strong>。如上图 。</p>
+<p><img src="http://img.blog.csdn.net/20170704164034869?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>  再此时a[i] =1 &lt;  a[top] = a[1] =2，所以1也要出栈，并且计算a[1]=2作为矩形最小高度的面积，因为栈已空，则左边界为0，右边界R=i−1=3，所以最大面积就是a[1]×(R−L+1)=8 ，小于10，取10 ; 最后i=4入栈。<strong>【此时堆栈[4]】</strong>。如上图。</p>
+<p> 7、  i=5，因为a[i] =4 &gt; a[top] = a[4] =1，所以i=5入栈。<strong>【此时堆栈[4,5]】</strong> </p>
+<p> 8、 i=6，因为a[i] =4 = a[top] = a[4] =1，跳过。<strong>【此时堆栈[4,5]】</strong></p>
+<p> 9、 i=7，扫描完毕了，此时a[4]，a[5]，a[6]必然单调增。然后再一个个出栈。</p>
+<p><img src="http://img.blog.csdn.net/20170704171910717?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>10、top=5出栈，计算面积，L=4+1=5,右边没值，相当于右边还有一个a[i=7]=0的矩形，那么R=7−1=6，所以面积就是a[5]×(R−L+1)=8。<strong>【此时堆栈[4]】</strong>。如上图。</p>
+<p><img src="http://img.blog.csdn.net/20170704171925040?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>11、top=4出栈，计算面积，栈空，左边为0，右边没值，相当于右边还有一个a[i=7]=0的矩形，那么R=7−1=6，所以面积就是a[4]×(R−L+1)=7。<strong>【此时堆栈[ ]】</strong>。如上图。</p>
+<p> 12.计算完毕； </p>
+<hr>
+<p>算法如下（java）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">public StackItem(int height, int index) &#123;</div><div class="line">			// TODO Auto-generated constructor stub</div><div class="line">			this.height=height;</div><div class="line">			this.index=index;</div><div class="line">		&#125;</div><div class="line">		public int height;</div><div class="line">		public int index;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		public int MaxRecttangleArea(int A[],int n)&#123;</div><div class="line">		int maxRean=0;</div><div class="line">		if(null==A || A.length&lt;=0)&#123;</div><div class="line">			return maxRean;</div><div class="line">		&#125;</div><div class="line">		Stack&lt;StackItem&gt; S=new Stack&lt;StackItem&gt;();</div><div class="line">		//先往栈中压入一个起始元素，为了进入后面的while循环</div><div class="line">		S.push(new StackItem(Integer.MIN_VALUE,-1)); </div><div class="line">		//这儿循环A.length次，让元素全部出栈</div><div class="line">		for(int i=0;i&lt;n;i++)&#123;  </div><div class="line">			StackItem cur=new StackItem((i&lt;n?A[i]:Integer.MIN_VALUE),i);</div><div class="line">			//lastElement 为栈顶</div><div class="line">			if(cur.height&gt;S.lastElement().height)&#123; </div><div class="line">				S.push(cur);</div><div class="line">				continue;</div><div class="line">			&#125;</div><div class="line">			while(S.size()&gt;0)&#123;</div><div class="line">				StackItem prev=S.lastElement();</div><div class="line">				int area=(i-prev.index)*prev.height;</div><div class="line">				if(area&gt;maxRean)&#123;</div><div class="line">					maxRean=area;</div><div class="line">				&#125;</div><div class="line">				prev.height=cur.height;</div><div class="line">				if(prev.height&gt;S.get(S.size()-2).height)&#123;</div><div class="line">					break;</div><div class="line">				&#125;</div><div class="line">				S.pop();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return maxRean;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>我们测试一下时间：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public static void main(String[] arg)&#123;</div><div class="line">		int[] A=new int[]&#123;3,2,5,6,1,4,4&#125;;</div><div class="line">		MaxRectangleArea clazz=new MaxRectangleArea();</div><div class="line">		long time=System.nanoTime();</div><div class="line">		System.out.println(clazz.MaxRecttangleArea(A, 7)+&quot;&quot;);</div><div class="line">		 long estimatedTime = System.nanoTime() - time;</div><div class="line">		System.out.println(estimatedTime);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>打印结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">10</div><div class="line">1169687</div></pre></td></tr></table></figure>
+<p>总耗时1ms。</p>
+<hr>
 <p>csdn地址：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a><br>github地址：<a href="https://github.com/qht1003077897" target="_blank" rel="external">https://github.com/qht1003077897</a><br>个人博客地址：<a href="https://qht1003077897.github.io/" target="_blank" rel="external">https://qht1003077897.github.io/</a><br>QQ：1003077897</p>
 
       
@@ -452,8 +483,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/19/OkHttp源码解析（三）/" rel="next" title="安卓面试清单----OKHttp源码解析（三）">
-                <i class="fa fa-chevron-left"></i> 安卓面试清单----OKHttp源码解析（三）
+              <a href="/2017/07/03/算法-floyd判断链表是否有环/" rel="next" title="算法-floyd判环(圈)算法">
+                <i class="fa fa-chevron-left"></i> 算法-floyd判环(圈)算法
               </a>
             
           </div>
@@ -461,10 +492,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/04/算法-直方图中的最大矩形/" rel="prev" title="算法-直方图中的最大矩形">
-                算法-直方图中的最大矩形 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
