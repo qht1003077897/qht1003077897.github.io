@@ -90,7 +90,7 @@
 <meta name="description" content="面试算法之----堆排序算法（摘自数据结构与算法经典问题解析190页问题11  注：原书中有好几处错误，已勘误）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法-堆排序算法">
-<meta property="og:url" content="http://yoursite.com/2017/07/06/算法-详解堆排序算法/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/07/06/算法-堆排序算法/index.html">
 <meta property="og:site_name" content="祁宏涛">
 <meta property="og:description" content="面试算法之----堆排序算法（摘自数据结构与算法经典问题解析190页问题11  注：原书中有好几处错误，已勘误）">
 <meta property="og:image" content="http://img.blog.csdn.net/20170707005835056?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20170707012548626?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170707012627747?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170707013241010?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-07-06T17:35:36.508Z">
+<meta property="og:updated_time" content="2017-07-06T17:51:29.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法-堆排序算法">
 <meta name="twitter:description" content="面试算法之----堆排序算法（摘自数据结构与算法经典问题解析190页问题11  注：原书中有好几处错误，已勘误）">
@@ -141,7 +141,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/06/算法-详解堆排序算法/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/06/算法-堆排序算法/"/>
 
 
 
@@ -286,7 +286,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/06/算法-详解堆排序算法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/06/算法-堆排序算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QHT">
@@ -362,7 +362,7 @@
 
           
           
-             <span id="/2017/07/06/算法-详解堆排序算法/" class="leancloud_visitors" data-flag-title="算法-堆排序算法">
+             <span id="/2017/07/06/算法-堆排序算法/" class="leancloud_visitors" data-flag-title="算法-堆排序算法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -412,9 +412,7 @@
 <li><p>即使在最坏情况堆排序的时间复杂仍然为O(nlogn)。而快速排序在最坏情况下会达到O(N^2)，所以快排在最好和平均情况下比堆排快,堆排在最坏情况下比快排快。</p>
 </li>
 </ol>
-<p>####基本思想：</p>
-<p> 利用大（小）顶堆堆顶记录的是最大（小）关键字这一特性，使得每次从无序中选择最大（小）记录变得简单。</p>
-<p> 下面的讨论全部基于大顶堆（小顶堆同理，不再赘述）。</p>
+<h2 id="基本思想："><a href="#基本思想：" class="headerlink" title="基本思想："></a>基本思想：</h2><p> 利用大（小）顶堆堆顶记录的是最大（小）关键字这一特性，使得每次从无序中选择最大（小）记录变得简单。<br> 下面的讨论全部基于大顶堆（小顶堆同理，不再赘述）。</p>
 <ol>
 <li><p>将初始待排序关键字序列(R1,R2….Rn)构建成大顶堆，此堆为初始的无序区；</p>
 </li>
@@ -423,22 +421,16 @@
 <li><p>由于交换后新的堆顶R[1]可能违反堆的性质，因此需要对当前无序区(R1,R2,……Rn-1)调整为新堆（堆化、筛选），然后再次将R[1]与无序区最后一个元素交换，得到新的无序区(R1,R2….Rn-2)和新的有序区(Rn-1,Rn)。不断重复此过程直到有序区的元素个数为n-1（原堆剩最后一个元素），则整个排序过程完成。</p>
 </li>
 </ol>
-<p>####操作过程如下：</p>
-<ol>
-<li><p>初始化堆：将R[1..n]构造为堆；</p>
-</li>
-<li><p>将当前无序区的堆顶元素R[1]同该区间的最后一个记录交换，然后将新的无序区调整为新的堆（不断堆化）。</p>
-</li>
+<h2 id="操作过程如下："><a href="#操作过程如下：" class="headerlink" title="操作过程如下："></a>操作过程如下：</h2><ol>
+<li>初始化堆：将R[1..n]构造为堆；</li>
+<li>将当前无序区的堆顶元素R[1]同该区间的最后一个记录交换，然后将新的无序区调整为新的堆（不断堆化）。</li>
 </ol>
 <p>因此对于堆排序，最重要的两个操作就是构造初始堆和调整堆，其实构造初始堆事实上也是调整堆的过程，只不过构造初始堆是对所有的非叶节点都进行调整。</p>
-<p> 给定一个整形数组a[]={16,7,3,20,17,8}，对其进行堆排序。</p>
-<p>首先根据该数组元素构建一个完全二叉树，得到：</p>
+<p>给定一个整形数组a[]={16,7,3,20,17,8}，对其进行堆排序。<br>首先根据该数组元素构建一个完全二叉树，得到：</p>
 <p><img src="http://img.blog.csdn.net/20170707005835056?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <p>然后需要构造初始堆，则从<strong>最后一个非叶节点</strong>开始调整，调整过程如下：</p>
-<p>####以下为构造初始堆：</p>
-<ol>
-<li><p>8和3交换，满足；</p>
-</li>
+<h2 id="以下为构造初始堆："><a href="#以下为构造初始堆：" class="headerlink" title="以下为构造初始堆："></a>以下为构造初始堆：</h2><ol>
+<li>8和3交换，满足；</li>
 <li><p>20和7交换，导致20和16不满足；<br><img src="http://img.blog.csdn.net/20170707010545789?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170707010615238?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 </li>
 <li><p>20和16交换，导致17和16不满足；</p>
@@ -449,27 +441,17 @@
 </li>
 </ol>
 <p>即每次调整都是从父节点、左孩子节点、右孩子节点三者中选择最大者跟父节点进行交换(交换之后可能造成被交换的孩子节点不满足堆的性质，因此每次交换之后要重新对被交换的孩子节点进行调整)。有了初始堆之后就可以进行排序了。</p>
-<p>####以下为交换元素并每步堆化（排序）：</p>
-<ol>
+<h2 id="以下为交换元素并每步堆化（排序）："><a href="#以下为交换元素并每步堆化（排序）：" class="headerlink" title="以下为交换元素并每步堆化（排序）："></a>以下为交换元素并每步堆化（排序）：</h2><ol>
 <li><p>交换3与20；  如下图：<br>此时3位于堆顶不满大顶堆的性质，则需继续调整。<br>交换3与17，导致3与16不满足；<br>交换3与16；<br>满足；<br><img src="http://img.blog.csdn.net/20170707011227881?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170707011429996?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170707011922837?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 </li>
-<li><p>交换17与3；如下图：<br>此时3位于堆顶不满大顶堆的性质，则需继续调整。<br>交换3与16，导致3与7不满足；<br>交换3与7；<br>满足；</p>
+<li><p>交换17与3；如下图：<br>此时3位于堆顶不满大顶堆的性质，则需继续调整。<br>交换3与16，导致3与7不满足；<br>交换3与7；<br>满足；<br><img src="http://img.blog.csdn.net/20170707012016247?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170707012201512?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170707012208510?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 </li>
-</ol>
-<p><img src="http://img.blog.csdn.net/20170707012016247?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170707012201512?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170707012208510?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<ol>
-<li>交换16与3；如下图：<br>此时3位于堆顶不满大顶堆的性质，则需继续调整。<br>交换3与8；<br>满足；</li>
-</ol>
-<p><img src="http://img.blog.csdn.net/20170707012326099?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170707012436414?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<ol>
+<li>交换16与3；如下图：<br>此时3位于堆顶不满大顶堆的性质，则需继续调整。<br>交换3与8；<br>满足；<br><img src="http://img.blog.csdn.net/20170707012326099?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170707012436414?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></li>
 <li>交换3与8；如下图：<br>此时3位于堆顶不满大顶堆的性质，则需继续调整。<br>交换3与7；<br>满足；<br><img src="http://img.blog.csdn.net/20170707012548626?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170707012627747?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></li>
-<li>交换3与7；如下图：<br>满足，完成排序。</li>
+<li>交换3与7；如下图：<br>满足，完成排序。<br><img src="http://img.blog.csdn.net/20170707013241010?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></li>
 </ol>
-<p><img src="http://img.blog.csdn.net/20170707013241010?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 这样整个区间便已经有序了。</p>
-<p>从上述过程可知，堆排序其实也是一种选择排序，是一种树形选择排序。只不过直接选择排序中，为了从R[1…n]中选择最大记录，需比较n-1次，然后从R[1…n-2]中选择最大记录需比较n-2次。事实上这n-2次比较中有很多已经在前面的n-1次比较中已经做过，而树形选择排序恰好利用树形的特点保存了部分前面的比较结果，因此可以减少比较次数。对于n个关键字序列，最坏情况下每个节点需比较logn次，因此其最坏情况下时间复杂度为nlogn。</p>
-<p>####算法实现（java）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">	/**定义堆*/</div><div class="line">static	class Heap&#123;</div><div class="line">	int count;</div><div class="line">	public int[] Array;</div><div class="line">	public Heap(int count)&#123;</div><div class="line">		this.count=count;</div><div class="line">		this.Array=new int[count];</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	/**获取左孩子的方法*/</div><div class="line">	public int getLeft(int i)&#123;</div><div class="line">		int left=2*i+1;</div><div class="line">		if(this.Array==null || left&gt;=this.count)&#123;return -1;&#125;</div><div class="line">		return left;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	/**获取右孩子的方法*/</div><div class="line">	public int getRight(int i)&#123;</div><div class="line">		int right=2*i+2;</div><div class="line">		if(this.Array==null || right&gt;=this.count)&#123;return -1;&#125;</div><div class="line">		return right;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	/**堆化（筛选）*/</div><div class="line">	public void PercolateDown(int i)&#123;</div><div class="line">		int left,right,max = 0,temp;</div><div class="line">		</div><div class="line">		left=this.getLeft(i);</div><div class="line">		right=this.getRight(i);</div><div class="line">		if(left!=-1 &amp;&amp; this.Array[i]&gt;=this.Array[left])&#123;</div><div class="line">			max=i;</div><div class="line">		&#125;else&#123;</div><div class="line">			max=left;	</div><div class="line">		&#125;</div><div class="line">		if(right!=-1 &amp;&amp;  this.Array[right]&gt;this.Array[max])&#123;</div><div class="line">			max=right;</div><div class="line">		&#125;</div><div class="line">		//交换,交换完之后结束方法，由外部调用</div><div class="line">		if(max!=-1 &amp;&amp; max!=i)&#123;</div><div class="line">			temp=Array[max]; </div><div class="line">			Array[max]=Array[i];</div><div class="line">			Array[i]=temp;</div><div class="line">			</div><div class="line">			PercolateDown(max);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;	 	</div><div class="line"></div><div class="line">public  static void Heapsort(int[] A,int n)&#123;</div><div class="line">	Heap heap=new Heap(n);</div><div class="line">	int temp;</div><div class="line">	for(int i=0;i&lt;n;i++)&#123;</div><div class="line">		heap.Array[i]=A[i];</div><div class="line">	&#125;</div><div class="line">	//从第一个非叶子节点开始堆化（筛选）</div><div class="line">	for(int i=(n-1)/2;i&gt;=0;i--)&#123;</div><div class="line">		heap.PercolateDown(i);</div><div class="line">	&#125;</div><div class="line">	//第一次堆化完成， 开始交换，最后一个数和第一个数交换一次</div><div class="line">	for(int i=n-1;i&gt;=0;i--)&#123; //heap.Array[0] 存储最大元素</div><div class="line">		temp=heap.Array[0];</div><div class="line">		heap.Array[0]=heap.Array[i];</div><div class="line">		heap.Array[i]=temp;</div><div class="line">		//使用count的目的是在getleft的时候避免再去判断已经交换过（排序过）的元素</div><div class="line">		heap.count--;</div><div class="line">		//对第一个数不满足则再次进行堆化</div><div class="line">		heap.PercolateDown(0);</div><div class="line">	&#125;</div><div class="line">	long time1=System.nanoTime();</div><div class="line">	for (int j : heap.Array) &#123;</div><div class="line">		System.out.println(j);</div><div class="line">	&#125;</div><div class="line">	System.out.println(System.nanoTime()-time1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样整个区间便已经有序了。<br>从上述过程可知，堆排序其实也是一种选择排序，是一种树形选择排序。只不过直接选择排序中，为了从R[1…n]中选择最大记录，需比较n-1次，然后从R[1…n-2]中选择最大记录需比较n-2次。事实上这n-2次比较中有很多已经在前面的n-1次比较中已经做过，而树形选择排序恰好利用树形的特点保存了部分前面的比较结果，因此可以减少比较次数。对于n个关键字序列，最坏情况下每个节点需比较logn次，因此其最坏情况下时间复杂度为nlogn。</p>
+<h2 id="算法实现（java）："><a href="#算法实现（java）：" class="headerlink" title="算法实现（java）："></a>算法实现（java）：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">	/**定义堆*/</div><div class="line">static	class Heap&#123;</div><div class="line">	int count;</div><div class="line">	public int[] Array;</div><div class="line">	public Heap(int count)&#123;</div><div class="line">		this.count=count;</div><div class="line">		this.Array=new int[count];</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	/**获取左孩子的方法*/</div><div class="line">	public int getLeft(int i)&#123;</div><div class="line">		int left=2*i+1;</div><div class="line">		if(this.Array==null || left&gt;=this.count)&#123;return -1;&#125;</div><div class="line">		return left;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	/**获取右孩子的方法*/</div><div class="line">	public int getRight(int i)&#123;</div><div class="line">		int right=2*i+2;</div><div class="line">		if(this.Array==null || right&gt;=this.count)&#123;return -1;&#125;</div><div class="line">		return right;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	/**堆化（筛选）*/</div><div class="line">	public void PercolateDown(int i)&#123;</div><div class="line">		int left,right,max = 0,temp;</div><div class="line">		</div><div class="line">		left=this.getLeft(i);</div><div class="line">		right=this.getRight(i);</div><div class="line">		if(left!=-1 &amp;&amp; this.Array[i]&gt;=this.Array[left])&#123;</div><div class="line">			max=i;</div><div class="line">		&#125;else&#123;</div><div class="line">			max=left;	</div><div class="line">		&#125;</div><div class="line">		if(right!=-1 &amp;&amp;  this.Array[right]&gt;this.Array[max])&#123;</div><div class="line">			max=right;</div><div class="line">		&#125;</div><div class="line">		//交换,交换完之后结束方法，由外部调用</div><div class="line">		if(max!=-1 &amp;&amp; max!=i)&#123;</div><div class="line">			temp=Array[max]; </div><div class="line">			Array[max]=Array[i];</div><div class="line">			Array[i]=temp;</div><div class="line">			</div><div class="line">			PercolateDown(max);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;	 	</div><div class="line"></div><div class="line">public  static void Heapsort(int[] A,int n)&#123;</div><div class="line">	Heap heap=new Heap(n);</div><div class="line">	int temp;</div><div class="line">	for(int i=0;i&lt;n;i++)&#123;</div><div class="line">		heap.Array[i]=A[i];</div><div class="line">	&#125;</div><div class="line">	//从第一个非叶子节点开始堆化（筛选）</div><div class="line">	for(int i=(n-1)/2;i&gt;=0;i--)&#123;</div><div class="line">		heap.PercolateDown(i);</div><div class="line">	&#125;</div><div class="line">	//第一次堆化完成， 开始交换，最后一个数和第一个数交换一次</div><div class="line">	for(int i=n-1;i&gt;=0;i--)&#123; //heap.Array[0] 存储最大元素</div><div class="line">		temp=heap.Array[0];</div><div class="line">		heap.Array[0]=heap.Array[i];</div><div class="line">		heap.Array[i]=temp;</div><div class="line">		//使用count的目的是在getleft的时候避免再去判断已经交换过（排序过）的元素</div><div class="line">		heap.count--;</div><div class="line">		//对第一个数不满足则再次进行堆化</div><div class="line">		heap.PercolateDown(0);</div><div class="line">	&#125;</div><div class="line">	long time1=System.nanoTime();</div><div class="line">	for (int j : heap.Array) &#123;</div><div class="line">		System.out.println(j);</div><div class="line">	&#125;</div><div class="line">	System.out.println(System.nanoTime()-time1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>测试程序：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static void  main(String[] arg)&#123;</div><div class="line">		int[] A=new int[]&#123;5,14,78,2,14,53,45,1&#125;;</div><div class="line">		Heapsort(A, A.length);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
 <p>打印内容如下：</p>
@@ -580,8 +562,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460"
@@ -643,6 +634,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本思想："><span class="nav-number">1.</span> <span class="nav-text">基本思想：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作过程如下："><span class="nav-number">2.</span> <span class="nav-text">操作过程如下：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以下为构造初始堆："><span class="nav-number">3.</span> <span class="nav-text">以下为构造初始堆：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以下为交换元素并每步堆化（排序）："><span class="nav-number">4.</span> <span class="nav-text">以下为交换元素并每步堆化（排序）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现（java）："><span class="nav-number">5.</span> <span class="nav-text">算法实现（java）：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
