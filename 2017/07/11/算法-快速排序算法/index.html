@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android,开源," />
+  <meta name="keywords" content="面试,算法,Algorithm,排序," />
 
 
 
@@ -87,28 +87,22 @@
 
 
 
-<meta name="description" content="https://github.com/qht1003077897/H-Express">
+<meta name="description" content="面试算法之----快速排序算法（摘自数据结构与算法经典问题解析264页问题10.11 ）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一款仿快递100的快递类APP  H-Express">
-<meta property="og:url" content="http://yoursite.com/2017/05/05/一款仿快递100的快递类APP之H-Express/index.html">
+<meta property="og:title" content="算法-快速排序算法">
+<meta property="og:url" content="http://yoursite.com/2017/07/11/算法-快速排序算法/index.html">
 <meta property="og:site_name" content="祁宏涛">
-<meta property="og:description" content="https://github.com/qht1003077897/H-Express">
-<meta property="og:image" content="https://img.shields.io/badge/platform-Android-blue.svg">
-<meta property="og:image" content="https://img.shields.io/badge/debug-1.0.0-orange.svg">
-<meta property="og:image" content="https://img.shields.io/badge/gradle-2.0.0-blue.svg">
-<meta property="og:image" content="https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic">
-<meta property="og:image" content="http://img.blog.csdn.net/20170504170212518?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170427215859131?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170427220250668?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170427220309106?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170504170118094?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170504170133439?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170504170200690?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-07-08T02:09:55.273Z">
+<meta property="og:description" content="面试算法之----快速排序算法（摘自数据结构与算法经典问题解析264页问题10.11 ）">
+<meta property="og:image" content="http://img.blog.csdn.net/20170711225641604?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170711230401427?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170711230835930?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170711231042553?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170711231337105?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-07-11T15:29:18.766Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一款仿快递100的快递类APP  H-Express">
-<meta name="twitter:description" content="https://github.com/qht1003077897/H-Express">
-<meta name="twitter:image" content="https://img.shields.io/badge/platform-Android-blue.svg">
+<meta name="twitter:title" content="算法-快速排序算法">
+<meta name="twitter:description" content="面试算法之----快速排序算法（摘自数据结构与算法经典问题解析264页问题10.11 ）">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170711225641604?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
 
@@ -136,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/05/一款仿快递100的快递类APP之H-Express/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/11/算法-快速排序算法/"/>
 
 
 
 
 
-  <title> 一款仿快递100的快递类APP  H-Express | 祁宏涛 </title>
+  <title> 算法-快速排序算法 | 祁宏涛 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -281,7 +275,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/05/一款仿快递100的快递类APP之H-Express/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/算法-快速排序算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QHT">
@@ -302,7 +296,7 @@
             
             
               
-                一款仿快递100的快递类APP  H-Express
+                算法-快速排序算法
               
             
           </h1>
@@ -317,8 +311,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-05T09:10:16+08:00">
-                2017-05-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T22:00:16+08:00">
+                2017-07-11
               </time>
             
 
@@ -340,8 +334,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开源/" itemprop="url" rel="index">
-                    <span itemprop="name">开源</span>
+                  <a href="/categories/算法-面试/" itemprop="url" rel="index">
+                    <span itemprop="name">算法,面试</span>
                   </a>
                 </span>
 
@@ -357,7 +351,7 @@
 
           
           
-             <span id="/2017/05/05/一款仿快递100的快递类APP之H-Express/" class="leancloud_visitors" data-flag-title="一款仿快递100的快递类APP  H-Express">
+             <span id="/2017/07/11/算法-快速排序算法/" class="leancloud_visitors" data-flag-title="算法-快速排序算法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -375,7 +369,7 @@
 
           
               <div class="post-description">
-                  https://github.com/qht1003077897/H-Express
+                  面试算法之----快速排序算法（摘自数据结构与算法经典问题解析264页问题10.11 ）
               </div>
           
 
@@ -390,126 +384,44 @@
       
 
       
-        <h1 id="H-Express-Android-App"><a href="#H-Express-Android-App" class="headerlink" title="H-Express Android App"></a>H-Express Android App</h1><p><img src="https://img.shields.io/badge/platform-Android-blue.svg" alt="Platform"><img src="https://img.shields.io/badge/debug-1.0.0-orange.svg" alt="Release"><img src="https://img.shields.io/badge/gradle-2.0.0-blue.svg" alt="Gradle"><a href=""><img src="https://img.shields.io/packagist/l/doctrine/orm.svg?style=plastic" alt="Packagist"></a></p>
-<p><img src="http://img.blog.csdn.net/20170504170212518?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p><a href="https://github.com/qht1003077897/H-Express/blob/master/apk/app-debug.apk" target="_blank" rel="external">H-Express  APK</a></p>
+        <p>快速排序算法是分治算法技术的一个实例，也称为分区交换排序。快速排序采用递归调用对元素进行排序，是基于比较的排序算法中的一个著名算法，也是面试常考的一个算法。</p>
+<p>本文主要思想借鉴于这篇文章：</p>
+<blockquote>
+<p>白话经典算法系列之六 快速排序 快速搞定<br><a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="external">http://blog.csdn.net/morewindows/article/details/6684558</a></p>
+</blockquote>
+<h2 id="时间复杂度："><a href="#时间复杂度：" class="headerlink" title="时间复杂度："></a>时间复杂度：</h2><ul>
+<li>时间复杂度：O(nlogn) </li>
+<li>空间复杂度：O（1）<br>性能：</li>
+</ul>
 <hr>
-<p>download这个项目，你可以学到：</p>
+<p>假设快速排序的复杂度为T(n) 且所有元素都不相同。T(n) 取决于两个子问题的规模，而规模又取决于中枢点。</p>
+<ul>
+<li>最好情况：每个划分把数组分成相等的两部分。时间复杂度为（nlogn）；</li>
+<li>最坏情况：每个划分把数组分成不相等的两部分。时间复杂度为（n^2）,最坏情况发生在序列已经排序且选择最后一个元素作为中枢点。</li>
+<li>平均情况下的时间复杂度与最好情况一样也为（nlogn）；</li>
+</ul>
+<h2 id="基本思想："><a href="#基本思想：" class="headerlink" title="基本思想："></a>基本思想：</h2><p>书上说该算法主要由以下四步组成：</p>
 <ol>
-<li>EventBus</li>
-<li>OkHttp</li>
-<li>butterknife</li>
-<li>Glide图片加载</li>
-<li>ZXing二维码扫描</li>
-<li>白天/夜间模式切换</li>
-<li>第三方QQ登录、分享</li>
-<li>安卓爬虫</li>
-<li>RecyclerView使用</li>
-<li>BaseActivity、BaseFragment、BaseAdapter</li>
-<li>LitePal数据库使用</li>
+<li>如果数组中仅有一个元素或者没有元素需要排序，则返回。</li>
+<li>选择数组中的一个元素作为中枢点（通常选择数组最左边的元素）。</li>
+<li>把数组分成两部分，一部分元素大于中枢点，一部分元素小于中枢点。</li>
+<li>对两部分数组递归调用该算法。</li>
 </ol>
+<p>借鉴参考文章，在这里我们巧妙的把它翻译为这样一种思想：</p>
+<p><font color="#ff0000" size="4px">挖坑填数、分而治之。<font></font></font></p>
+<h2 id="操作过程如下："><a href="#操作过程如下：" class="headerlink" title="操作过程如下："></a>操作过程如下：</h2><p>假设有如下数组，且拟定有一个数组 A[4,6,2,9,1,17] ，下标为index，和两个指针 left 和 right，和一个保存中枢点的变量 temp。</p>
+<p>初始时，取第一个元素为中枢点，此时：left = 0;  right = 5;   temp = A[left] = 4;<br><img src="http://img.blog.csdn.net/20170711225641604?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>由于已经将A[0]中的数保存到temp中，可以理解成在数组A[0]上挖了个坑，可以将其它数据填充到这来。</p>
+<p>1、首先从右向左，寻找第一个比temp小的数，准备填充到A[0]的位置上。<br>当right=4时满足情况，于是将A[4] 挖走，填充到上一个坑A[0]处，并且left++；此时：left=1；right=4；temp=4；形成新坑A[4]。<br><img src="http://img.blog.csdn.net/20170711230401427?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>2、开始从左往右，寻找第一个比temp大的数，准备填充到A[4]的位置上。当left=1时，便满足条件，于是将A[1]挖走，填到上一个坑A[4]处，并且right–；此时：left=1；right=3；temp=4；形成新坑A[1];<br><img src="http://img.blog.csdn.net/20170711230835930?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>3、开始从右往左，寻找第二个比temp小的数，准备填充到A[1]的位置上。<br>当right=2时满足情况，于是将A[2] 挖走，填充到上一个坑A[1]处，并且left++；此时：left=2；right=2；temp=4；形成新坑A[2]。<br><img src="http://img.blog.csdn.net/20170711231042553?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>4、此时left=right，则第一趟排序结束，将temp填充到中枢点index=2的位置上，可以看到，4的左边都比4小，右边都比4大。<br><img src="http://img.blog.csdn.net/20170711231337105?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>5、得到新的中枢点后，递归对左边和右边重复上述过程即可完成整个排序。</p>
+<h2 id="对挖坑填数进行总结（引用自上述参考文章）："><a href="#对挖坑填数进行总结（引用自上述参考文章）：" class="headerlink" title="对挖坑填数进行总结（引用自上述参考文章）："></a>对挖坑填数进行总结（引用自上述参考文章）：</h2><blockquote>
+<p>1．i =L; j = R; 将基准数挖出形成第一个坑a[i]。<br>2．j–由后向前找比它小的数，找到后挖出此数填前一个坑a[i]中。<br>3．i++由前向后找比它大的数，找到后也挖出此数填到前一个坑a[j]中。<br>4．再重复执行2，3二步，直到i==j，将基准数填入a[i]中。</p>
+</blockquote>
+<h2 id="算法实现（java）："><a href="#算法实现（java）：" class="headerlink" title="算法实现（java）："></a>算法实现（java）：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">public static void sort(int[] A,int l,int r)&#123;</div><div class="line">	int left=l;</div><div class="line">	int right=r;</div><div class="line">	// index为下标，temp用来保存中枢位置的值，无关数组A,只是一个临时变量而已</div><div class="line">	int index,temp;</div><div class="line">	</div><div class="line">	if(A.length==0 || A.length==1)&#123;return;&#125;</div><div class="line">	if(left&gt;right)&#123;return;&#125;</div><div class="line">	//选取中枢，通常选择最左边的元素</div><div class="line">	temp=A[left];	</div><div class="line">	while(left &lt; right)&#123;</div><div class="line">	//先从右向左找不大于temp的元素</div><div class="line">	 while(left &lt; right &amp;&amp; A[right] &gt; temp)&#123;  </div><div class="line">		 right--;</div><div class="line">	 &#125;	</div><div class="line">	 if(left &lt; right)&#123;</div><div class="line">		//挖right，填left</div><div class="line">		A[left]=A[right];  </div><div class="line">		//填完之后，left右移一位        </div><div class="line">		left++;                   </div><div class="line">	 &#125;</div><div class="line">	 //再从左向右找不小于temp的元素来填上一个坑</div><div class="line">	 while(left &lt; right &amp;&amp; A[left] &lt;= temp)&#123;  </div><div class="line">		 left++;</div><div class="line">	 &#125;</div><div class="line">	 if(left &lt; right)&#123;</div><div class="line">		 //挖left，填上一次的right</div><div class="line">		 A[right]=A[left];   </div><div class="line">		 //填完之后，right左移一位        </div><div class="line">		 right--;					</div><div class="line">	 &#125;</div><div class="line">	&#125;</div><div class="line">	//走到这一步，必然left==right，得到中枢位置，将temp插入中枢位置</div><div class="line">	A[left]=temp; 	</div><div class="line">	//下标index						</div><div class="line">	index=left;					</div><div class="line">	//执行完一次排序操作，再对左边和右边分别递归</div><div class="line">	sort(A,l,index-1);</div><div class="line">	sort(A,index+1,r);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>测试程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static void  main(String[] arg)&#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		int[] A=new int[]&#123;1,4,2,8,5,9,477,25,1&#125;;</div><div class="line">		</div><div class="line">		long time=System.nanoTime();</div><div class="line">		sort(A, 0, A.length-1);</div><div class="line">		System.out.println(&quot;耗时：&quot;System.nanoTime()-time);</div><div class="line">		for (int i : A) &#123;</div><div class="line">			System.out.println(i);	</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>打印内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">耗时：9659</div><div class="line">1</div><div class="line">1</div><div class="line">2</div><div class="line">4</div><div class="line">5</div><div class="line">8</div><div class="line">9</div><div class="line">25</div><div class="line">477</div></pre></td></tr></table></figure>
 <hr>
-<ul>
-<li><strong>H-Express</strong> is an express delivery tracking app , built on OkHttp、EventBus、LitePal、Glide and ZXing.</li>
-<li>H-Express 是一款快递追踪 APP，基于OkHttp、EventBus、LitePal、Glide、RecyclerView、ZXing而构建。</li>
-</ul>
-<ul>
-<li>Clone the Repository: </li>
-<li>克隆仓库：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/qht1003077897/H-Express.git</div></pre></td></tr></table></figure>
-<ul>
-<li>Suggestion: It is better for you to update your Android Studio to<br>version 2.0 when you open this project.</li>
-<li>建议：运行此项目最好使用 Android Studio2.0 以上版本。</li>
-</ul>
-<h3 id="To-dos"><a href="#To-dos" class="headerlink" title="To-dos"></a>To-dos</h3><ul>
-<li>This project is still in progress. Here are the some features that I<br>will finish in the future. </li>
-<li><p>这个项目还在开发当中，下面的条目是我以后的完善计划。</p>
-<p>√ 完成客服模块。<br>√ 加入网点地图模式。<br>√ 界面美化、按钮样式统一。<br>√ …..</p>
-</li>
-</ul>
-<h3 id="Help-Me-Improve-This-App"><a href="#Help-Me-Improve-This-App" class="headerlink" title="Help Me Improve This App"></a>Help Me Improve This App</h3><ul>
-<li>As you can see at the screenshots, some images in H-Express app are not suitable. So If you want to improve the translation of H-Express, please email me.</li>
-</ul>
-<ul>
-<li>从截图中可以看到，H-Express 并不是很完善，因此如果你有更好的建议或者想帮助我一起完善 H-Express，请 Email 我。</li>
-</ul>
-<hr>
-<p><img src="http://img.blog.csdn.net/20170427215859131?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170427220250668?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<hr>
-<p><img src="http://img.blog.csdn.net/20170427220309106?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170504170118094?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<hr>
-<p><img src="http://img.blog.csdn.net/20170504170133439?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20170504170200690?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<hr>
-<h2 id="2017-05-03"><a href="#2017-05-03" class="headerlink" title="2017-05-03"></a>2017-05-03</h2><ol>
-<li>完成“寄快递”部分功能（数据来自快递100 H5 解析，包括网点信息、时效天数）。</li>
-<li>完成“添加常用地址”功能。</li>
-<li>编写“关于”界面。</li>
-</ol>
-<hr>
-<h2 id="2017-04-27"><a href="#2017-04-27" class="headerlink" title="2017-04-27"></a>2017-04-27</h2><ol>
-<li>完成订单模块(包括已完成、已签收、未签收订单查看、编辑、单选、多选、全选、删除功能，包括手工设置订单状态为 已/未 签收)</li>
-<li>增加 夜间/白天 主题切换</li>
-<li>加入第三方(QQ)登录、退出登录、分享功能</li>
-<li>可清除缓存</li>
-<li>实时天气温度信息</li>
-</ol>
-<hr>
-<h2 id="2017-04-18"><a href="#2017-04-18" class="headerlink" title="2017-04-18"></a>2017-04-18</h2><ol>
-<li>实现订单详情页面</li>
-<li>时间轴式订单信息</li>
-<li>RecyclerView添加BaseAdapter</li>
-<li>添加menu菜单样式</li>
-<li>使用litepal数据库存储订单信息</li>
-<li>首页添加weelview选择快递公司</li>
-</ol>
-<hr>
-<h2 id="2017-04-14"><a href="#2017-04-14" class="headerlink" title="2017-04-14"></a>2017-04-14</h2><ol>
-<li>首页Fragment订单查询输入</li>
-<li>订单页面viewpage+fragment </li>
-</ol>
-<hr>
-<h2 id="2017-04-11"><a href="#2017-04-11" class="headerlink" title="2017-04-11"></a>2017-04-11</h2><ol>
-<li>BaseFragment </li>
-<li>微信底部菜单栏  </li>
-<li>无数据情况下的EmptyView </li>
-</ol>
-<hr>
-<h2 id="2017-04-05"><a href="#2017-04-05" class="headerlink" title="2017-04-05"></a>2017-04-05</h2><ol>
-<li>OkHttp 3.3.1(引用鸿洋的一个OkhttpUtil) </li>
-<li>EventBus 3.0  </li>
-<li>Json解析 </li>
-<li>ButterKnife8.5.1</li>
-</ol>
-<hr>
-<h2 id="2017-03-26"><a href="#2017-03-26" class="headerlink" title="2017-03-26"></a>2017-03-26</h2><ol>
-<li>透明状态栏 </li>
-<li>生命周期监控 </li>
-<li>顶部统一的ToolBar</li>
-</ol>
-<hr>
-<h2 id="尊重原创，请勿用作商业用途"><a href="#尊重原创，请勿用作商业用途" class="headerlink" title=" 尊重原创，请勿用作商业用途."></a> 尊重原创，请勿用作商业用途.</h2><h2 id="License"><a href="#License" class="headerlink" title=" License"></a> License</h2><pre><code> MIT License
-
-Copyright (c) 2016-2018  qht1003077897
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the &quot;Software&quot;), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-</code></pre><hr>
+<p>csdn地址：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a><br>github地址：<a href="https://github.com/qht1003077897" target="_blank" rel="external">https://github.com/qht1003077897</a><br>个人博客地址：<a href="https://qht1003077897.github.io" target="_blank" rel="external">https://qht1003077897.github.io</a><br>QQ：1003077897</p>
 
       
     </div>
@@ -539,9 +451,13 @@ SOFTWARE.
       
         <div class="post-tags">
           
-            <a href="/tags/android/" rel="tag"># android</a>
+            <a href="/tags/面试/" rel="tag"># 面试</a>
           
-            <a href="/tags/开源/" rel="tag"># 开源</a>
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+            <a href="/tags/排序/" rel="tag"># 排序</a>
           
         </div>
       
@@ -553,8 +469,8 @@ SOFTWARE.
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/27/App构建之路问题记录/" rel="next" title="APP构建之路问题记录">
-                <i class="fa fa-chevron-left"></i> APP构建之路问题记录
+              <a href="/2017/07/06/算法-堆排序算法/" rel="next" title="算法-堆排序算法">
+                <i class="fa fa-chevron-left"></i> 算法-堆排序算法
               </a>
             
           </div>
@@ -562,10 +478,6 @@ SOFTWARE.
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/05/安卓面试清单/" rel="prev" title="安卓面试清单">
-                安卓面试清单 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -696,7 +608,7 @@ SOFTWARE.
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#H-Express-Android-App"><span class="nav-number">1.</span> <span class="nav-text">H-Express Android App</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#To-dos"><span class="nav-number">1.0.1.</span> <span class="nav-text">To-dos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Help-Me-Improve-This-App"><span class="nav-number">1.0.2.</span> <span class="nav-text">Help Me Improve This App</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-05-03"><span class="nav-number">1.1.</span> <span class="nav-text">2017-05-03</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-27"><span class="nav-number">1.2.</span> <span class="nav-text">2017-04-27</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-18"><span class="nav-number">1.3.</span> <span class="nav-text">2017-04-18</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-14"><span class="nav-number">1.4.</span> <span class="nav-text">2017-04-14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-11"><span class="nav-number">1.5.</span> <span class="nav-text">2017-04-11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-04-05"><span class="nav-number">1.6.</span> <span class="nav-text">2017-04-05</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2017-03-26"><span class="nav-number">1.7.</span> <span class="nav-text">2017-03-26</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尊重原创，请勿用作商业用途"><span class="nav-number">1.8.</span> <span class="nav-text"> 尊重原创，请勿用作商业用途.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#License"><span class="nav-number">1.9.</span> <span class="nav-text"> License</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度："><span class="nav-number">1.</span> <span class="nav-text">时间复杂度：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本思想："><span class="nav-number">2.</span> <span class="nav-text">基本思想：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作过程如下："><span class="nav-number">3.</span> <span class="nav-text">操作过程如下：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对挖坑填数进行总结（引用自上述参考文章）："><span class="nav-number">4.</span> <span class="nav-text">对挖坑填数进行总结（引用自上述参考文章）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法实现（java）："><span class="nav-number">5.</span> <span class="nav-text">算法实现（java）：</span></a></li></ol></div>
             
 
           </div>
