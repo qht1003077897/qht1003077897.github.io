@@ -1,0 +1,961 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="手把手," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="祁宏涛" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="基于红外项目自己摸索学习总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓实现耳机口音频转红外发射">
+<meta property="og:url" content="http://yoursite.com/2017/12/11/手把手教你学习并实现 安卓耳机口音频转红外发射/index.html">
+<meta property="og:site_name" content="祁宏涛">
+<meta property="og:description" content="基于红外项目自己摸索学习总结">
+<meta property="og:image" content="http://img.blog.csdn.net/20171207101223410?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171207105650197?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171207110931614?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171207110858841?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171207112851831?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-12-11T14:18:31.124Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓实现耳机口音频转红外发射">
+<meta name="twitter:description" content="基于红外项目自己摸索学习总结">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20171207101223410?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Q2nAmor'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/11/手把手教你学习并实现 安卓耳机口音频转红外发射/"/>
+
+
+
+
+
+  <title> 安卓实现耳机口音频转红外发射 | 祁宏涛 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+	<a href="https://github.com/qht1003077897"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">祁宏涛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友情链接
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/11/手把手教你学习并实现 安卓耳机口音频转红外发射/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QHT">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="祁宏涛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                安卓实现耳机口音频转红外发射
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-11T22:00:16+08:00">
+                2017-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/手把手-无线技术/" itemprop="url" rel="index">
+                    <span itemprop="name">手把手,无线技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/11/手把手教你学习并实现 安卓耳机口音频转红外发射/" class="leancloud_visitors" data-flag-title="安卓实现耳机口音频转红外发射">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  基于红外项目自己摸索学习总结
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>###安卓实现耳机口音频转红外发射</p>
+<p>前一段时间因为找工作，完了之后又有两个项目做，一个 BLE4.0 的项目，一个红外控制的项目，因此也好久没写文章了。BLE4.0 的资料网上一抓一大把，就不多说了。</p>
+<p>虽说红外很早就开始火了，从最早的遥控器，到红外测距等等，但是网上关于 Android 红外开发的相关资料几乎没有。那就只能硬着头皮自己上。</p>
+<p>手机自带红外有 ConsumerIrManager 类，很好用，略过。而我们今天看的是另一种红外发送方式：<font color="#ff0000" size="3" face="微软雅黑">音频转红外</font>。</p>
+<hr>
+<p><strong>1、相关知识介绍：</strong></p>
+<p><img src="http://img.blog.csdn.net/20171207101223410?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 这是网上找的格力空调的开机短码，将这些数字理解成一个 TA 自己规定的协议，9000，4500 为帧头，560,1690 代表 1，560,560 代表 0。先不管帧头，剩下的翻译过来就是{1,0,1,0 , 1,0,1,0，0,1,0,1，0,1,0,1}，再翻译为16进制，即为0xAA，0x55，这是一个开机命令。</p>
+<p><em>注：<a href="http://read.pudn.com/downloads66/sourcecode/embed/236793/IR/%E9%81%A5%E6%8E%A7%E5%99%A8%E5%8E%9F%E7%90%86.pdf" target="_blank" rel="external">红外遥控器原理和NEC协议</a>，<font color="black" size="3" face="“楷体”">这里面有相关的知识，建议先阅读。</font></em></p>
+<hr>
+<p>采样率 44100：通俗理解就是  在1s内在一条连续的正玄波上面采集 44100 个点。<br>载波 38KHZ：  即为我们发出的音频信号需要放在 38KHZ 的载波上才能发送出去被红外接收头接收。</p>
+<font color="#ff0000" size="3" face="微软雅黑">音频转红外要做的就是生成 PCM（单/双声道）数据，即为音频数据，按照硬件支持的 NEC 协议，指定采样率，指定载波，使用 Android SDK 中的 audioTrack 类播放这段音频即可</font>。<br><br><img src="http://img.blog.csdn.net/20171207105650197?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><br><em>注：<a href="http://www.cnblogs.com/CoderTian/p/6657844.html" target="_blank" rel="external">多媒体基础知识之PCM数据</a>，<font color="black" size="3" face="“楷体”">这里面有 PCM 相关的知识，包括采样率、载波等。</font></em>
+
+<p><em>注：<font color="black" size="3" face="“楷体”">硬件自己焊接或者淘宝：android 音频红外发射头，附<a href="http://bbs.vivo.com.cn/thread-2252423-1-1.html" target="_blank" rel="external">焊接教程</a></font></em></p>
+<hr>
+<p><strong>2、音频调试：</strong></p>
+<p>音频调试我使用的电脑软件 cooledit，百度一下就有免费的，再加一根3.5mm 的公对公耳机线。</p>
+<p><img src="http://img.blog.csdn.net/20171207110931614?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20171207110858841?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<ul>
+<li><p>step1：使用遥控精灵搜到你的空调型号。</p>
+</li>
+<li><p>step2：公头线一头插耳机口，一头插电脑音频 mic 口，手机音量调到最大，并在电脑上打开 cooledit 软件。</p>
+</li>
+<li><p>step3：点击 cooledit 的录音键，选择采样率 44100，双声道，16 位。打开遥控精灵，打到你的空调按钮面板，连续点击几次开机键。</p>
+</li>
+<li><p>step4：可以看到 cooledit 软件界面上有一些绿色的声音波形。</p>
+</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20171207112851831?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>上面这张图片是我抓的遥控精灵发出的电平信号，可以看到 9ms 的高电平和 4.5ms 的低电平，虽然看到这儿是方波，但是再往后其实 TA 也是正玄波。高电平这儿全部是标准的正玄波组成的，宽度为时间宽度 9ms。</p>
+<p>那对于我们来说只要仿造出图中那样的波形，9ms高、4.5ms低………….，即可和遥控精灵一样控制我们的空调了。</p>
+<p><strong>3、仿造波形：</strong></p>
+<p>要仿造一段 20KHZ（因为耳机口只能输出这么大），采样率 44100 , 16 位双声道的 PCM 音频数据，网上还是有点资料可寻的。</p>
+<p>目前，我没有找到输出方波的方法，再加上经过对遥控精灵输出波形的观察，也是输出的正玄波，所以就放心的输出 Sin 正玄波吧。</p>
+<p>必要了解 ①：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buffSize = AudioTrack.getMinBufferSize(this.sampleRate,</div><div class="line">               AudioFormat.CHANNEL_OUT_STEREO,</div><div class="line">               AudioFormat.ENCODING_PCM_16BIT) * 4;</div></pre></td></tr></table></figure>
+<p>AudioTrack：音频播放类。<br>sampleRate：采样率。<br>AudioFormat.CHANNEL_OUT_STEREO：双声道输出，即为立体声，但同时也增加了文件大小。<br>AudioFormat.ENCODING_PCM_16BIT：16位，一个采样点占16位。但同时也增加了文件大小。</p>
+<p>必要了解 ②：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">y(t) = A * sin (ωt + φ)</div><div class="line"></div><div class="line">//ω即为角速度，在一段周期内转过了多少角度。</div><div class="line">//T为周期。</div><div class="line">//f为频率。</div><div class="line">ω = 2π/T = 2πf  </div><div class="line"></div><div class="line">y(t) = A * sin (2πft + φ)</div></pre></td></tr></table></figure>
+<p>正玄波重要函数，</p>
+<ul>
+<li>A: 振幅，这里为1；</li>
+<li>f : 频率，这里为 freqOfTone;（即为19000HZ）</li>
+<li>t: 时间，这里为 (i/sampleRate);（当i为44100时是不是就是1s了）</li>
+<li>φ: 相位，这里为0；</li>
+</ul>
+<p>表示下来就是这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sample[i] = Math.sin(2 * Math.PI  * i * (freqOfTone /sampleRate));</div></pre></td></tr></table></figure></p>
+<p>必要了解 ③：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,</div><div class="line">                   this.sampleRate, AudioFormat.CHANNEL_OUT_STEREO,</div><div class="line">                   AudioFormat.ENCODING_PCM_16BIT, bytes1.length,</div><div class="line">                   AudioTrack.MODE_STREAM);</div></pre></td></tr></table></figure>
+<p>STREAM_MUSIC：播放类型，有 Alerm、Notification 等。<br>AudioTrack.MODE_STREAM：MODE 有 STREAM 和 STATIC  两种。STREAM 类型意味着音频可以被连续播放，只需要一直往缓冲池写即可。STATIC 通常用于播放游戏音等，适合短小音频。<br>bytes1.length：一次可播放音频文件的缓冲池大小。</p>
+<p>核心代码片段：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">for (final double dVal : sample) &#123;</div><div class="line">   final short val = (short) ((dVal * 32767));</div><div class="line">   final short val_minus = (short) -val;</div><div class="line">   //左声道</div><div class="line">   generatedSnd[idx] = (byte) (val &amp; 0x00ff);</div><div class="line">   generatedSnd[idx+1] = (byte) ((val &amp; 0xff00) &gt;&gt;&gt; 8);</div><div class="line">   //16位双声道  右声道</div><div class="line">   generatedSnd[idx+2] = (byte) (val_minus &amp; 0x00ff);</div><div class="line">   generatedSnd[idx+3] = (byte) ((val_minus &amp; 0xff00) &gt;&gt;&gt; 8);</div><div class="line">   idx=idx+4;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>代码解释：</p>
+<p>上面第2行和第3行是将振幅缩放到最大振幅（32767是16位整数的最大值）。</p>
+<p>上面第5、6行和第8、9行是填充PCM数据，上面有文章讲了PCM数据格式，在16位wav PCM中，低字节到高字节：<br>|样本大小| 数据格式| 最小值| 最大值|<br>|: ————-|:————-|: —–|: —–|<br>|8位PCM | int |-128|127|<br>| 16位PCM |  int  | -32768  |32767|</p>
+<p>填充完毕后，我们就有了完整的正玄波数据。（即高电平正玄波）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">List&lt;Byte&gt; listByte = new ArrayList&lt;&gt;();</div><div class="line">for (int j = 0; j &lt; patterns.length; j++) &#123;</div><div class="line">    int d=patterns[j];</div><div class="line">    final int points = (int) ((((double) d / 1000000.0) * sampleRate)*4);</div><div class="line">      if (j % 2 == 0) &#123;</div><div class="line">        for (int i = 0; i &lt; points; i++) &#123;</div><div class="line">            listByte.add(generatedSnd[i]);</div><div class="line">        &#125;</div><div class="line">      &#125; else &#123;</div><div class="line">         for (int i = 0; i &lt; points; i++) &#123;</div><div class="line">             listByte.add((byte) 0);</div><div class="line">         &#125;</div><div class="line">      &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码解释：<br>patterns 即为我们要发送的电平数组，9000 , 4500… 那个。</p>
+<p>看第4行，9000是 μs，9000/1000000，是将  μs 转化为秒，再乘sampleRate 即为在9000μs 这段时间内占有多少个采样点。</p>
+<p>因为9000为高电平，4500为低电平，再接下来又为高电平，然后又是低电平….所以偶数位为高电平 ，所以偶数位上这 points 个点都为高电平，到奇数位了这 points 个点都为低电平，低电平使用0表示即可。然后将所有的点拼装到一起，组成完成的PCM数据，使用 AudioTrack 播放即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">            audioTrack.play();</div><div class="line">        &#125; catch (IllegalStateException e) &#123;</div><div class="line">            LogUtil.e( e.getMessage());</div><div class="line">        &#125;</div><div class="line">           audioTrack.write(listByte, 0, listByte.length);</div></pre></td></tr></table></figure>
+<p>格力空调的控制码网上一搜一大堆，在这里我不会开放源代码，核心代码已经给出了，自己好好理解理解，分析分析，就可以自己写出来了。</p>
+<p>这个也是自己花了好长时间才搞定的，所以请尊重他人劳动成果，不做伸手党。当然有不明白的可以在下面留言，欢迎交流，共同学习。</p>
+<hr>
+<p>my QQ : 1003077897<br>my csdn：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a><br>my  gay：<a href="https://github.com/qht1003077897" target="_blank" rel="external">https://github.com/qht1003077897</a></p>
+<p>欢迎交流。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      QHT
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yoursite.com/2017/12/11/手把手教你学习并实现 安卓耳机口音频转红外发射/" title="安卓实现耳机口音频转红外发射">http://yoursite.com/2017/12/11/手把手教你学习并实现 安卓耳机口音频转红外发射/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/手把手/" rel="tag"># 手把手</a>
+          
+        </div>
+      
+
+      
+        
+      
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/21/算法-KMP算法/" rel="next" title="算法-KMP算法">
+                <i class="fa fa-chevron-left"></i> 算法-KMP算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/07/2017年终总结/" rel="prev" title="2017年终总结">
+                2017年终总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODA2Ni80NjQw"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/16768811?v=3&s=460"
+               alt="QHT" />
+          <p class="site-author-name" itemprop="name">QHT</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QHT</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+&nbsp; | &nbsp;
+<span id="busuanzi_container_site_pv">
+   本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("iHroEhpKFMjKWPBLi56akdfi-gzGzoHsz", "SKwAep4PKplglnYzay5F4dFm");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+	<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>
