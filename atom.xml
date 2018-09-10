@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-10T05:31:53.636Z</updated>
+  <updated>2018-09-10T13:03:01.288Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,178 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>(QT) C++ 版本IM通信软件（客户端+服务器文本聊天、文件断点续传、在线用户搜索）</title>
+    <link href="http://yoursite.com/2018/09/11/(QT)C++%20%E7%89%88%E6%9C%ACIM%E9%80%9A%E4%BF%A1%E8%BD%AF%E4%BB%B6%EF%BC%88%E5%AE%A2%E6%88%B7%E7%AB%AF+%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%96%87%E6%9C%AC%E8%81%8A%E5%A4%A9%E3%80%81%E6%96%87%E4%BB%B6%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0%E3%80%81%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E6%90%9C%E7%B4%A2%EF%BC%89/"/>
+    <id>http://yoursite.com/2018/09/11/(QT)C++ 版本IM通信软件（客户端+服务器文本聊天、文件断点续传、在线用户搜索）/</id>
+    <published>2018-09-11T01:00:00.000Z</published>
+    <updated>2018-09-10T13:03:01.288Z</updated>
+    
+    <content type="html"><![CDATA[<p>紧接着上一节课程，这次的作业是要求实现一个简易版的“QQ”，可支持“软件需求”所列出的功能。当时由于图方便便选择了QTCPSocket进行整个过程的通信（事后才知道有多坑）。服务端界面比较简单，就几个按钮一个进度条，主要在客户端实现了基本的功能和界面。整个学习和开发阶段持续了将近3个礼拜，可谓是历史悠久。总的来说功能都实现了，但是存在一定的bug，估计以后也没时间去搞了，留在这儿当做一个自我的学习记录和新手的学习借鉴Demo。</p>
+<h4 id="运行要求"><a href="#运行要求" class="headerlink" title="运行要求"></a>运行要求</h4><ul>
+<li>同一局域网，默认端口：1234和4321，分别是聊天服务和文件服务。</li>
+<li>服务端代码为：SocketServer.rar</li>
+<li>客户端代码为：SocketClient.rar</li>
+</ul>
+<h4 id="软件需求"><a href="#软件需求" class="headerlink" title="软件需求"></a>软件需求</h4><ol>
+<li>支持文本消息的传输；</li>
+<li>支持局域网内在线用户搜索的功能；</li>
+<li>可以采用c/s或者b/s结构，也可以混合结构；</li>
+<li>支持文件传输功能；</li>
+<li>支持1GB大小的数据文件正确传输；</li>
+<li>支持断点续传的功能。</li>
+</ol>
+<h4 id="主要特点为"><a href="#主要特点为" class="headerlink" title="主要特点为"></a>主要特点为</h4><ol>
+<li>利用QTCPSocket完成通信，包括聊天和文件上传。</li>
+<li>仿QQ双击条目打开窗口聊天，收到消息自动弹窗。</li>
+<li>支持拉取历史聊天记录，从服务获取，默认全时间段。</li>
+<li>利用QLineEdit组合QPushButton实现在线用户搜索，并高亮显示。</li>
+<li>可支持跨机器的登录与注册。</li>
+<li>服务端推送的在线用户列表，客户端实时更新。</li>
+<li>轻量级的sqlite数据库，无需配置额外环境。</li>
+<li>用户下线的监听，包括正常下线和异常下线，都可捕获。</li>
+<li>支持离线文件传输，A客户端先发送到服务端，服务端保存一份，再发送到B客户端。</li>
+<li>支持GB级大文件的快速传输。</li>
+<li>支持断点续传，客户端点击暂停模拟断开链接或者客户端关闭窗口或者客户端下线，点击重新发送重连服务端进行续传即可。</li>
+</ol>
+<hr>
+<p>由于每次的C-S交互过程都涉及到数据传输格式，因此需要制定一个简单易理解的数据交换格式，如下：</p>
+<h4 id="数据交换格式"><a href="#数据交换格式" class="headerlink" title="数据交换格式"></a>数据交换格式</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">客户端请求</th>
+<th style="text-align:left">服务端返回</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">登录</td>
+<td style="text-align:left">login # username # password</td>
+<td style="text-align:left">login # login success # true(false)</td>
+</tr>
+<tr>
+<td style="text-align:left">注册</td>
+<td style="text-align:left">register # username # password</td>
+<td style="text-align:left">register # username # register success # true(false)</td>
+</tr>
+<tr>
+<td style="text-align:left">聊天</td>
+<td style="text-align:left">chat # 发送者 # 接受者 # message</td>
+<td style="text-align:left">chat # 发送者 # message</td>
+</tr>
+<tr>
+<td style="text-align:left">在线用户列表</td>
+<td style="text-align:left">getUserList</td>
+<td style="text-align:left">getUserList # username1 # username2……</td>
+</tr>
+<tr>
+<td style="text-align:left">新连接(更换登录socket)</td>
+<td style="text-align:left">newconnect # username</td>
+<td style="text-align:left">无返回</td>
+</tr>
+<tr>
+<td style="text-align:left">断点续传</td>
+<td style="text-align:left">continue # 发送者 # 接受者 # 文件总长度 # 剩余数据长度 # 文件名</td>
+<td style="text-align:left">无返回</td>
+</tr>
+<tr>
+<td style="text-align:left">历史聊天记录</td>
+<td style="text-align:left">record # 发送者 # 接受者</td>
+<td style="text-align:left">record ## 发送者 ## 接受者 ## 文本内容 ## 发送时间 ##（精确到毫秒）<em>**</em></td>
+</tr>
+</tbody>
+</table>
+<p>上表中，record ##用来标识每条聊天记录的切分点，因为涉及到N多条聊天记录。<br>末尾的<em>**</em>用来标识聊天记录结束，是结束符，由于聊天记录也许会很大，因此需要用来判断是否需要分包接收服务返回记录。<br><br></p>
+<hr>
+<h4 id="服务端介绍"><a href="#服务端介绍" class="headerlink" title="服务端介绍"></a>服务端介绍</h4><ul>
+<li><strong>登录与注册</strong>：</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz1vz6.png" alt="登录与注册"></p>
+<p>服务端使用sqlite数据库保存用户注册的账号和密码，在同一局域网内支持不同机器的登录。每次客户端发送请求服务端会给予一定的返回，然后客户端再根据这个返回值执行逻辑。</p>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz1Bxf.png" alt="登录与注册"></p>
+<p>上图是登录表，四个字段，使用isLogin区分是否登录，socketID保存客户端句柄，注册的话插入就行。</p>
+<ul>
+<li><strong>聊天</strong>：</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz3iod.png" alt="这里写图片描述"></p>
+<p>客户端A要发送消息给客户端B的时候，先发送消息到服务端，服务端拿到发送者和接受者名字后，寻找到接收者相应的socket，然后再进行转发，然后发送成功后会有返回值给发送者A，发送者A拿到返回值后确认发送成功。然后聊天的所有消息记录可以保存到数据库中，以便客户端随时远程同步消息记录。服务端此处的逻辑是：客户端发消息到主界面（在线用户列表界面），然后主界面将收到的消息根据发送者进行分发，打开不同的聊天窗口，而不是在聊天窗口接受消息，分发方式使的客户端的管理更加清晰。</p>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz3SsO.png" alt="这里写图片描述">        </p>
+<ul>
+<li><strong>文件上传</strong>：</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz3pLD.png" alt="文件上传"></p>
+<p>可以看到服务端会受到来自于客户端1的文件，首先保存到服务器，然后会将该文件转发到接收端dl，在途中会触发两次进度条读条，同时服务端会打印整个传输过程。</p>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz1jRx.png" alt="这里写图片描述"><br><img src="https://s1.ax1x.com/2018/09/03/Pz1cZQ.png" alt="这里写图片描述"></p>
+<p>上图是断点续传的服务端触发过程以及断点续传记录保存表，若发生断点，则保存已发送数据长度为断点位置，下次续传时从记录位置开始上传。当有来自于A的同名文件到达时，先查找数据库已发送数据长度是否等于总长度，若相等则为新文件，若不相等则为续传文件。</p>
+<hr>
+<h4 id="客户端介绍"><a href="#客户端介绍" class="headerlink" title="客户端介绍"></a>客户端介绍</h4><ul>
+<li><strong>客户端类图</strong>：</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz1qo9.png" alt="客户端类图"></p>
+<ul>
+<li><p><strong>客户端主要工程结构</strong>：</p>
+<ol>
+<li>Mysql类和SocketUtil类为公共类，Mysql存储一些必要数据，SocketUtil主要实现一些封装的公共函数，如connect函数；</li>
+<li>主要实现类为Login（登录功能）、Register（注册功能）、Chat（聊天功能）、OnlineUserlist（在线用户列表和搜索功能）。这几个基础类分别继承于ISOCKETSink类，此类用作Socket操作结果的回调，其中Success和Fail方法为虚函数，基类调用实现各自的具体返回结果显示。</li>
+</ol>
+</li>
+<li><p><strong>客户端登录注册界面</strong>：</p>
+</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz3Cee.png" alt="登录注册"><img src="https://s1.ax1x.com/2018/09/03/Pz1Win.png" alt="这里写图片描述"></p>
+<ul>
+<li><strong>客户端在线用户列表和搜索界面</strong>：</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz12Is.png" alt="客户端在线用户列表和搜索界面"><img src="https://s1.ax1x.com/2018/09/03/Pz1hR0.png" alt="这里写图片描述"></p>
+<ul>
+<li><strong>客户端聊天界面</strong>：</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz1fGq.png" alt="客户端聊天界面"><img src="https://s1.ax1x.com/2018/09/03/Pz14zV.png" alt="客户端聊天界面"></p>
+<ul>
+<li><strong>客户端发送文件界面</strong>：</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz1IMT.png" alt="客户端发送文件界面"><img src="https://s1.ax1x.com/2018/09/03/Pz1osU.png" alt="客户端发送文件界面"></p>
+<p>发送文件本项目为离线文件传送，文件发送流程为客户端-&gt;服务端-&gt;转发给客户端。当实现断点续传时，点击暂停，断开当前连接，关闭当前文件，停止发送，点击重新开始时，文件从上次断开的位置继续发送，直至文件接收完成。</p>
+<ul>
+<li><strong>客户端断点续传和接收文件界面</strong>：</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2018/09/03/Pz1HZ4.png" alt="客户端断点续传和接收文件界面"><img src="https://s1.ax1x.com/2018/09/03/Pz1XJ1.png" alt="客户端断点续传和接收文件界面"><img src="https://s1.ax1x.com/2018/09/03/Pz1bdJ.png" alt="客户端断点续传和接收文件界面"></p>
+<hr>
+<h4 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h4><ol>
+<li>首先打开 Tserver.exe，点击“打开聊天服务”和“打开文件服务”，剩下的服务端就不用动了，处于打开状态，继续客户端操作。</li>
+<li>客户端打开exe，进入登录界面。点击注册，注册完成后返回登录界面进行登录。</li>
+<li>登录成功后可以看到在线用户列表（服务端推送实时刷新），“在线用户列表”界面，搜索框输入要搜索的用户，即可高亮显示被搜索用户名。</li>
+<li>双击用户名进行聊天，支持自己给自己发送消息，输入文本消息，点击“发送消息”，即可发送文本。</li>
+<li>支持聊天记录查看，默认同步的是从服务获得的所有时间段的聊天记录。</li>
+<li>点击选择文件按钮，即可选择任意类型文件，点击发送，即可在线发送文件。</li>
+<li>点击暂停模拟断点，此时已经断开客户端socket连接。再次点击继续，从断点位置开始上传。或者断开客户端，下线或者关闭窗口，重新打开后选择同名文件即可继续完成文件续传操作。</li>
+<li>上传完成后界面显示已发送文件名和发送成功标志。</li>
+<li>服务端同步显示发送进度和发送成功状态。</li>
+<li>此文件发送为离线文件发送，即客户端先发送文件到服务端，服务端非同时转发，而是接受文件完成后再将此文件发送到接收端。</li>
+</ol>
+<hr>
+<ul>
+<li>csdn地址：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a></li>
+<li>github地址：<a href="https://github.com/qht1003077897" target="_blank" rel="external">https://github.com/qht1003077897</a></li>
+<li>个人博客地址：<a href="https://qht1003077897.github.io" target="_blank" rel="external">https://qht1003077897.github.io</a></li>
+<li>Demo下载地址: <a href="https://download.csdn.net/download/u012534831/10657854" target="_blank" rel="external">https://download.csdn.net/download/u012534831/10657854</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      https://qht1003077897.github.io/
+    
+    </summary>
+    
+      <category term="学习" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>(QT) C++学习之路之——计算器的实现</title>
@@ -1610,9 +1782,9 @@ android:focusableInTouchMode=&quot;false&quot;
     
       <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
-      <category term="手把手" scheme="http://yoursite.com/tags/%E6%89%8B%E6%8A%8A%E6%89%8B/"/>
-    
       <category term="框架" scheme="http://yoursite.com/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="手把手" scheme="http://yoursite.com/tags/%E6%89%8B%E6%8A%8A%E6%89%8B/"/>
     
   </entry>
   
@@ -1676,9 +1848,9 @@ android:focusableInTouchMode=&quot;false&quot;
     
       <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
-      <category term="手把手" scheme="http://yoursite.com/tags/%E6%89%8B%E6%8A%8A%E6%89%8B/"/>
-    
       <category term="框架" scheme="http://yoursite.com/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="手把手" scheme="http://yoursite.com/tags/%E6%89%8B%E6%8A%8A%E6%89%8B/"/>
     
   </entry>
   
@@ -1787,9 +1959,9 @@ android:focusableInTouchMode=&quot;false&quot;
     
       <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
-      <category term="手把手" scheme="http://yoursite.com/tags/%E6%89%8B%E6%8A%8A%E6%89%8B/"/>
-    
       <category term="框架" scheme="http://yoursite.com/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="手把手" scheme="http://yoursite.com/tags/%E6%89%8B%E6%8A%8A%E6%89%8B/"/>
     
   </entry>
   
@@ -1841,39 +2013,9 @@ android:focusableInTouchMode=&quot;false&quot;
     
       <category term="android" scheme="http://yoursite.com/tags/android/"/>
     
-      <category term="手把手" scheme="http://yoursite.com/tags/%E6%89%8B%E6%8A%8A%E6%89%8B/"/>
-    
       <category term="框架" scheme="http://yoursite.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
-  </entry>
-  
-  <entry>
-    <title>ListView源码分析</title>
-    <link href="http://yoursite.com/2016/07/17/ListView%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    <id>http://yoursite.com/2016/07/17/ListView源码分析/</id>
-    <published>2016-07-17T08:59:16.000Z</published>
-    <updated>2017-07-17T09:18:19.539Z</updated>
-    
-    <content type="html"><![CDATA[<p>这篇文章没文字，只有两幅图，需要文字的请看：<a href="http://blog.csdn.net/guolin_blog/article/details/44996879" target="_blank" rel="external"> Android ListView工作原理完全解析，带你从源码的角度彻底理解</a>。</p>
-<p><img src="http://img.blog.csdn.net/20170717165745483?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20170717170016126?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMjUzNDgzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>自己总结了一下，加深对listview复用机制的理解。</p>
-<hr>
-<p>csdn地址：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a><br>github地址：<a href="https://github.com/qht1003077897" target="_blank" rel="external">https://github.com/qht1003077897</a><br>个人博客地址：<a href="https://qht1003077897.github.io" target="_blank" rel="external">https://qht1003077897.github.io</a><br>QQ：1003077897</p>
-]]></content>
-    
-    <summary type="html">
-    
-      ListView源码分析，根据郭霖ListView源码分析总结而来，全文只有两幅图
-    
-    </summary>
-    
-      <category term="源码,Android" scheme="http://yoursite.com/categories/%E6%BA%90%E7%A0%81-Android/"/>
-    
-    
-      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
-    
-      <category term="源码" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81/"/>
+      <category term="手把手" scheme="http://yoursite.com/tags/%E6%89%8B%E6%8A%8A%E6%89%8B/"/>
     
   </entry>
   
