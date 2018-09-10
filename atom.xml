@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-08T01:19:25.993Z</updated>
+  <updated>2018-09-10T05:31:53.636Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,99 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>(QT) C++学习之路之——计算器的实现</title>
+    <link href="http://yoursite.com/2018/09/10/C++%E7%89%88%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://yoursite.com/2018/09/10/C++版本计算器实现/</id>
+    <published>2018-09-10T05:10:00.000Z</published>
+    <updated>2018-09-10T05:31:53.636Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="QT-C-学习之路之——计算器的实现"><a href="#QT-C-学习之路之——计算器的实现" class="headerlink" title="(QT) C++学习之路之——计算器的实现"></a>(QT) C++学习之路之——计算器的实现</h2><p>在学校一直学习的是 Android 应用开发，入职后公司要求转C++(QT) 开发，嫁鸡随鸡。同时公司给新员工有几门培训课程，而每门课都有作业，这篇文章便是“数据结构”这门课的作业说明。</p>
+<p><strong>PS：控制台的计算器实现，C++代码，可进行加减乘除四则运算，支持<font color="red" size="3">负数</font>和<font color="red" size="3">小数</font>运算。</strong></p>
+<hr>
+<p><strong><strong>本计算器的主要特点为：</strong></strong></p>
+<ol>
+<li>自定义栈和单链表。</li>
+<li>提供顶层计算接口，由实现类完成具体计算方法，易扩展。</li>
+<li>利用简单工厂模式实现计算器的计算部分。</li>
+<li>通过栈的特性进行四则运算表达式的括号匹配。</li>
+<li>抽取Check类，完成输入表达式的正确性校验，复用性强。</li>
+</ol>
+<p><strong><strong>本计算器的主要思想过程为：</strong></strong></p>
+<ul>
+<li>首先对输入的表达式进行非法校验，如果输入非法，提示用户重新输入。</li>
+<li>然后将中缀表达式转化为后缀表达式，并对负号和减号进行区分，消除括号，只保留数字和运算符。</li>
+<li>其次对后缀表达式中的小数点、非个位数进行处理，转化为数字。</li>
+<li>再次依次出栈根据不同的运算符进行计算。</li>
+<li>最后得出结果并打印。</li>
+</ul>
+<hr>
+<p><strong>JSQ_C++.cpp</strong></p>
+<blockquote>
+<pre><code>本文件为主函数入口，通过调用计算器的run方法启动计算器。
+</code></pre></blockquote>
+<p><strong>JSQ.cpp</strong></p>
+<blockquote>
+<p>本文件封装了计算器的核心算法思想，提供三个方法，</p>
+<ul>
+<li>mid2Behind方法：将输入的中缀表达式转换为后缀表达式（逆波兰表达式）。</li>
+<li>readNumber方法：将后缀表达式中的字符处理为数字（包含小数点和非个位数字处理）。</li>
+<li>caculate  方法：利用工厂方法产出计算结果。</li>
+</ul>
+</blockquote>
+<p><strong>OptionerFactory.cpp</strong></p>
+<blockquote>
+<pre><code>本文件是操作符的生产类，根据传入参数生产不同的操作符对象。
+</code></pre></blockquote>
+<p><strong>Check.cpp</strong></p>
+<blockquote>
+<pre><code>本文件只暴露一个public的check方法，供外部调用，进行输入非法校验。
+其余还包含4个或更多的private方法，实现具体的判断逻辑，返回结果给public的check方法。
+</code></pre></blockquote>
+<p><strong>Util.cpp</strong></p>
+<blockquote>
+<pre><code>本文件提供一系列的static方法，无关对象，只可访问，不可修改，任何人可以调用。
+具体实现是一些常见的工具类。
+</code></pre></blockquote>
+<p><strong>IOperation.h</strong></p>
+<blockquote>
+<pre><code>本文件是操作符的上层接口，只提供一个getResult方法，由加减乘除实现类去实现。
+</code></pre></blockquote>
+<p><strong>ADD.cpp  SUB.cpp  MUI.cpp  DIV.cpp  MOD.cpp</strong></p>
+<blockquote>
+<pre><code>这五个文件为具体的运算类，实现了IOperation接口，进行具体的二元运算。
+</code></pre></blockquote>
+<p><strong>SLList.h</strong></p>
+<blockquote>
+<pre><code>自定义的单链表，包含一个节点类和一个链表类，实现了链表常见的插入和删除操作。
+由于属于模板类，因此声明和定义只能放到一个文件中。
+</code></pre></blockquote>
+<p><strong>StackDIY.h</strong></p>
+<blockquote>
+<pre><code>使用SLList实现的栈，实现了常见的压栈、出栈、取栈顶元素等操作。
+</code></pre></blockquote>
+<hr>
+<ul>
+<li>csdn地址：<a href="http://blog.csdn.net/u012534831" target="_blank" rel="external">http://blog.csdn.net/u012534831</a></li>
+<li>github地址：<a href="https://github.com/qht1003077897" target="_blank" rel="external">https://github.com/qht1003077897</a></li>
+<li>个人博客地址：<a href="https://qht1003077897.github.io" target="_blank" rel="external">https://qht1003077897.github.io</a></li>
+<li>代码下载地址:<a href="https://download.csdn.net/download/u012534831/10656676" target="_blank" rel="external">https://download.csdn.net/download/u012534831/10656676</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      https://qht1003077897.github.io/
+    
+    </summary>
+    
+      <category term="学习" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>2017年终总结</title>
