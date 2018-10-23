@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-23T04:34:51.429Z</updated>
+  <updated>2018-10-23T04:40:18.852Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2018/10/23/VLC%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E2%80%94linux%E4%B8%8B%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91x86%E5%92%8Cx64%E7%89%88%E6%9C%AC/"/>
     <id>http://yoursite.com/2018/10/23/VLC源码编译—linux下交叉编译x86和x64版本/</id>
     <published>2018-10-23T04:00:16.000Z</published>
-    <updated>2018-10-23T04:34:51.429Z</updated>
+    <updated>2018-10-23T04:40:18.852Z</updated>
     
     <content type="html"><![CDATA[<h2 id="VLC源码编译—linux下交叉编译x86和x64版本-附采坑记录"><a href="#VLC源码编译—linux下交叉编译x86和x64版本-附采坑记录" class="headerlink" title="VLC源码编译—linux下交叉编译x86和x64版本(附采坑记录)"></a>VLC源码编译—linux下交叉编译x86和x64版本(附采坑记录)</h2><ol>
 <li>官方文档地址：<br><a href="https://wiki.videolan.org/Win32Compile/#Obtaining_the_toolchain" target="_blank" rel="external">https://wiki.videolan.org/Win32Compile/#Obtaining_the_toolchain</a></li>
@@ -28,19 +28,46 @@
 </ol>
 <p>本文参考地址：</p>
 <ol>
-<li>VMware Ubuntu安装详细过程（非常靠谱）：<br><a href="https://blog.csdn.net/stpeace/article/details/78598333" target="_blank" rel="external">https://blog.csdn.net/stpeace/article/details/78598333</a></li>
-<li>流媒体02：Linux交叉编译VLC-2.2.1：<br><a href="https://higoge.github.io/2015/07/17/sm02/index.html" target="_blank" rel="external">https://higoge.github.io/2015/07/17/sm02/index.html</a></li>
-<li>vlc-2.2.4 交叉编译 UbuntuX64_1604_Desktop 编译windows版本vlc：<br><a href="https://blog.csdn.net/longji/article/details/52304590" target="_blank" rel="external">https://blog.csdn.net/longji/article/details/52304590</a></li>
+<li>VMware Ubuntu安装详细过程（非常靠谱）：<blockquote>
+<p><a href="https://blog.csdn.net/stpeace/article/details/78598333" target="_blank" rel="external">https://blog.csdn.net/stpeace/article/details/78598333</a></p>
+</blockquote>
+</li>
+<li>流媒体02：Linux交叉编译VLC-2.2.1：<blockquote>
+<p><a href="https://higoge.github.io/2015/07/17/sm02/index.html" target="_blank" rel="external">https://higoge.github.io/2015/07/17/sm02/index.html</a></p>
+</blockquote>
+</li>
+<li>vlc-2.2.4 交叉编译 UbuntuX64_1604_Desktop 编译windows版本vlc：<blockquote>
+<p><a href="https://blog.csdn.net/longji/article/details/52304590" target="_blank" rel="external">https://blog.csdn.net/longji/article/details/52304590</a></p>
+</blockquote>
+</li>
 </ol>
 <hr>
 <h3 id="1、编译环境"><a href="#1、编译环境" class="headerlink" title="1、编译环境"></a>1、编译环境</h3><p>win10，ubuntu 16.0.4，linux 64位，Vlc 2.2.4，VMware Workstation 14。</p>
 <p>下载地址：</p>
-<p><a href="http://releases.ubuntu.com/16.04/ubuntu-16.04-desktop-amd64.iso" target="_blank" rel="external">ubuntu下载地址：<br>http://releases.ubuntu.com/16.04/ubuntu-16.04-desktop-amd64.iso</a></p>
-<p><a href="https://download.csdn.net/download/u012534831/10737727" target="_blank" rel="external">VLC32位依赖库下载地址：<br>https://download.csdn.net/download/u012534831/10737727</a></p>
-<p><a href="https://download.csdn.net/download/u012534831/10737729" target="_blank" rel="external">VLC64位依赖库下载地址：<br>https://download.csdn.net/download/u012534831/10737729</a></p>
-<p><a href="http://download.videolan.org/pub/videolan/contrib/x86_64-w64-mingw32/" target="_blank" rel="external">原始下载地址：（过墙）：<br>http://download.videolan.org/pub/videolan/contrib/x86_64-w64-mingw32</a></p>
-<p><a href="http://ftp.jp.debian.org/debian/pool/main/m/mingw-w64/" target="_blank" rel="external">mingw32 和 64 原始下载地址：<br>http://ftp.jp.debian.org/debian/pool/main/m/mingw-w64/</a></p>
-<p><a href="https://blog.csdn.net/wangyequn1124/article/details/69247220" target="_blank" rel="external">VLC2.2.4源码下载地址：<br>https://blog.csdn.net/wangyequn1124/article/details/69247220</a></p>
+<p>ubuntu下载地址：</p>
+<blockquote>
+<p><a href="http://releases.ubuntu.com/16.04/ubuntu-16.04-desktop-amd64.iso" target="_blank" rel="external">http://releases.ubuntu.com/16.04/ubuntu-16.04-desktop-amd64.iso</a></p>
+</blockquote>
+<p>VLC32位依赖库下载地址：</p>
+<blockquote>
+<p><a href="https://download.csdn.net/download/u012534831/10737727" target="_blank" rel="external">https://download.csdn.net/download/u012534831/10737727</a></p>
+</blockquote>
+<p>VLC64位依赖库下载地址：</p>
+<blockquote>
+<p><a href="https://download.csdn.net/download/u012534831/10737729" target="_blank" rel="external">https://download.csdn.net/download/u012534831/10737729</a></p>
+</blockquote>
+<p>原始下载地址：（过墙）：</p>
+<blockquote>
+<p><a href="http://download.videolan.org/pub/videolan/contrib/x86_64-w64-mingw32/" target="_blank" rel="external">http://download.videolan.org/pub/videolan/contrib/x86_64-w64-mingw32</a></p>
+</blockquote>
+<p>mingw32 和 64 原始下载地址：</p>
+<blockquote>
+<p><a href="http://ftp.jp.debian.org/debian/pool/main/m/mingw-w64/" target="_blank" rel="external">http://ftp.jp.debian.org/debian/pool/main/m/mingw-w64/</a></p>
+</blockquote>
+<p>VLC2.2.4源码下载地址：</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/wangyequn1124/article/details/69247220" target="_blank" rel="external">https://blog.csdn.net/wangyequn1124/article/details/69247220</a></p>
+</blockquote>
 <h3 id="2、准备工作"><a href="#2、准备工作" class="headerlink" title="2、准备工作"></a>2、准备工作</h3><p>编译VLC源码需要一些软件的支持，在编译过程中也需要用到一些软件。</p>
 <ul>
 <li>在linux64位下，网上都是apt-get安装软件，本人推荐使用aptitude命令安装，倘若没有，可先安装aptitude，因为aptitude可以帮助解决软件的依赖关系，给出合理建议，询问你是否采纳，避免很多麻烦。</li>
@@ -66,42 +93,22 @@
 <h3 id="7、准备编译源码"><a href="#7、准备编译源码" class="headerlink" title="7、准备编译源码"></a>7、准备编译源码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$ ./bootstrap</div><div class="line">## 32位</div><div class="line">$ mkdir win32 &amp;&amp; cd win32</div><div class="line">## 64位</div><div class="line">$ mkdir x86_64 &amp;&amp; cd x86_64</div><div class="line"></div><div class="line">## 32位</div><div class="line">export PKG_CONFIG_LIBDIR=$HOME/vlc-2.2.4/contrib/i686-w64-mingw32/lib/pkgconfig</div><div class="line">## 64位</div><div class="line">export PKG_CONFIG_LIBDIR=$HOME/vlc-2.2.4/contrib/x86_64-w64-mingw32/lib/pkgconfig</div><div class="line"></div><div class="line">##利用configure 脚本进行编译</div><div class="line">## ../extras/package/win32/configure.sh为源码解压得到的win32编译脚本</div><div class="line"></div><div class="line">## 在linux 64位下编译windows32位，这个过程，会有一个wine更新过程，自动完成的</div><div class="line">$ ../extras/package/win32/configure.sh --host=HOST-i686-w64-mingw32 --build=x86_64-pc-linux-gnu</div><div class="line"></div><div class="line">## 在linux 64位下编译windows64位</div><div class="line">$ ../configure --host=HOST-x86_64-w64-mingw32 --build=x86_64-pc-linux-gnu</div><div class="line"></div><div class="line">##See &apos;../configure --help&apos; for more information.</div></pre></td></tr></table></figure>
 <h3 id="8、构建"><a href="#8、构建" class="headerlink" title="8、构建"></a>8、构建</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">##配置完成，开始构建</div><div class="line">$ make</div><div class="line"></div><div class="line">##或者</div><div class="line"></div><div class="line">$ make –j4 ##（加速make，4核CPU）</div></pre></td></tr></table></figure>
 <h3 id="9、打包"><a href="#9、打包" class="headerlink" title="9、打包"></a>9、打包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ make package-win-common  # 生成 _win32 和 vlc-2.2.4 目录</div><div class="line">$ wine ./vlc-2.2.4/vlc.exe  # 可以启动vlc.exe</div><div class="line">$ make package-win32-7zip  # 生成 vlc-2.2.4-win64.7z 和 symbols-2.2.4。拷贝到windows系统，解压后运行。这一步会下载npapi-vlc源码到x86_64/npapi-vlc下并编译，会覆盖原有的x86_64/npapi-vlc文件。需要vpn。</div><div class="line">$ make package-win32-debug-7zip  # 生成 vlc-2.2.4-win64-debug.7z</div></pre></td></tr></table></figure>
-<h3 id="10、踩坑记录"><a href="#10、踩坑记录" class="headerlink" title="10、踩坑记录"></a>10、踩坑记录</h3><ol>
-<li><p>倘若在安装依赖软件的时候报错：</p>
+<h3 id="10、踩坑记录"><a href="#10、踩坑记录" class="headerlink" title="10、踩坑记录"></a>10、踩坑记录</h3><p><strong>1、倘若在安装依赖软件的时候报错：</strong></p>
 <blockquote>
-<p>  UBuntu安装软 件时提示:<br>  正在读取软件包列表… 完成<br>  正在分析软件包的依赖关系树<br>  正在读取状态信息… 完成<br>  E: 无法找到软件包 build-essential</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">## 此问题解决方法:</div><div class="line">## 先执行</div><div class="line">$ sudo aptitude update</div><div class="line">## 然后再安装软件即可</div></pre></td></tr></table></figure>
+<p>  UBuntu安装软 件时提示:<br>  正在读取软件包列表… 完成<br>  正在分析软件包的依赖关系树<br>  正在读取状态信息… 完成<br>  E: 无法找到软件包 build-essential<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">## 此问题解决方法:</div><div class="line">## 先执行</div><div class="line">$ sudo aptitude update</div><div class="line">## 然后再安装软件即可</div></pre></td></tr></table></figure></p>
 </blockquote>
-</li>
-<li><p>安装依赖软件时QT报错，见官网说明 <strong>↓</strong>： 因此换成qt4-default即可。</p>
+<p><strong>2、安装依赖软件时QT报错，见官网说明 </strong>↓<strong>： 因此换成qt4-default即可。</strong></p>
 <blockquote>
 <p>qt4-dev-tools, qt5-default (or qt4-default if qt plugin build fails)</p>
 </blockquote>
-</li>
-</ol>
-<ol>
-<li><p>sh脚本运行不过，是因为linux编码和windows不同，linux换行是/n，windows是/r/n。因此需要安装dos2unix软件，转换格式后再运行脚本。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo aptitude install dos2unix</div><div class="line">$ dos2unix jb.sh</div><div class="line">$ sh jb.sh</div></pre></td></tr></table></figure>
-</li>
-<li><p>执行xxx时有可能报错：error: LibVLC requires mingw-runtime version 3.15 or higher, or mingw-w64 version 3.0 or higher! 是由于mingw版本太低，重新安装高版本即可。</p>
-</li>
-</ol>
+<p><strong>3、sh脚本运行不过，是因为linux编码和windows不同，linux换行是/n，windows是/r/n。因此需要安装dos2unix软件，转换格式后再运行脚本。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo aptitude install dos2unix</div><div class="line">$ dos2unix jb.sh</div><div class="line">$ sh jb.sh</div></pre></td></tr></table></figure></p>
+<p><strong>4、执行xxx时有可能报错：error: LibVLC requires mingw-runtime version 3.15 or higher, or mingw-w64 version 3.0 or higher! 是由于mingw版本太低，重新安装高版本即可。</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">## 参考文章：https://blog.csdn.net/mengzhengjie/article/details/46680281</div><div class="line">## 到 http://ftp.jp.debian.org/debian/pool/main/m/mingw-w64/ 下载需用的软件包，注意64位的需要修改i686为（x86-64）</div><div class="line"></div><div class="line">##（选择下载的版本要大于3.15以上，可选用3.2的）</div><div class="line">## mingw-w64-common_3.2.0-3_all.deb</div><div class="line">## mingw-w64-i686-dev_3.2.0-3_all.deb</div><div class="line"></div><div class="line">## 下载后安装 mingw-w64-i686 软件包：</div><div class="line">$ dpkg-i mingw-w64-common_3.2.0-3_all.deb</div><div class="line">$ dpkg-i mingw-w64-i686-dev_3.2.0-3_all.deb</div><div class="line">## 最后，重装MinGW的gcc/g++支持：</div><div class="line">$ aptitude install gcc-mingw-w64-i686</div><div class="line">$ aptitude install g++-mingw-w64-i686</div><div class="line">$ aptitude install gfortran-mingw-w64-i686</div><div class="line">$ aptitude install mingw-w64-tools</div></pre></td></tr></table></figure>
-<ol>
-<li>configure: error: You need 32-bits luac when using lua from contrib</li>
-</ol>
+<p><strong>5、configure: error: You need 32-bits luac when using lua from contrib</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">## 即使安装了32位lua也可能出现此错误，此时可以修改/vlc/configure文件，</div><div class="line">## 注释掉 #as_fn_error $?  &quot;You nedd 32-bits luac when using lua from contrib.&quot;</div><div class="line"></div><div class="line">## 我用的：</div><div class="line">$ aptitude install lua5.2:i386</div></pre></td></tr></table></figure>
-<ol>
-<li><p>libavutil versions 55 and later are not supported</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">## 参考原文：https://blog.csdn.net/freeman1975/article/details/50572374</div><div class="line">## 先：</div><div class="line">$ aptitude install -y libdbus-1-dev lua5.1 liblua5.1-dev libmad0-dev libavcodec-dev libavformat-dev libswscale-dev libpostproc-dev liba52-dev libxcb1-dev libxcb-shm0-dev libxcb-xv0-dev libx11-xcb-dev libgl1-mesa-dev libqt4-dev libgcrypt11-dev</div><div class="line">## 再：</div><div class="line">$ ./configure --disable-lua --disable-mad --disable-avcodec --disable-avformat --disable-swscale --disable-postproc --disable-a52 --disable-mkv</div><div class="line">## （禁用某些插件, 在后面的步骤中如果还碰到类似错误，说某些插件找不到，也可以用disable屏蔽）</div></pre></td></tr></table></figure>
-</li>
-<li><p>configure: error: Package requirements (xcb) were not met</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">## No package &apos;xcb&apos; found</div><div class="line">## 解决：</div><div class="line">$ sudo aptitude install libxcb-composite0-dev</div></pre></td></tr></table></figure>
-</li>
-<li><p>No package ‘alsa’ found. alsa-lib 1.0.24 or later required</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 解决：</div><div class="line">$ sudo apt-get install libalsa-ocaml-dev</div></pre></td></tr></table></figure>
-</li>
-</ol>
+<p><strong>6、libavutil versions 55 and later are not supported</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">## 参考原文：https://blog.csdn.net/freeman1975/article/details/50572374</div><div class="line">## 先：</div><div class="line">$ aptitude install -y libdbus-1-dev lua5.1 liblua5.1-dev libmad0-dev libavcodec-dev libavformat-dev libswscale-dev libpostproc-dev liba52-dev libxcb1-dev libxcb-shm0-dev libxcb-xv0-dev libx11-xcb-dev libgl1-mesa-dev libqt4-dev libgcrypt11-dev</div><div class="line">## 再：</div><div class="line">$ ./configure --disable-lua --disable-mad --disable-avcodec --disable-avformat --disable-swscale --disable-postproc --disable-a52 --disable-mkv</div><div class="line">## （禁用某些插件, 在后面的步骤中如果还碰到类似错误，说某些插件找不到，也可以用disable屏蔽）</div></pre></td></tr></table></figure></p>
+<p><strong>7、configure: error: Package requirements (xcb) were not met</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">## No package &apos;xcb&apos; found</div><div class="line">## 解决：</div><div class="line">$ sudo aptitude install libxcb-composite0-dev</div></pre></td></tr></table></figure></p>
+<p><strong>8、No package ‘alsa’ found. alsa-lib 1.0.24 or later required</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 解决：</div><div class="line">$ sudo apt-get install libalsa-ocaml-dev</div></pre></td></tr></table></figure></p>
 <p>~~ EOF ~~</p>
 ]]></content>
     
