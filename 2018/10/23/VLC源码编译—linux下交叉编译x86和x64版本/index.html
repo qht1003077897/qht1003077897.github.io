@@ -95,7 +95,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/10/23/VLC源码编译—linux下交叉编译x86和x64版本/index.html">
 <meta property="og:site_name" content="祁宏涛">
 <meta property="og:description" content="基于ffmpeg的VLC源码在ubuntu 64位 linux下的交叉编译，可编译出x86的和x64的">
-<meta property="og:updated_time" content="2018-10-23T04:30:38.432Z">
+<meta property="og:updated_time" content="2018-10-23T04:34:51.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VLC源码编译—linux下交叉编译x86和x64版本(附采坑记录)">
 <meta name="twitter:description" content="基于ffmpeg的VLC源码在ubuntu 64位 linux下的交叉编译，可编译出x86的和x64的">
@@ -391,24 +391,24 @@
 
       
         <h2 id="VLC源码编译—linux下交叉编译x86和x64版本-附采坑记录"><a href="#VLC源码编译—linux下交叉编译x86和x64版本-附采坑记录" class="headerlink" title="VLC源码编译—linux下交叉编译x86和x64版本(附采坑记录)"></a>VLC源码编译—linux下交叉编译x86和x64版本(附采坑记录)</h2><ol>
-<li>官方文档地址：<a href="https://wiki.videolan.org/Win32Compile/#Obtaining_the_toolchain" target="_blank" rel="external">https://wiki.videolan.org/Win32Compile/#Obtaining_the_toolchain</a></li>
-<li>github地址：<a href="https://github.com/videolan/vlc" target="_blank" rel="external">https://github.com/videolan/vlc</a></li>
+<li>官方文档地址：<br><a href="https://wiki.videolan.org/Win32Compile/#Obtaining_the_toolchain" target="_blank" rel="external">https://wiki.videolan.org/Win32Compile/#Obtaining_the_toolchain</a></li>
+<li>github地址：<br><a href="https://github.com/videolan/vlc" target="_blank" rel="external">https://github.com/videolan/vlc</a></li>
 </ol>
 <p>本文参考地址：</p>
 <ol>
-<li>VMware Ubuntu安装详细过程（非常靠谱）：<a href="https://blog.csdn.net/stpeace/article/details/78598333" target="_blank" rel="external">https://blog.csdn.net/stpeace/article/details/78598333</a></li>
-<li>流媒体02：Linux交叉编译VLC-2.2.1：<a href="https://higoge.github.io/2015/07/17/sm02/index.html" target="_blank" rel="external">https://higoge.github.io/2015/07/17/sm02/index.html</a></li>
-<li>vlc-2.2.4 交叉编译 UbuntuX64_1604_Desktop 编译windows版本vlc：<a href="https://blog.csdn.net/longji/article/details/52304590" target="_blank" rel="external">https://blog.csdn.net/longji/article/details/52304590</a></li>
+<li>VMware Ubuntu安装详细过程（非常靠谱）：<br><a href="https://blog.csdn.net/stpeace/article/details/78598333" target="_blank" rel="external">https://blog.csdn.net/stpeace/article/details/78598333</a></li>
+<li>流媒体02：Linux交叉编译VLC-2.2.1：<br><a href="https://higoge.github.io/2015/07/17/sm02/index.html" target="_blank" rel="external">https://higoge.github.io/2015/07/17/sm02/index.html</a></li>
+<li>vlc-2.2.4 交叉编译 UbuntuX64_1604_Desktop 编译windows版本vlc：<br><a href="https://blog.csdn.net/longji/article/details/52304590" target="_blank" rel="external">https://blog.csdn.net/longji/article/details/52304590</a></li>
 </ol>
 <hr>
 <h3 id="1、编译环境"><a href="#1、编译环境" class="headerlink" title="1、编译环境"></a>1、编译环境</h3><p>win10，ubuntu 16.0.4，linux 64位，Vlc 2.2.4，VMware Workstation 14。</p>
 <p>下载地址：</p>
-<p><a href="hubuntu下载地址：http://releases.ubuntu.com/16.04/ubuntu-16.04-desktop-amd64.iso">ubuntu下载地址：http://releases.ubuntu.com/16.04/ubuntu-16.04-desktop-amd64.iso</a></p>
-<p><a href="https://download.csdn.net/download/u012534831/10737727" target="_blank" rel="external">VLC32位依赖库下载地址：https://download.csdn.net/download/u012534831/10737727</a></p>
-<p><a href="https://download.csdn.net/download/u012534831/10737729" target="_blank" rel="external">VLC64位依赖库下载地址：https://download.csdn.net/download/u012534831/10737729</a></p>
-<p><a href="http://download.videolan.org/pub/videolan/contrib/x86_64-w64-mingw32/" target="_blank" rel="external">原始下载地址：（过墙）：http://download.videolan.org/pub/videolan/contrib/x86_64-w64-mingw32</a></p>
-<p><a href="http://ftp.jp.debian.org/debian/pool/main/m/mingw-w64/" target="_blank" rel="external">mingw32 和 64 原始下载地址：http://ftp.jp.debian.org/debian/pool/main/m/mingw-w64/</a></p>
-<p><a href="https://blog.csdn.net/wangyequn1124/article/details/69247220" target="_blank" rel="external">VLC2.2.4源码下载地址：https://blog.csdn.net/wangyequn1124/article/details/69247220</a></p>
+<p><a href="http://releases.ubuntu.com/16.04/ubuntu-16.04-desktop-amd64.iso" target="_blank" rel="external">ubuntu下载地址：<br>http://releases.ubuntu.com/16.04/ubuntu-16.04-desktop-amd64.iso</a></p>
+<p><a href="https://download.csdn.net/download/u012534831/10737727" target="_blank" rel="external">VLC32位依赖库下载地址：<br>https://download.csdn.net/download/u012534831/10737727</a></p>
+<p><a href="https://download.csdn.net/download/u012534831/10737729" target="_blank" rel="external">VLC64位依赖库下载地址：<br>https://download.csdn.net/download/u012534831/10737729</a></p>
+<p><a href="http://download.videolan.org/pub/videolan/contrib/x86_64-w64-mingw32/" target="_blank" rel="external">原始下载地址：（过墙）：<br>http://download.videolan.org/pub/videolan/contrib/x86_64-w64-mingw32</a></p>
+<p><a href="http://ftp.jp.debian.org/debian/pool/main/m/mingw-w64/" target="_blank" rel="external">mingw32 和 64 原始下载地址：<br>http://ftp.jp.debian.org/debian/pool/main/m/mingw-w64/</a></p>
+<p><a href="https://blog.csdn.net/wangyequn1124/article/details/69247220" target="_blank" rel="external">VLC2.2.4源码下载地址：<br>https://blog.csdn.net/wangyequn1124/article/details/69247220</a></p>
 <h3 id="2、准备工作"><a href="#2、准备工作" class="headerlink" title="2、准备工作"></a>2、准备工作</h3><p>编译VLC源码需要一些软件的支持，在编译过程中也需要用到一些软件。</p>
 <ul>
 <li>在linux64位下，网上都是apt-get安装软件，本人推荐使用aptitude命令安装，倘若没有，可先安装aptitude，因为aptitude可以帮助解决软件的依赖关系，给出合理建议，询问你是否采纳，避免很多麻烦。</li>
